@@ -27,9 +27,12 @@ const Name = compact ? "p" : "h3";
   <div class="ticket-stub">
     <p class="ticket-price"><span class="sr-only">Price: </span><span class="cur">₦</span>{amount(p.price)}</p>
     {!compact && (
+      <a class="btn btn-ink buy" href={`/checkout/${p.id}`}>
+        Buy now<span class="sr-only">: {p.name}</span>
+      </a>
       <div class="ticket-actions">
-        <a class="btn btn-ink" href={waLink(orderMsg)} target="_blank" rel="noopener">
-          <WhatsAppIcon /> Order<span class="sr-only"> {p.name} on WhatsApp</span>
+        <a class="btn btn-line-ink" href={waLink(orderMsg)} target="_blank" rel="noopener">
+          <WhatsAppIcon /> Ask<span class="sr-only"> about {p.name} on WhatsApp</span>
         </a>
         {p.swap && (
           <a class="btn btn-line-ink" href={waLink(swapMsg)} target="_blank" rel="noopener">
@@ -42,6 +45,7 @@ const Name = compact ? "p" : "h3";
 </article>
 
 <style>
+  .buy { --h: 2.9rem; width: 100%; font-size: 0.95rem; margin-bottom: -0.4rem; }
   .ticket-actions { display: flex; gap: 0.5rem; }
   .ticket-actions .btn { --h: 2.75rem; flex: 1; padding: 0 1rem; font-size: 0.92rem; }
   .compact .ticket-name { font-size: 1.2rem; }

@@ -33,11 +33,11 @@ const fears = [
   },
   {
     q: "“Am I being overcharged?”",
-    a: "Our prices are on this page before you message us. No “how much you get?”. Prices follow the dollar, so we confirm today's price before you pay, never after.",
+    a: "Our prices are on this page before you message us. No “how much you get?”. Buy online and you pay exactly the price you see.",
   },
   {
     q: "“Will it actually reach me?”",
-    a: "We deliver to all 36 states and the FCT. We'll tell you the delivery fee and timing before you pay. Or you can pick it up at our shop.",
+    a: "We deliver to all 36 states and the FCT. We agree the delivery fee and timing with you on WhatsApp. Or pick it up at our shop for free.",
   },
 ];
 
@@ -50,7 +50,7 @@ const testimonials = [
 const faqs = [
   {
     q: "Are your phones and laptops original?",
-    a: "Yes. We check every device before it goes on sale. If you're not sure, ask on WhatsApp for photos or a live video of the exact unit. You'll see it before you pay for it.",
+    a: "Yes. We check every device before it goes on sale. If you're not sure, ask on WhatsApp for photos or a live video of the exact unit before you buy.",
   },
   {
     q: "What does “UK Used” mean?",
@@ -58,11 +58,11 @@ const faqs = [
   },
   {
     q: "Do you deliver outside Lagos?",
-    a: "Yes, to all 36 states and the FCT. The fee and delivery time depend on where you are, and we confirm both before you pay.",
+    a: "Yes, to all 36 states and the FCT. The fee and delivery time depend on where you are. We agree both with you on WhatsApp, and you pay the delivery fee separately from the device.",
   },
   {
     q: "How do I pay?",
-    a: "Message us on WhatsApp with what you want and we'll confirm it's available. See the unit on a live video before you pay, or come and pay in person at our shop in Computer Village.",
+    a: "Tap Buy now on any device and pay securely on Paystack. Or message us on WhatsApp first and ask for a live video of the unit, or come and pay in person at our shop in Computer Village.",
   },
   {
     q: "How does a swap work?",
@@ -70,7 +70,7 @@ const faqs = [
   },
   {
     q: "Is the price on this page final?",
-    a: "Gadget prices in Nigeria move with the dollar. We keep this page up to date and confirm today's price with you on WhatsApp before you pay. No surprises after.",
+    a: "Yes. If you buy online, you pay exactly the price on the ticket, nothing added at checkout. Gadget prices in Nigeria follow the dollar, so prices on this page can change from day to day.",
   },
 ];
 ---
@@ -186,8 +186,8 @@ const faqs = [
         <div class="deals-head">
           <div class="section-head" data-reveal>
             <p class="eyebrow">Today's prices</p>
-            <h2>Pick it. Message us. It's yours.</h2>
-            <p>Tap <strong>Order</strong> and WhatsApp opens with the device already in your message. We confirm it's in stock and send a live video of the exact unit.</p>
+            <h2>Pick it. Pay for it. It's yours.</h2>
+            <p>Tap <strong>Buy now</strong> to pay securely with Paystack. Want to see it first? Tap <strong>Ask</strong> and we'll send a live video of the exact unit on WhatsApp.</p>
           </div>
           <div class="filters" role="group" aria-label="Filter by category" hidden>
             <button type="button" aria-pressed="true" data-filter="all">All</button>
@@ -204,7 +204,7 @@ const faqs = [
           <p><strong>Don't see it?</strong> This is a selection. Tell us the model and budget, and we'll find it.</p>
           <a class="btn btn-ghost" href={findIt} target="_blank" rel="noopener"><WhatsAppIcon /> Ask for a device</a>
         </div>
-        <p class="price-note">Prices move with the dollar. We confirm today's price on WhatsApp before you pay.</p>
+        <p class="price-note">Prices follow the dollar and can change from day to day. Buy online and you pay the price on the ticket. Delivery is agreed and paid separately.</p>
       </div>
     </section>
 
@@ -225,7 +225,7 @@ const faqs = [
           <div class="cond-card" data-reveal style="--i:1">
             <span class="stamp stamp-used">UK Used</span>
             <h3>Pre-owned, tested by us</h3>
-            <p>Imported and checked by us: battery, screen, cameras, ports, buttons. We tell you the exact condition before you pay, and it costs a lot less than new.</p>
+            <p>Imported and checked by us: battery, screen, cameras, ports, buttons. Ask us about any unit's exact condition before you buy. It costs a lot less than new.</p>
           </div>
         </div>
       </div>
@@ -346,7 +346,7 @@ const faqs = [
           <div class="visit-item" data-reveal style="--i:2">
             <p class="v-label">Delivery</p>
             <p class="v-value">All 36 states + FCT</p>
-            <span class="v-hint">Fee and timing confirmed before you pay.</span>
+            <span class="v-hint">Fee agreed on WhatsApp, paid separately.</span>
           </div>
         </div>
       </div>
@@ -662,29 +662,6 @@ const faqs = [
   .steps b { flex: none; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--green); color: var(--green); font-family: var(--font-mono); font-size: 0.85rem; }
 
   .swap-form { display: grid; gap: 1.1rem; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 2rem); }
-  .mode { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; background: var(--surface-2); border-radius: 999px; padding: 0.3rem; }
-  .mode label { position: relative; }
-  .mode input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-  .mode span { display: block; text-align: center; padding: 0.65rem; border-radius: 999px; font-weight: 600; font-size: var(--text-sm); color: var(--muted); transition: background-color var(--dur-fast), color var(--dur-fast); }
-  .mode input:checked + span { background: var(--green); color: var(--green-ink); }
-  .mode input:focus-visible + span { outline: 2px solid var(--green); outline-offset: 2px; }
-  .field { display: grid; gap: 0.45rem; }
-  .field[hidden] { display: none; }
-  .field label { font-size: var(--text-sm); font-weight: 600; }
-  .opt { color: var(--muted); font-weight: 400; }
-  .field input, .field select {
-    min-height: 3.1rem;
-    padding: 0 1rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid #6f8574;
-    background: var(--surface);
-    font-size: 1rem;
-    transition: border-color var(--dur-fast);
-  }
-  .field input::placeholder { color: #7d8f81; }
-  .field input:focus, .field select:focus { border-color: var(--green); outline: none; box-shadow: 0 0 0 3px rgba(0, 230, 118, 0.18); }
-  .field input[aria-invalid="true"] { border-color: #ff7a7a; }
-  .err { color: #ff9b9b; font-size: var(--text-sm); }
   .swap-form .btn { width: 100%; margin-top: 0.4rem; }
   .form-note { font-size: 0.82rem; color: var(--muted); text-align: center; }
   @media (max-width: 860px) { .swap-grid { grid-template-columns: 1fr; } }

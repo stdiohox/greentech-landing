@@ -5,8 +5,8 @@ import displayLatin from "@fontsource-variable/bricolage-grotesque/files/bricola
 import displayLatinExt from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-ext-opsz-normal.woff2?url";
 import bodyLatin from "@fontsource-variable/instrument-sans/files/instrument-sans-latin-wdth-normal.woff2?url";
 
-interface Props { title: string; description: string }
-const { title, description } = Astro.props;
+interface Props { title: string; description: string; noindex?: boolean }
+const { title, description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 const ogImage = new URL("/og.jpg", Astro.site ?? site.url).href;
 
@@ -46,7 +46,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" as="font" type="font/woff2" href={displayLatin} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={displayLatinExt} crossorigin />

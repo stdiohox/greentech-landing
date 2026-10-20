@@ -1,0 +1,27 @@
+---
+import Logo from "./Logo.astro";
+import WhatsAppIcon from "./WhatsAppIcon.astro";
+import { site, waLink } from "../data/site";
+interface Props { help?: string }
+const { help = "Hi GreenTech, I need help with my order." } = Astro.props;
+---
+<header class="mini">
+  <div class="wrap mini-inner">
+    <a href="/" class="mini-brand" aria-label={`${site.name} home`}>
+      <Logo size={30} />
+      <span class="mini-word">Green<b>Tech</b></span>
+    </a>
+    <a class="btn btn-ghost mini-help" href={waLink(help)} target="_blank" rel="noopener">
+      <WhatsAppIcon /> Need help?
+    </a>
+  </div>
+</header>
+
+<style>
+  .mini { border-bottom: 1px solid var(--line); }
+  .mini-inner { display: flex; align-items: center; justify-content: space-between; height: 4rem; }
+  .mini-brand { display: inline-flex; align-items: center; gap: 0.55rem; text-decoration: none; }
+  .mini-word { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; letter-spacing: -0.03em; }
+  .mini-word b { color: var(--green); }
+  .mini-help { --h: 2.5rem; font-size: var(--text-sm); padding: 0 1rem; }
+</style>

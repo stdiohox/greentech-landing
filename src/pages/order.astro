@@ -1,0 +1,124 @@
+---
+import Base from "../layouts/Base.astro";
+import MiniHeader from "../components/MiniHeader.astro";
+import WhatsAppIcon from "../components/WhatsAppIcon.astro";
+import { findProduct } from "../data/products";
+import { amount, site, waLink } from "../data/site";
+import { REFERENCE_PATTERN, isConfigured, verify, type Verification } from "../lib/paystack";
+
+export const prerender = false;
+
+// Paystack redirects here with ?reference=…&trxref=… after the buyer pays.
+const reference = (Astro.url.searchParams.get("reference") ?? Astro.url.searchParams.get("trxref") ?? "").trim();
+Astro.response.headers.set("Cache-Control", "no-store");
+Astro.response.headers.set("Referrer-Policy", "no-referrer");
+
+let result: Verification | { state: "missing" };
+if (!REFERENCE_PATTERN.test(reference)) result = { state: "missing" };
+else if (!isConfigured()) result = { state: "error", reference };
+else result = await verify(reference);
+
+const product = result.state === "paid" ? findProduct(result.productId) : undefined;
+const deviceName = product ? `${product.name} (${product.condition})` : "my order";
+const paidMsg = result.state === "paid"
+  ? `Hi GreenTech, I just paid ${"₦" + amount(result.amountKobo / 100)} for the ${deviceName}. My payment reference is ${reference}.`
+  : "";
+const helpMsg = `Hi GreenTech, I tried to pay on your website and need help. My payment reference is ${reference || "(none)"}.`;
+const delivery = result.state === "paid" && result.order.fulfilment === "delivery";
+
+// Anyone holding the link can open this page, so show only enough for the buyer to recognise their order.
+const firstName = result.state === "paid" ? (result.order.name ?? "").split(" ")[0] : "";
+const maskedPhone = result.state === "paid" && result.order.phone ? `ending ${result.order.phone.replace(/\D/g, "").slice(-4)}` : "";
+const maskedEmail = result.state === "paid" && result.order.email
+  ? result.order.email.replace(/^(.)[^@]*(@.).*(\.[^.]+)$/, "$1***$2***$3")
+  : "";
+if (result.state === "missing") Astro.response.status = 400;
+---
+<Base title={result.state === "paid" ? `Payment confirmed | ${site.shortName}` : `Your order | ${site.shortName}`} description="Order status" noindex>
+  <MiniHeader help={helpMsg} />
+  <main id="main" class="wrap order">
+    {result.state === "paid" && (
+      <section class="card ok" aria-labelledby="t">
+        <span class="badge" aria-hidden="true">✓</span>
+        <p class="eyebrow">Payment confirmed</p>
+        <h1 id="t">Thank you{firstName ? `, ${firstName}` : ""}. It's yours.</h1>
+        <dl class="rows">
+          <div><dt>Device</dt><dd>{deviceName}</dd></div>
+          <div><dt>Paid</dt><dd class="mono"><span class="cur">₦</span>{amount(result.amountKobo / 100)}</dd></div>
+          <div><dt>Reference</dt><dd class="mono">{reference}</dd></div>
+          <div><dt>Getting it</dt><dd>{delivery ? `Delivery to the address you gave, ${result.order.state}` : `Pickup at ${site.address}`}</dd></div>
+        </dl>
+        <h2>What happens next</h2>
+        <ol class="next">
+          <li>We'll message you on WhatsApp{maskedPhone ? ` (number ${maskedPhone})` : ""} to confirm your order.</li>
+          {delivery
+            ? <li>We agree the delivery fee and time with you, then send it out.</li>
+            : <li>Come to the shop ({site.hours}) when we tell you it's ready. Bring this reference.</li>}
+        </ol>
+        <p class="hint">Paystack has also emailed your receipt{maskedEmail ? ` to ${maskedEmail}` : ""}.</p>
+        <div class="ctas">
+          <a class="btn btn-primary btn-lg" href={waLink(paidMsg)} target="_blank" rel="noopener"><WhatsAppIcon /> Send us your reference</a>
+          <a class="btn btn-ghost btn-lg" href="/">Back to GreenTech</a>
+        </div>
+      </section>
+    )}
+
+    {result.state === "failed" && (
+      <section class="card" aria-labelledby="t">
+        <p class="eyebrow warn">Payment not completed</p>
+        <h1 id="t">Your payment didn't go through.</h1>
+        <p class="lead">{result.message} You haven't been charged for this attempt.</p>
+        <div class="ctas">
+          <a class="btn btn-primary btn-lg" href="/#deals">Try again</a>
+          <a class="btn btn-ghost btn-lg" href={waLink(helpMsg)} target="_blank" rel="noopener"><WhatsAppIcon /> Get help on WhatsApp</a>
+        </div>
+      </section>
+    )}
+
+    {result.state === "pending" && (
+      <section class="card" aria-labelledby="t">
+        <p class="eyebrow">Still processing</p>
+        <h1 id="t">We're waiting for Paystack to confirm.</h1>
+        <p class="lead">Bank transfers can take a minute or two. Refresh this page shortly. If you've been debited and it still says this, message us with your reference: <span class="mono">{reference}</span></p>
+        <div class="ctas">
+          <a class="btn btn-primary btn-lg" href={`/order?reference=${encodeURIComponent(reference)}`}>Check again</a>
+          <a class="btn btn-ghost btn-lg" href={waLink(helpMsg)} target="_blank" rel="noopener"><WhatsAppIcon /> Message us</a>
+        </div>
+      </section>
+    )}
+
+    {(result.state === "invalid" || result.state === "error" || result.state === "missing") && (
+      <section class="card" aria-labelledby="t">
+        <p class="eyebrow warn">We couldn't confirm this payment</p>
+        <h1 id="t">{result.state === "missing" ? "No payment to show." : "Let's sort this out together."}</h1>
+        <p class="lead">
+          {result.state === "missing"
+            ? "This page shows your confirmation after you pay on Paystack."
+            : <>We couldn't confirm this payment automatically. If you were debited, your money is safe. Message us with your reference <span class="mono">{reference}</span> and we'll check it with Paystack.</>}
+        </p>
+        <div class="ctas">
+          <a class="btn btn-primary btn-lg" href={waLink(helpMsg)} target="_blank" rel="noopener"><WhatsAppIcon /> Message us</a>
+          <a class="btn btn-ghost btn-lg" href="/">Back to GreenTech</a>
+        </div>
+      </section>
+    )}
+  </main>
+</Base>
+
+<style>
+  .order { padding-block: clamp(2.5rem, 6vw, 5rem); }
+  .card { max-width: 40rem; margin-inline: auto; display: grid; gap: 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.5rem, 4vw, 2.75rem); }
+  .badge { width: 3.25rem; height: 3.25rem; border-radius: 50%; display: grid; place-items: center; background: var(--green); color: var(--green-ink); font-size: 1.5rem; font-weight: 800; }
+  .warn { color: #ffb86b; }
+  h1 { font-size: var(--text-3xl); }
+  h2 { font-size: 1.25rem; margin-top: 0.5rem; }
+  .lead { color: var(--muted); font-size: var(--text-lg); }
+  .mono { font-family: var(--font-mono); }
+  .rows { margin: 0.5rem 0 0; border-top: 1px solid var(--line); }
+  .rows div { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--line); }
+  .rows dt { color: var(--muted); font-size: var(--text-sm); }
+  .rows dd { margin: 0; overflow-wrap: anywhere; }
+  .next { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.4rem; color: var(--muted); }
+  .hint { font-size: var(--text-sm); color: var(--muted); }
+  .ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
+</style>

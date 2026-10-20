@@ -1,0 +1,171 @@
+---
+import type { GetStaticPaths } from "astro";
+import Base from "../../layouts/Base.astro";
+import MiniHeader from "../../components/MiniHeader.astro";
+import Ticket from "../../components/Ticket.astro";
+import { products, type Product } from "../../data/products";
+import { NIGERIAN_STATES } from "../../data/states";
+import { amount, naira, orderMessage, site, waLink } from "../../data/site";
+
+export const getStaticPaths = (() => products.map((product) => ({ params: { id: product.id }, props: { product } }))) satisfies GetStaticPaths;
+
+const { product } = Astro.props as { product: Product };
+---
+<Base title={`Buy ${product.name} | ${site.shortName}`} description={`Checkout: ${product.name} (${product.condition}), ${naira(product.price)}.`} noindex>
+  <MiniHeader help={`Hi GreenTech, I need help buying the ${product.name}.`} />
+  <main id="main" class="wrap checkout">
+    <a class="back" href="/#deals">← All prices</a>
+
+    <div class="co-grid">
+      <aside class="summary">
+        <p class="eyebrow">Your order</p>
+        <Ticket product={product} compact />
+        <ul class="facts">
+          <li><b>You pay now:</b> <span class="cur">₦</span>{amount(product.price)}, the device price. Nothing is added at checkout.</li>
+          <li><b>Delivery:</b> if you choose delivery, we agree the fee with you on WhatsApp and you pay it separately. Pickup at our shop costs nothing extra.</li>
+          <li><b>Payment:</b> on Paystack's secure page. GreenTech never sees your card details.</li>
+        </ul>
+        <p class="ask">Want to see the unit first? <a href={waLink(orderMessage(product))} target="_blank" rel="noopener">Ask for a live video on WhatsApp</a></p>
+      </aside>
+
+      <form class="co-form" id="form" method="post" action="/api/checkout">
+        <h1>Your details</h1>
+        <p class="form-error" id="form-error" role="alert" tabindex="-1" hidden></p>
+        <input type="hidden" name="item" value={product.id} />
+        <div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off" /></label></div>
+
+        <div class="field">
+          <label for="c-name">Full name</label>
+          <input id="c-name" name="name" required minlength="2" maxlength="100" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="c-phone">Phone (WhatsApp)</label>
+          <input id="c-phone" name="phone" type="tel" required inputmode="tel" pattern="\+?[0-9 ()\-]{7,20}" autocomplete="tel" placeholder="0803 123 4567" />
+        </div>
+        <div class="field">
+          <label for="c-email">Email <span class="opt">(Paystack sends your receipt here)</span></label>
+          <input id="c-email" name="email" type="email" required maxlength="254" autocomplete="email" />
+        </div>
+
+        <fieldset class="mode">
+          <legend class="sr-only">How do you want to get it?</legend>
+          <label><input type="radio" name="fulfilment" value="pickup" checked /> <span>Pick up in Ikeja</span></label>
+          <label><input type="radio" name="fulfilment" value="delivery" /> <span>Deliver to me</span></label>
+        </fieldset>
+
+        <div class="field" data-delivery>
+          <label for="c-address">Delivery address <span class="opt no-js-only">(delivery only)</span></label>
+          <input id="c-address" name="address" maxlength="200" autocomplete="street-address" placeholder="House number, street, area" />
+        </div>
+        <div class="field" data-delivery>
+          <label for="c-state">State <span class="opt no-js-only">(delivery only)</span></label>
+          <select id="c-state" name="state" autocomplete="address-level1">
+            <option value="">Choose a state</option>
+            {NIGERIAN_STATES.map((s) => <option>{s}</option>)}
+          </select>
+        </div>
+        <p class="pickup-note" data-pickup hidden>Collect it at {site.address}, {site.hours}. We'll message you on WhatsApp when it's ready.</p>
+
+        <div class="field">
+          <label for="c-notes">Anything we should know? <span class="opt">(optional)</span></label>
+          <textarea id="c-notes" name="notes" maxlength="500" rows="3"></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-lg pay" type="submit">
+          <span>Pay <span class="cur">₦</span>{amount(product.price)} with Paystack</span>
+        </button>
+        <p class="form-note">You'll go to Paystack to pay, then come back here for your confirmation.</p>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById("form") as HTMLFormElement;
+    const KEY = "gt-checkout";
+    const errors: Record<string, [string, string]> = {
+      "field-name": ["name", "Please enter your full name."],
+      "field-phone": ["phone", "Please enter a phone number we can reach you on, e.g. 0803 123 4567."],
+      "field-email": ["email", "Please enter a valid email address for your receipt."],
+      "field-address": ["address", "Please enter your delivery address."],
+      "field-state": ["state", "Please choose your state."],
+      "field-notes": ["notes", "Please keep your note under 500 characters."],
+      gateway: ["", "We couldn't reach Paystack just now. Please try again in a moment, or order on WhatsApp."],
+      unavailable: ["", "Online payment isn't available right now. Please order on WhatsApp and we'll sort you out."],
+    };
+
+    const delivery = form.querySelectorAll<HTMLElement>("[data-delivery]");
+    const pickup = form.querySelector<HTMLElement>("[data-pickup]")!;
+    const sync = () => {
+      const isDelivery = (form.elements.namedItem("fulfilment") as RadioNodeList).value === "delivery";
+      delivery.forEach((el) => {
+        el.hidden = !isDelivery;
+        el.querySelector<HTMLInputElement | HTMLSelectElement>("input, select")!.required = isDelivery;
+      });
+      pickup.hidden = isDelivery;
+    };
+    document.querySelectorAll(".no-js-only").forEach((el) => el.remove());
+
+    // After a server-side rejection, restore what the buyer typed and point at the problem.
+    const code = new URLSearchParams(location.search).get("error");
+    if (code) {
+      try {
+        const saved = JSON.parse(sessionStorage.getItem(KEY) ?? "{}") as Record<string, string>;
+        for (const [k, v] of Object.entries(saved)) {
+          const el = form.elements.namedItem(k);
+          if (el instanceof RadioNodeList) el.value = v;
+          else if (el instanceof HTMLInputElement || el instanceof HTMLSelectElement || el instanceof HTMLTextAreaElement) el.value = v;
+        }
+      } catch {}
+      const [field, message] = errors[code] ?? ["", "Something went wrong. Please try again."];
+      const box = document.getElementById("form-error")!;
+      box.textContent = message;
+      box.hidden = false;
+      const input = field ? (form.elements.namedItem(field) as HTMLElement | null) : null;
+      input?.setAttribute("aria-invalid", "true");
+      input?.addEventListener("input", () => input.removeAttribute("aria-invalid"), { once: true });
+      (input ?? box).focus?.();
+    }
+    // Don't keep the buyer's details in the browser longer than one retry needs.
+    if (!code) { try { sessionStorage.removeItem(KEY); } catch {} }
+    form.addEventListener("change", sync);
+    sync();
+
+    form.addEventListener("submit", () => {
+      const data: Record<string, string> = {};
+      new FormData(form).forEach((v, k) => k !== "item" && (data[k] = String(v)));
+      try { sessionStorage.setItem(KEY, JSON.stringify(data)); } catch {}
+      const btn = form.querySelector<HTMLButtonElement>(".pay")!;
+      btn.disabled = true;
+      btn.textContent = "Taking you to Paystack…";
+    });
+    // Re-enable if the buyer comes back with the browser's Back button.
+    addEventListener("pageshow", (e) => {
+      if (e.persisted) location.reload();
+    });
+  </script>
+</Base>
+
+<style>
+  .checkout { padding-block: 2rem 5rem; }
+  .back { color: var(--muted); font-size: var(--text-sm); text-decoration: none; }
+  .back:hover { color: var(--green); }
+  .co-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; margin-top: 1.5rem; }
+  .summary { display: grid; gap: 1.25rem; position: sticky; top: 1.5rem; }
+  .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; color: var(--muted); font-size: var(--text-sm); }
+  .facts b { color: var(--text); }
+  .ask { font-size: var(--text-sm); color: var(--muted); }
+  .ask a { color: var(--green); }
+  .co-form { display: grid; gap: 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 2.25rem); }
+  .co-form h1 { font-size: var(--text-2xl); }
+  .form-error { padding: 0.85rem 1rem; border-radius: var(--radius-sm); background: rgba(255, 122, 122, 0.1); border: 1px solid rgba(255, 122, 122, 0.4); color: #ffb3b3; font-size: var(--text-sm); }
+  .form-error[hidden], .pickup-note[hidden] { display: none; }
+  .pickup-note { font-size: var(--text-sm); color: var(--muted); margin-top: -0.25rem; }
+  .pay { width: 100%; margin-top: 0.4rem; }
+  .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  .pay:disabled { opacity: 0.7; cursor: progress; }
+  .form-note { font-size: 0.82rem; color: var(--muted); text-align: center; }
+  @media (max-width: 860px) {
+    .co-grid { grid-template-columns: 1fr; }
+    .summary { position: static; }
+  }
+</style>
