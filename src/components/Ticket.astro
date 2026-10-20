@@ -1,6 +1,6 @@
 ---
 import type { Product } from "../data/products";
-import { amount, naira, waLink } from "../data/site";
+import { amount, orderMessage, swapMessage, waLink } from "../data/site";
 import WhatsAppIcon from "./WhatsAppIcon.astro";
 
 interface Props {
@@ -11,8 +11,8 @@ interface Props {
 }
 const { product: p, compact = false, index = 0 } = Astro.props;
 
-const orderMsg = `Hi GreenTech, I'm interested in the ${p.name} (${p.condition}) at ${naira(p.price)}. Is it available? Please send photos of the unit.`;
-const swapMsg = `Hi GreenTech, I want to swap my old device for the ${p.name} (${p.condition}, ${naira(p.price)}). My device is: `;
+const orderMsg = orderMessage(p);
+const swapMsg = swapMessage(p);
 const Name = compact ? "p" : "h3";
 ---
 <article class:list={["ticket", { compact }]} data-category={p.category} data-reveal={compact ? undefined : ""} style={`--i:${index % 4}`}>

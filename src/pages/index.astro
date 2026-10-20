@@ -5,18 +5,26 @@ import Logo from "../components/Logo.astro";
 import Ticket from "../components/Ticket.astro";
 import WhatsAppIcon from "../components/WhatsAppIcon.astro";
 import { categories, heroPicks, products } from "../data/products";
-import { site, waLink } from "../data/site";
+import { orderMessage, site, waLink } from "../data/site";
 import phonesImg from "../assets/cat/phones.jpg";
 import laptopsImg from "../assets/cat/laptops.jpg";
 import consolesImg from "../assets/cat/consoles.jpg";
 import audioImg from "../assets/cat/audio.jpg";
 
 const catImages = { phones: phonesImg, laptops: laptopsImg, consoles: consolesImg, audio: audioImg };
-const lowest = (id: string) => Math.min(...products.filter((p) => p.category === id).map((p) => p.price));
-const hero = heroPicks.map((n) => products.find((p) => p.name === n)!);
+const lowest = (id: string) => {
+  const prices = products.filter((p) => p.category === id).map((p) => p.price);
+  if (!prices.length) throw new Error(`No products in category "${id}"`);
+  return Math.min(...prices);
+};
+const hero = heroPicks.map((n) => {
+  const p = products.find((x) => x.name === n);
+  if (!p) throw new Error(`heroPicks: no product named "${n}" in products.ts`);
+  return p;
+});
 
-const hello = waLink("Hi GreenTech, I'm looking for a gadget. Can you help?");
-const findIt = waLink("Hi GreenTech, I'm looking for: ");
+const hello = waLink("Hi GreenTech, I saw your website. I'm looking for: ");
+const findIt = waLink("Hi GreenTech, I saw your website. I can't find this on your list. I'm looking for: ");
 
 const fears = [
   {
@@ -25,7 +33,7 @@ const fears = [
   },
   {
     q: "“Am I being overcharged?”",
-    a: "Our prices are right here on the page, before you message us. No “how much you get?” and no price that changes when you show up.",
+    a: "Our prices are on this page before you message us. No “how much you get?”. Prices follow the dollar, so we confirm today's price before you pay, never after.",
   },
   {
     q: "“Will it actually reach me?”",
@@ -54,21 +62,21 @@ const faqs = [
   },
   {
     q: "How do I pay?",
-    a: "Message us on WhatsApp with what you want. We confirm it's available, then send you the payment options. You can also pay in person at our shop in Computer Village.",
+    a: "Message us on WhatsApp with what you want and we'll confirm it's available. See the unit on a live video before you pay, or come and pay in person at our shop in Computer Village.",
   },
   {
     q: "How does a swap work?",
     a: "Tell us your device's model, storage and condition with the form above. We send you a valuation on WhatsApp. If you're happy with it, you hand over your old device, pay the difference, and take your new one home.",
   },
   {
-    q: "Why are some prices different on WhatsApp?",
-    a: "Gadget prices in Nigeria move with the dollar. We keep this page up to date, but we always confirm today's price with you before you pay. No surprises after.",
+    q: "Is the price on this page final?",
+    a: "Gadget prices in Nigeria move with the dollar. We keep this page up to date and confirm today's price with you on WhatsApp before you pay. No surprises after.",
   },
 ];
 ---
 <Base
-  title="GreenTech Gadget Store: Phones, Laptops & Consoles in Computer Village, Lagos"
-  description="Tested UK-used and brand-new phones, laptops and consoles at upfront prices, from Computer Village, Ikeja. Swap your old device, or order on WhatsApp for delivery anywhere in Nigeria."
+  title="GreenTech Gadget Store | Phones & Laptops, Computer Village"
+  description="Tested UK-used and new phones, laptops and consoles in Computer Village, Ikeja. Prices upfront, swap your old device, delivery nationwide."
 >
   <header class="nav">
     <div class="wrap nav-inner">
@@ -84,7 +92,7 @@ const faqs = [
           <li><a href="#visit">Visit</a></li>
         </ul>
       </nav>
-      <a class="btn btn-primary nav-cta" href={hello} target="_blank" rel="noopener">
+      <a class="btn btn-primary nav-cta" href={hello} target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
         <WhatsAppIcon /> <span>Chat with us</span>
       </a>
     </div>
@@ -101,9 +109,8 @@ const faqs = [
             <span class="hl">None of the wahala.</span>
           </h1>
           <p class="hero-sub hero-in" style="--d:2">
-            UK-used and brand-new phones, laptops and consoles. Every one is tested before it
-            leaves our shop, priced upfront, and delivered to your door anywhere in Nigeria. Or swap
-            your old device and pay only the difference.
+            Tested UK-used and brand-new phones, laptops and consoles. Prices on this page.
+            Delivery to all 36 states + FCT. Swap your old device and pay only the difference.
           </p>
           <div class="hero-ctas hero-in" style="--d:3">
             <a class="btn btn-primary btn-lg" href={hello} target="_blank" rel="noopener">
@@ -118,11 +125,12 @@ const faqs = [
           </ul>
         </div>
 
-        <div class="hero-board" aria-label="A few of today's prices">
+        <div class="hero-board" role="group" aria-label="A few of today's prices">
           {hero.map((p, i) => (
-            <div class={`pin pin-${i}`}>
+            <a class={`pin pin-${i}`} href={waLink(orderMessage(p))} target="_blank" rel="noopener">
+              <span class="sr-only">Order on WhatsApp: </span>
               <Ticket product={p} compact />
-            </div>
+            </a>
           ))}
           <p class="swap-badge">
             <span>Swap</span> your old phone. Pay the difference.
@@ -141,11 +149,12 @@ const faqs = [
               alt=""
               widths={[360, 560, 800]}
               sizes="(max-width: 700px) 50vw, 25vw"
-              loading={i < 2 ? "eager" : "lazy"}
+              loading="lazy"
             />
             <span class="cat-label">
               <span class="cat-name">{c.label}</span>
               <span class="cat-from">from <span class="cur">₦</span>{lowest(c.id).toLocaleString("en-NG")}</span>
+              <span class="sr-only">, show in prices</span>
             </span>
           </a>
         ))}
@@ -178,7 +187,7 @@ const faqs = [
           <div class="section-head" data-reveal>
             <p class="eyebrow">Today's prices</p>
             <h2>Pick it. Message us. It's yours.</h2>
-            <p>Tap <strong>Order</strong> and WhatsApp opens with the device already in your message. We confirm it's in stock and send real photos of the unit.</p>
+            <p>Tap <strong>Order</strong> and WhatsApp opens with the device already in your message. We confirm it's in stock and send a live video of the exact unit.</p>
           </div>
           <div class="filters" role="group" aria-label="Filter by category" hidden>
             <button type="button" aria-pressed="true" data-filter="all">All</button>
@@ -227,8 +236,8 @@ const faqs = [
       <div class="wrap"><div class="swap-grid">
         <div class="swap-copy" data-reveal>
           <p class="eyebrow">Swap or sell</p>
-          <h2>Your old phone is worth more than you think.</h2>
-          <p class="lead">Swap it for something newer and pay only the difference. Or sell it to us for cash. No lowballing.</p>
+          <h2>What's your old phone worth? Find out today.</h2>
+          <p class="lead">Swap it for something newer and pay only the difference, or sell it to us for cash. We send you a valuation on WhatsApp, and you decide.</p>
           <ol class="steps">
             <li><b>1</b><span>Tell us what you have, with the form.</span></li>
             <li><b>2</b><span>We send you a valuation on WhatsApp.</span></li>
@@ -246,7 +255,7 @@ const faqs = [
           <div class="field">
             <label for="f-device">Your device</label>
             <input id="f-device" name="device" required autocomplete="off" placeholder="e.g. iPhone 12 Pro, 128GB" />
-            <p class="err" id="f-device-err" hidden>Tell us the model so we can value it.</p>
+            <p class="err" id="f-device-err" role="alert" hidden>Tell us the model so we can value it.</p>
           </div>
 
           <div class="field">
@@ -316,7 +325,7 @@ const faqs = [
       <div class="wrap">
         <div class="close" data-reveal>
           <Logo size={64} class="close-logo" />
-          <h2>Tell us what you want.<br /><span class="hl">We'll find it.</span></h2>
+          <h2>Tell us what you want.<br /><span class="hl">We'll tell you straight.</span></h2>
           <div class="close-ctas">
             <a class="btn btn-primary btn-lg" href={hello} target="_blank" rel="noopener"><WhatsAppIcon /> Chat on WhatsApp</a>
             <a class="btn btn-ghost btn-lg" href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay}</a>
@@ -356,16 +365,19 @@ const faqs = [
     </div>
   </footer>
 
-  <div class="dock" aria-label="Quick contact">
+  <nav class="dock" aria-label="Quick contact">
     <a class="btn btn-primary" href={hello} target="_blank" rel="noopener"><WhatsAppIcon /> WhatsApp us</a>
     <a class="btn btn-ghost" href={`tel:${site.phoneTel}`} aria-label={`Call ${site.phoneDisplay}`}>Call</a>
-  </div>
-</Base>
+  </nav>
+
 
 <script>
   import { waLink } from "../data/site";
 
-  // Scroll reveal. Elements are only hidden when the html.js class is present.
+  // Scroll reveal. Elements are only hidden when the html.js class is present,
+  // and anything that can't be observed is shown straight away.
+  const revealAll = () => document.querySelectorAll("[data-reveal]").forEach((el) => el.classList.add("in"));
+  if (!("IntersectionObserver" in window)) revealAll();
   const io = new IntersectionObserver(
     (entries) => {
       for (const e of entries) {
@@ -378,6 +390,8 @@ const faqs = [
     { rootMargin: "0px 0px -8% 0px" },
   );
   document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+  // Safety net: never leave content hidden for long, whatever happens above.
+  setTimeout(revealAll, 4000);
 
   // Category filter. Without JS every deal stays visible and the buttons stay hidden.
   const filters = document.querySelector<HTMLElement>(".filters");
@@ -406,6 +420,10 @@ const faqs = [
   document.querySelectorAll<HTMLAnchorElement>(".cat[data-filter]").forEach((a) =>
     a.addEventListener("click", () => apply(a.dataset.filter!)),
   );
+  // Generic links to the price list always show everything.
+  document.querySelectorAll<HTMLAnchorElement>('a[href="#deals"]:not([data-filter])').forEach((a) =>
+    a.addEventListener("click", () => apply("all")),
+  );
 
   // Swap / sell form: composes a WhatsApp message, nothing is sent anywhere else.
   const form = document.getElementById("swap-form") as HTMLFormElement | null;
@@ -417,7 +435,10 @@ const faqs = [
 
     const sync = () => {
       const sell = (form.elements.namedItem("mode") as RadioNodeList).value === "sell";
-      swapOnly.forEach((el) => (el.hidden = sell));
+      swapOnly.forEach((el) => {
+        el.hidden = sell;
+        el.querySelectorAll("input").forEach((i) => (i.disabled = sell));
+      });
       if (label) label.textContent = sell ? "Get my cash offer" : "Get my swap value";
     };
     form.addEventListener("change", sync);
@@ -451,10 +472,15 @@ const faqs = [
       ];
       if (!sell && want) lines.push(`I want: ${want}`);
       lines.push("What can you offer?");
-      window.open(waLink(lines.join("\n")), "_blank", "noopener");
+      // A real link click survives popup blockers and in-app browsers better than window.open.
+      const a = Object.assign(document.createElement("a"), { href: waLink(lines.join("\n")), target: "_blank", rel: "noopener" });
+      document.body.append(a);
+      a.click();
+      a.remove();
     });
   }
 </script>
+</Base>
 
 <style>
   /* ---------- Nav ---------- */
@@ -506,12 +532,13 @@ const faqs = [
   .tick { width: 1rem; height: 1rem; border-radius: 50%; background: var(--green); position: relative; flex: none; }
   .tick::after { content: ""; position: absolute; left: 0.33rem; top: 0.2rem; width: 0.25rem; height: 0.45rem; border: solid var(--green-ink); border-width: 0 2px 2px 0; transform: rotate(45deg); }
 
+  /* Transform only: the h1 is the LCP element and must paint immediately */
   .hero-in { animation: rise 900ms var(--ease-out) both; animation-delay: calc(var(--d) * 90ms); }
-  @keyframes rise { from { opacity: 0; transform: translateY(22px); } }
+  @keyframes rise { from { transform: translateY(22px); } }
 
   /* Price board: three tickets pinned at angles */
   .hero-board { position: relative; min-height: 36rem; }
-  .pin { position: absolute; width: min(19rem, 78%); animation: pin-in 1000ms var(--ease-out) both; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.5)); }
+  .pin { position: absolute; display: block; text-decoration: none; color: inherit; width: min(19rem, 78%); animation: pin-in 1000ms var(--ease-out) both; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.5)); }
   .pin::before {
     content: "";
     position: absolute;
@@ -613,7 +640,6 @@ const faqs = [
   .filters button:hover { color: var(--text); border-color: var(--mint); }
   .filters button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--green-ink); }
   .deal-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr)); gap: 1rem; }
-  .deal-grid :global(.ticket[hidden]) { display: none; }
   .deals-more { margin-top: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; padding: 1.5rem clamp(1.25rem, 3vw, 2rem); border: 1px dashed var(--line-strong); border-radius: var(--radius); }
   .deals-more p { color: var(--muted); }
   .deals-more strong { color: var(--text); }
@@ -650,7 +676,7 @@ const faqs = [
     min-height: 3.1rem;
     padding: 0 1rem;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--line-strong);
+    border: 1px solid #6f8574;
     background: var(--surface);
     font-size: 1rem;
     transition: border-color var(--dur-fast);
@@ -690,7 +716,7 @@ const faqs = [
     letter-spacing: -0.015em;
   }
   summary::-webkit-details-marker { display: none; }
-  summary::after { content: "+"; position: absolute; right: 0.25rem; top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-size: 1.4rem; color: var(--green); transition: transform var(--dur-fast) var(--ease-out); }
+  summary::after { content: "+"; content: "+" / ""; position: absolute; right: 0.25rem; top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-size: 1.4rem; color: var(--green); transition: transform var(--dur-fast) var(--ease-out); }
   details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
   summary:hover { color: var(--mint); }
   details p { padding: 0 0 1.4rem; color: var(--muted); max-width: 40rem; }

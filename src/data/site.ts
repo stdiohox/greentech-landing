@@ -20,3 +20,9 @@ export const waLink = (message: string) =>
 
 export const naira = (amount: number) => `₦${amount.toLocaleString("en-NG")}`;
 export const amount = (n: number) => n.toLocaleString("en-NG");
+
+type Orderable = { name: string; condition: string; price: number };
+export const orderMessage = (p: Orderable) =>
+  `Hi GreenTech, I saw your website. I'm interested in the ${p.name} (${p.condition}) at ${naira(p.price)}. Is it available? Please send a live video of the exact unit.`;
+export const swapMessage = (p: Orderable) =>
+  `Hi GreenTech, I saw your website. I want to swap my old device for the ${p.name} (${p.condition}, ${naira(p.price)}). My device is: `;
