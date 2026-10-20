@@ -1,0 +1,744 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Logo from "../components/Logo.astro";
+import Ticket from "../components/Ticket.astro";
+import WhatsAppIcon from "../components/WhatsAppIcon.astro";
+import { categories, heroPicks, products } from "../data/products";
+import { site, waLink } from "../data/site";
+import phonesImg from "../assets/cat/phones.jpg";
+import laptopsImg from "../assets/cat/laptops.jpg";
+import consolesImg from "../assets/cat/consoles.jpg";
+import audioImg from "../assets/cat/audio.jpg";
+
+const catImages = { phones: phonesImg, laptops: laptopsImg, consoles: consolesImg, audio: audioImg };
+const lowest = (id: string) => Math.min(...products.filter((p) => p.category === id).map((p) => p.price));
+const hero = heroPicks.map((n) => products.find((p) => p.name === n)!);
+
+const hello = waLink("Hi GreenTech, I'm looking for a gadget. Can you help?");
+const findIt = waLink("Hi GreenTech, I'm looking for: ");
+
+const fears = [
+  {
+    q: "“Is this thing even original?”",
+    a: "Every device is checked before it's listed: screen, battery, cameras, ports, buttons. Ask, and we'll send a live video of the exact unit before you pay.",
+  },
+  {
+    q: "“Am I being overcharged?”",
+    a: "Our prices are right here on the page, before you message us. No “how much you get?” and no price that changes when you show up.",
+  },
+  {
+    q: "“Will it actually reach me?”",
+    a: "We deliver to all 36 states and the FCT. We'll tell you the delivery fee and timing before you pay. Or you can pick it up at our shop.",
+  },
+];
+
+const testimonials = [
+  { name: "Tunde A.", where: "Lekki", text: "Swapped my old iPhone 11 for a Pixel 9. Fair valuation, no stress. Delivery to Lekki the same day." },
+  { name: "Chinwe O.", where: "Yaba", text: "Got my MacBook Air M2 in 24 hours. Genuine UK Used, exactly as described. Going back for the JBL." },
+  { name: "Bola K.", where: "Ikeja", text: "GreenTech is now my go-to. Honest pricing, real specs, and they actually pick up the phone." },
+];
+
+const faqs = [
+  {
+    q: "Are your phones and laptops original?",
+    a: "Yes. We check every device before it goes on sale. If you're not sure, ask on WhatsApp for photos or a live video of the exact unit. You'll see it before you pay for it.",
+  },
+  {
+    q: "What does “UK Used” mean?",
+    a: "It's a pre-owned device imported from abroad, usually the UK, that we've tested ourselves. It costs a lot less than brand new. We tell you its exact condition (scratches, battery health) before you buy.",
+  },
+  {
+    q: "Do you deliver outside Lagos?",
+    a: "Yes, to all 36 states and the FCT. The fee and delivery time depend on where you are, and we confirm both before you pay.",
+  },
+  {
+    q: "How do I pay?",
+    a: "Message us on WhatsApp with what you want. We confirm it's available, then send you the payment options. You can also pay in person at our shop in Computer Village.",
+  },
+  {
+    q: "How does a swap work?",
+    a: "Tell us your device's model, storage and condition with the form above. We send you a valuation on WhatsApp. If you're happy with it, you hand over your old device, pay the difference, and take your new one home.",
+  },
+  {
+    q: "Why are some prices different on WhatsApp?",
+    a: "Gadget prices in Nigeria move with the dollar. We keep this page up to date, but we always confirm today's price with you before you pay. No surprises after.",
+  },
+];
+---
+<Base
+  title="GreenTech Gadget Store: Phones, Laptops & Consoles in Computer Village, Lagos"
+  description="Tested UK-used and brand-new phones, laptops and consoles at upfront prices, from Computer Village, Ikeja. Swap your old device, or order on WhatsApp for delivery anywhere in Nigeria."
+>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="brand" aria-label="GreenTech Gadget Store, back to top">
+        <Logo size={34} />
+        <span class="brand-word">Green<b>Tech</b></span>
+      </a>
+      <nav aria-label="Sections">
+        <ul class="nav-links">
+          <li><a href="#deals">Prices</a></li>
+          <li><a href="#swap">Swap</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#visit">Visit</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-primary nav-cta" href={hello} target="_blank" rel="noopener">
+        <WhatsAppIcon /> <span>Chat with us</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow hero-in" style="--d:0">Computer Village, Ikeja · Delivery nationwide</p>
+          <h1 class="hero-in" style="--d:1">
+            Computer Village prices.<br />
+            <span class="hl">None of the wahala.</span>
+          </h1>
+          <p class="hero-sub hero-in" style="--d:2">
+            UK-used and brand-new phones, laptops and consoles. Every one is tested before it
+            leaves our shop, priced upfront, and delivered to your door anywhere in Nigeria. Or swap
+            your old device and pay only the difference.
+          </p>
+          <div class="hero-ctas hero-in" style="--d:3">
+            <a class="btn btn-primary btn-lg" href={hello} target="_blank" rel="noopener">
+              <WhatsAppIcon /> Chat on WhatsApp
+            </a>
+            <a class="btn btn-ghost btn-lg" href="#deals">See today's prices</a>
+          </div>
+          <ul class="hero-proof hero-in" style="--d:4">
+            <li><span class="tick" aria-hidden="true"></span>Every device tested</li>
+            <li><span class="tick" aria-hidden="true"></span>Prices listed upfront</li>
+            <li><span class="tick" aria-hidden="true"></span>36 states + FCT</li>
+          </ul>
+        </div>
+
+        <div class="hero-board" aria-label="A few of today's prices">
+          {hero.map((p, i) => (
+            <div class={`pin pin-${i}`}>
+              <Ticket product={p} compact />
+            </div>
+          ))}
+          <p class="swap-badge">
+            <span>Swap</span> your old phone. Pay the difference.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="cats" aria-label="Shop by category">
+      <div class="wrap cats-grid">
+        {categories.map((c, i) => (
+          <a class="cat" href="#deals" data-filter={c.id} data-reveal style={`--i:${i}`}>
+            <Image
+              src={catImages[c.id]}
+              alt=""
+              widths={[360, 560, 800]}
+              sizes="(max-width: 700px) 50vw, 25vw"
+              loading={i < 2 ? "eager" : "lazy"}
+            />
+            <span class="cat-label">
+              <span class="cat-name">{c.label}</span>
+              <span class="cat-from">from <span class="cur">₦</span>{lowest(c.id).toLocaleString("en-NG")}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- FEARS -->
+    <section class="section fears">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Why GreenTech</p>
+          <h2>We know how buying a gadget in Lagos goes.</h2>
+        </div>
+        <ol class="fear-list">
+          {fears.map((f, i) => (
+            <li data-reveal style={`--i:${i}`}>
+              <span class="fear-n" aria-hidden="true">0{i + 1}</span>
+              <h3>{f.q}</h3>
+              <p>{f.a}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- DEALS -->
+    <section class="section deals" id="deals">
+      <div class="wrap">
+        <div class="deals-head">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">Today's prices</p>
+            <h2>Pick it. Message us. It's yours.</h2>
+            <p>Tap <strong>Order</strong> and WhatsApp opens with the device already in your message. We confirm it's in stock and send real photos of the unit.</p>
+          </div>
+          <div class="filters" role="group" aria-label="Filter by category" hidden>
+            <button type="button" aria-pressed="true" data-filter="all">All</button>
+            {categories.map((c) => <button type="button" aria-pressed="false" data-filter={c.id}>{c.label}</button>)}
+          </div>
+        </div>
+
+        <p class="sr-only" aria-live="polite" id="deal-count"></p>
+        <div class="deal-grid">
+          {products.map((p, i) => <Ticket product={p} index={i} />)}
+        </div>
+
+        <div class="deals-more" data-reveal>
+          <p><strong>Don't see it?</strong> This is a selection. Tell us the model and budget, and we'll find it.</p>
+          <a class="btn btn-ghost" href={findIt} target="_blank" rel="noopener"><WhatsAppIcon /> Ask for a device</a>
+        </div>
+        <p class="price-note">Prices move with the dollar. We confirm today's price on WhatsApp before you pay.</p>
+      </div>
+    </section>
+
+    <!-- CONDITION -->
+    <section class="section cond">
+      <div class="wrap cond-grid">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Know what you're buying</p>
+          <h2>Brand New or UK Used? Here's the difference.</h2>
+          <p>Both come tested from us. The difference is the price, and whether someone owned it before you.</p>
+        </div>
+        <div class="cond-cards">
+          <div class="cond-card" data-reveal style="--i:0">
+            <span class="stamp stamp-new">Brand New</span>
+            <h3>Never used</h3>
+            <p>Straight from the manufacturer, for when you want it untouched.</p>
+          </div>
+          <div class="cond-card" data-reveal style="--i:1">
+            <span class="stamp stamp-used">UK Used</span>
+            <h3>Pre-owned, tested by us</h3>
+            <p>Imported and checked by us: battery, screen, cameras, ports, buttons. We tell you the exact condition before you pay, and it costs a lot less than new.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SWAP -->
+    <section class="section swap" id="swap">
+      <div class="wrap"><div class="swap-grid">
+        <div class="swap-copy" data-reveal>
+          <p class="eyebrow">Swap or sell</p>
+          <h2>Your old phone is worth more than you think.</h2>
+          <p class="lead">Swap it for something newer and pay only the difference. Or sell it to us for cash. No lowballing.</p>
+          <ol class="steps">
+            <li><b>1</b><span>Tell us what you have, with the form.</span></li>
+            <li><b>2</b><span>We send you a valuation on WhatsApp.</span></li>
+            <li><b>3</b><span>Happy with it? Hand it over, pay the difference, and take your upgrade home.</span></li>
+          </ol>
+        </div>
+
+        <form class="swap-form" id="swap-form" data-reveal style="--i:1" novalidate>
+          <fieldset class="mode">
+            <legend class="sr-only">What do you want to do?</legend>
+            <label><input type="radio" name="mode" value="swap" checked /> <span>Swap it</span></label>
+            <label><input type="radio" name="mode" value="sell" /> <span>Sell for cash</span></label>
+          </fieldset>
+
+          <div class="field">
+            <label for="f-device">Your device</label>
+            <input id="f-device" name="device" required autocomplete="off" placeholder="e.g. iPhone 12 Pro, 128GB" />
+            <p class="err" id="f-device-err" hidden>Tell us the model so we can value it.</p>
+          </div>
+
+          <div class="field">
+            <label for="f-condition">Condition</label>
+            <select id="f-condition" name="condition">
+              <option>Like new, no scratches</option>
+              <option selected>Good, light signs of use</option>
+              <option>Fair, visible scratches or dents</option>
+              <option>Has a fault (screen, battery, etc.)</option>
+            </select>
+          </div>
+
+          <div class="field" data-swap-only>
+            <label for="f-want">What do you want instead? <span class="opt">(optional)</span></label>
+            <input id="f-want" name="want" autocomplete="off" placeholder="e.g. iPhone 14 Pro Max" />
+          </div>
+
+          <button class="btn btn-primary btn-lg" type="submit"><WhatsAppIcon /> <span data-label>Get my swap value</span></button>
+          <p class="form-note">This opens WhatsApp with your details filled in. You send it yourself, and nothing is stored here.</p>
+        </form>
+      </div></div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section voices">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">From our customers</p>
+          <h2>They came for one gadget. They came back for the next.</h2>
+        </div>
+        <div class="voice-grid">
+          {testimonials.map((t, i) => (
+            <figure class="voice" data-reveal style={`--i:${i}`}>
+              <blockquote>{t.text}</blockquote>
+              <figcaption><b>{t.name}</b> · {t.where}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <p class="voices-more">
+          See unboxings and deliveries on Instagram:{" "}
+          <a href={site.instagram.url} target="_blank" rel="noopener">{site.instagram.handle}</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq">
+      <div class="wrap faq-grid">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Questions</p>
+          <h2>Before you ask.</h2>
+          <p>Still unsure? <a href={hello} target="_blank" rel="noopener">Message us</a>. A real person replies.</p>
+        </div>
+        <div class="faq-list">
+          {faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT + CLOSE -->
+    <section class="section visit" id="visit">
+      <div class="wrap">
+        <div class="close" data-reveal>
+          <Logo size={64} class="close-logo" />
+          <h2>Tell us what you want.<br /><span class="hl">We'll find it.</span></h2>
+          <div class="close-ctas">
+            <a class="btn btn-primary btn-lg" href={hello} target="_blank" rel="noopener"><WhatsAppIcon /> Chat on WhatsApp</a>
+            <a class="btn btn-ghost btn-lg" href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay}</a>
+          </div>
+        </div>
+
+        <div class="visit-grid">
+          <div class="visit-item" data-reveal style="--i:0">
+            <p class="v-label">Shop</p>
+            <p class="v-value">{site.address}</p>
+            <a href={site.mapsUrl} target="_blank" rel="noopener">Get directions →</a>
+          </div>
+          <div class="visit-item" data-reveal style="--i:1">
+            <p class="v-label">Open</p>
+            <p class="v-value">{site.hours}</p>
+            <span class="v-hint">Message first and we'll have your device ready.</span>
+          </div>
+          <div class="visit-item" data-reveal style="--i:2">
+            <p class="v-label">Delivery</p>
+            <p class="v-value">All 36 states + FCT</p>
+            <span class="v-hint">Fee and timing confirmed before you pay.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p class="brand-word">Green<b>Tech</b> <span>· {site.tagline}</span></p>
+      <ul>
+        <li><a href={site.instagram.url} target="_blank" rel="noopener">Instagram {site.instagram.handle}</a></li>
+        <li><a href={site.x.url} target="_blank" rel="noopener">X {site.x.handle}</a></li>
+        <li><a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a></li>
+      </ul>
+      <p class="foot-small">© {new Date().getFullYear()} {site.name}. Computer Village, Ikeja, Lagos.</p>
+    </div>
+  </footer>
+
+  <div class="dock" aria-label="Quick contact">
+    <a class="btn btn-primary" href={hello} target="_blank" rel="noopener"><WhatsAppIcon /> WhatsApp us</a>
+    <a class="btn btn-ghost" href={`tel:${site.phoneTel}`} aria-label={`Call ${site.phoneDisplay}`}>Call</a>
+  </div>
+</Base>
+
+<script>
+  import { waLink } from "../data/site";
+
+  // Scroll reveal. Elements are only hidden when the html.js class is present.
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      }
+    },
+    { rootMargin: "0px 0px -8% 0px" },
+  );
+  document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+
+  // Category filter. Without JS every deal stays visible and the buttons stay hidden.
+  const filters = document.querySelector<HTMLElement>(".filters");
+  const tickets = document.querySelectorAll<HTMLElement>(".deal-grid .ticket");
+  const count = document.getElementById("deal-count");
+  const apply = (cat: string) => {
+    let shown = 0;
+    tickets.forEach((t) => {
+      const match = cat === "all" || t.dataset.category === cat;
+      t.hidden = !match;
+      if (match) {
+        shown++;
+        t.classList.add("in");
+      }
+    });
+    filters?.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === cat)));
+    if (count) count.textContent = `Showing ${shown} ${shown === 1 ? "device" : "devices"}`;
+  };
+  if (filters) {
+    filters.hidden = false;
+    filters.addEventListener("click", (e) => {
+      const b = (e.target as HTMLElement).closest("button");
+      if (b?.dataset.filter) apply(b.dataset.filter);
+    });
+  }
+  document.querySelectorAll<HTMLAnchorElement>(".cat[data-filter]").forEach((a) =>
+    a.addEventListener("click", () => apply(a.dataset.filter!)),
+  );
+
+  // Swap / sell form: composes a WhatsApp message, nothing is sent anywhere else.
+  const form = document.getElementById("swap-form") as HTMLFormElement | null;
+  if (form) {
+    const label = form.querySelector<HTMLElement>("[data-label]");
+    const swapOnly = form.querySelectorAll<HTMLElement>("[data-swap-only]");
+    const device = form.elements.namedItem("device") as HTMLInputElement;
+    const err = document.getElementById("f-device-err");
+
+    const sync = () => {
+      const sell = (form.elements.namedItem("mode") as RadioNodeList).value === "sell";
+      swapOnly.forEach((el) => (el.hidden = sell));
+      if (label) label.textContent = sell ? "Get my cash offer" : "Get my swap value";
+    };
+    form.addEventListener("change", sync);
+    sync();
+
+    device.addEventListener("input", () => {
+      if (device.value.trim()) {
+        device.removeAttribute("aria-invalid");
+        device.removeAttribute("aria-describedby");
+        if (err) err.hidden = true;
+      }
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const d = String(data.get("device") ?? "").trim();
+      if (!d) {
+        device.setAttribute("aria-invalid", "true");
+        device.setAttribute("aria-describedby", "f-device-err");
+        if (err) err.hidden = false;
+        device.focus();
+        return;
+      }
+      const sell = data.get("mode") === "sell";
+      const want = String(data.get("want") ?? "").trim();
+      const lines = [
+        sell ? "Hi GreenTech, I want to sell my device for cash." : "Hi GreenTech, I want to swap my device.",
+        `Device: ${d}`,
+        `Condition: ${data.get("condition")}`,
+      ];
+      if (!sell && want) lines.push(`I want: ${want}`);
+      lines.push("What can you offer?");
+      window.open(waLink(lines.join("\n")), "_blank", "noopener");
+    });
+  }
+</script>
+
+<style>
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10, 15, 10, 0.78);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; gap: 1.5rem; height: 4.25rem; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+  .brand-word { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; letter-spacing: -0.03em; }
+  .brand-word b { color: var(--green); font-weight: 700; }
+  nav { margin-left: auto; }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
+  .nav-links a {
+    display: block;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: var(--text-sm);
+    color: var(--muted);
+    transition: color var(--dur-fast), background-color var(--dur-fast);
+  }
+  .nav-links a:hover { color: var(--text); background: var(--surface-2); }
+  .nav-cta { --h: 2.6rem; font-size: var(--text-sm); }
+  @media (max-width: 760px) {
+    nav { display: none; }
+    .nav-cta { margin-left: auto; }
+  }
+  @media (max-width: 380px) {
+    .nav-cta span { display: none; }
+    .nav-cta { padding: 0 0.85rem; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-block: clamp(3rem, 8vw, 6.5rem) clamp(3rem, 6vw, 5rem); }
+  .hero-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+  .hero h1 { font-size: var(--text-hero); margin-top: 1.4rem; letter-spacing: -0.038em; line-height: 0.95; }
+  .hl { color: var(--green); }
+  .hero-sub { margin-top: 1.6rem; font-size: var(--text-lg); color: var(--muted); max-width: 36rem; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2.2rem; }
+  .btn-lg { --h: 3.5rem; padding: 0 1.6rem; font-size: 1.02rem; }
+  .hero-proof { list-style: none; padding: 0; margin: 2rem 0 0; display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; font-size: var(--text-sm); color: var(--muted); }
+  .hero-proof li { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .tick { width: 1rem; height: 1rem; border-radius: 50%; background: var(--green); position: relative; flex: none; }
+  .tick::after { content: ""; position: absolute; left: 0.33rem; top: 0.2rem; width: 0.25rem; height: 0.45rem; border: solid var(--green-ink); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+
+  .hero-in { animation: rise 900ms var(--ease-out) both; animation-delay: calc(var(--d) * 90ms); }
+  @keyframes rise { from { opacity: 0; transform: translateY(22px); } }
+
+  /* Price board: three tickets pinned at angles */
+  .hero-board { position: relative; min-height: 36rem; }
+  .pin { position: absolute; width: min(19rem, 78%); animation: pin-in 1000ms var(--ease-out) both; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.5)); }
+  .pin::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: -6px;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #7dffb6, var(--green) 45%, #00703a);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  .pin-0 { top: 0; left: 0; --r: -5deg; animation-delay: 250ms; }
+  .pin-1 { top: 10.5rem; right: 0; --r: 4deg; animation-delay: 380ms; }
+  .pin-2 { top: 22rem; left: 4%; --r: -2deg; animation-delay: 510ms; }
+  .pin { transform: rotate(var(--r)); }
+  @keyframes pin-in { from { opacity: 0; transform: translateY(-30px) rotate(calc(var(--r) * 3)); } }
+
+  .swap-badge {
+    position: absolute;
+    right: 2%;
+    bottom: -0.5rem;
+    z-index: 3;
+    width: 9.5rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    padding: 1rem;
+    background: var(--green);
+    color: var(--green-ink);
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.25;
+    transform: rotate(10deg);
+    animation: pin-in 900ms var(--ease-out) 700ms both;
+    --r: 10deg;
+  }
+  .swap-badge span { display: block; font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.2rem; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-board { min-height: 0; display: flex; gap: 1rem; overflow-x: auto; padding: 1.5rem 0.25rem 1.5rem; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .hero-board::-webkit-scrollbar { display: none; }
+    .pin { position: relative; inset: auto; flex: 0 0 15.5rem; width: auto; scroll-snap-align: start; }
+    .swap-badge { display: none; }
+  }
+
+  /* ---------- Categories ---------- */
+  .cats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+  .cat {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    isolation: isolate;
+    border: 1px solid var(--line);
+  }
+  .cat :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease-out); z-index: -2; }
+  .cat::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(6, 10, 6, 0.92) 8%, rgba(6, 10, 6, 0.2) 55%, transparent); }
+  .cat:hover :global(img) { transform: scale(1.05); }
+  .cat-label { position: absolute; left: 1.1rem; right: 1.1rem; bottom: 1rem; display: flex; flex-direction: column; gap: 0.15rem; }
+  .cat-name { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+  .cat-from { font-family: var(--font-mono); font-size: 0.8rem; color: var(--mint); }
+  @media (max-width: 700px) {
+    .cats-grid { grid-template-columns: repeat(2, 1fr); }
+    .cat { aspect-ratio: 1; }
+  }
+
+  /* ---------- Fears ---------- */
+  .fear-list { list-style: none; padding: 0; margin: clamp(2.5rem, 5vw, 4rem) 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .fear-list li { background: var(--bg); padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-direction: column; gap: 0.9rem; }
+  .fear-n { font-family: var(--font-mono); font-size: 0.8rem; color: var(--green); }
+  .fear-list h3 { font-size: var(--text-2xl); letter-spacing: -0.025em; line-height: 1.05; }
+  .fear-list p { color: var(--muted); }
+  @media (max-width: 860px) { .fear-list { grid-template-columns: 1fr; } }
+
+  /* ---------- Deals ---------- */
+  .deals { background: linear-gradient(to bottom, transparent, rgba(23, 32, 23, 0.55) 18%, rgba(23, 32, 23, 0.55) 82%, transparent); }
+  .deals-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 2rem; }
+  .deals-head strong { color: var(--text); }
+  .filters { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .filters[hidden] { display: none; }
+  .filters button {
+    min-height: 2.75rem;
+    padding: 0 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    transition: background-color var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+  }
+  .filters button:hover { color: var(--text); border-color: var(--mint); }
+  .filters button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--green-ink); }
+  .deal-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr)); gap: 1rem; }
+  .deal-grid :global(.ticket[hidden]) { display: none; }
+  .deals-more { margin-top: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; padding: 1.5rem clamp(1.25rem, 3vw, 2rem); border: 1px dashed var(--line-strong); border-radius: var(--radius); }
+  .deals-more p { color: var(--muted); }
+  .deals-more strong { color: var(--text); }
+  .price-note { margin-top: 1rem; font-size: var(--text-sm); color: var(--muted); }
+
+  /* ---------- Condition ---------- */
+  .cond-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+  .cond-cards { display: grid; gap: 1rem; }
+  .cond-card { background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 1.6rem 1.75rem; display: grid; gap: 0.6rem; justify-items: start; }
+  .cond-card h3 { font-size: 1.5rem; letter-spacing: -0.02em; margin-top: 0.4rem; }
+  .cond-card p { color: var(--ink-muted); }
+  @media (max-width: 860px) { .cond-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Swap ---------- */
+  .swap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; padding: clamp(1.5rem, 4vw, 4rem); border-radius: calc(var(--radius) * 1.6); background: radial-gradient(40rem 30rem at 0% 0%, rgba(0, 230, 118, 0.14), transparent 60%), var(--surface); border: 1px solid var(--line); }
+  .swap-copy h2 { font-size: var(--text-3xl); margin-top: 1rem; }
+  .lead { font-size: var(--text-lg); color: var(--muted); margin-top: 1.1rem; }
+  .steps { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1rem; }
+  .steps li { display: flex; gap: 1rem; align-items: baseline; }
+  .steps b { flex: none; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--green); color: var(--green); font-family: var(--font-mono); font-size: 0.85rem; }
+
+  .swap-form { display: grid; gap: 1.1rem; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 2rem); }
+  .mode { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; background: var(--surface-2); border-radius: 999px; padding: 0.3rem; }
+  .mode label { position: relative; }
+  .mode input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .mode span { display: block; text-align: center; padding: 0.65rem; border-radius: 999px; font-weight: 600; font-size: var(--text-sm); color: var(--muted); transition: background-color var(--dur-fast), color var(--dur-fast); }
+  .mode input:checked + span { background: var(--green); color: var(--green-ink); }
+  .mode input:focus-visible + span { outline: 2px solid var(--green); outline-offset: 2px; }
+  .field { display: grid; gap: 0.45rem; }
+  .field[hidden] { display: none; }
+  .field label { font-size: var(--text-sm); font-weight: 600; }
+  .opt { color: var(--muted); font-weight: 400; }
+  .field input, .field select {
+    min-height: 3.1rem;
+    padding: 0 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    font-size: 1rem;
+    transition: border-color var(--dur-fast);
+  }
+  .field input::placeholder { color: #7d8f81; }
+  .field input:focus, .field select:focus { border-color: var(--green); outline: none; box-shadow: 0 0 0 3px rgba(0, 230, 118, 0.18); }
+  .field input[aria-invalid="true"] { border-color: #ff7a7a; }
+  .err { color: #ff9b9b; font-size: var(--text-sm); }
+  .swap-form .btn { width: 100%; margin-top: 0.4rem; }
+  .form-note { font-size: 0.82rem; color: var(--muted); text-align: center; }
+  @media (max-width: 860px) { .swap-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Testimonials ---------- */
+  .voice-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .voice { margin: 0; padding: 1.75rem; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; }
+  .voice blockquote { margin: 0; font-size: var(--text-lg); line-height: 1.45; }
+  .voice blockquote::before { content: "“"; display: block; font-family: var(--font-display); font-size: 3rem; line-height: 0.6; color: var(--green); margin-bottom: 0.6rem; }
+  .voice figcaption { font-size: var(--text-sm); color: var(--muted); }
+  .voice figcaption b { color: var(--text); }
+  .voices-more { margin-top: 1.5rem; color: var(--muted); font-size: var(--text-sm); }
+  .voices-more a { color: var(--green); }
+  @media (max-width: 860px) { .voice-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- FAQ ---------- */
+  .faq-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+  .faq-grid .section-head a { color: var(--green); }
+  .faq-list { border-top: 1px solid var(--line); }
+  details { border-bottom: 1px solid var(--line); }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.3rem 2.5rem 1.3rem 0;
+    position: relative;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; position: absolute; right: 0.25rem; top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-size: 1.4rem; color: var(--green); transition: transform var(--dur-fast) var(--ease-out); }
+  details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  summary:hover { color: var(--mint); }
+  details p { padding: 0 0 1.4rem; color: var(--muted); max-width: 40rem; }
+  @media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Visit / close ---------- */
+  .close { text-align: center; display: grid; justify-items: center; gap: 1.5rem; padding-bottom: clamp(3rem, 6vw, 5rem); }
+  .close h2 { font-size: var(--text-hero); letter-spacing: -0.045em; line-height: 0.95; }
+  .close-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 0.5rem; }
+  .visit-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+  .visit-item { padding: 1.75rem 1.5rem 0 0; display: grid; gap: 0.35rem; align-content: start; }
+  .v-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); }
+  .v-value { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+  .visit-item a { color: var(--mint); font-size: var(--text-sm); }
+  .v-hint { color: var(--muted); font-size: var(--text-sm); }
+  @media (max-width: 760px) { .visit-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Footer ---------- */
+  .foot { border-top: 1px solid var(--line); padding-block: 2.5rem; }
+  .foot-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; }
+  .foot-inner .brand-word span { color: var(--muted); font-family: var(--font-body); font-size: var(--text-sm); font-weight: 400; letter-spacing: 0; }
+  .foot ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: var(--text-sm); }
+  .foot a { color: var(--muted); text-decoration: none; }
+  .foot a:hover { color: var(--green); }
+  .foot-small { width: 100%; font-size: 0.8rem; color: var(--muted); }
+
+  /* ---------- Mobile dock ---------- */
+  .dock { display: none; }
+  @media (max-width: 760px) {
+    .dock {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      position: fixed;
+      left: 0.75rem;
+      right: 0.75rem;
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+      z-index: 60;
+      padding: 0.45rem;
+      border-radius: 999px;
+      background: rgba(17, 24, 17, 0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    }
+    .dock .btn { --h: 3rem; }
+    .dock .btn-ghost { padding: 0 1.4rem; }
+    .foot { padding-bottom: 6.5rem; }
+  }
+</style>

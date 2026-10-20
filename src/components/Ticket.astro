@@ -1,0 +1,49 @@
+---
+import type { Product } from "../data/products";
+import { amount, naira, waLink } from "../data/site";
+import WhatsAppIcon from "./WhatsAppIcon.astro";
+
+interface Props {
+  product: Product;
+  /** Hero tickets are display-only: no buttons, not a heading. */
+  compact?: boolean;
+  index?: number;
+}
+const { product: p, compact = false, index = 0 } = Astro.props;
+
+const orderMsg = `Hi GreenTech, I'm interested in the ${p.name} (${p.condition}) at ${naira(p.price)}. Is it available? Please send photos of the unit.`;
+const swapMsg = `Hi GreenTech, I want to swap my old device for the ${p.name} (${p.condition}, ${naira(p.price)}). My device is: `;
+const Name = compact ? "p" : "h3";
+---
+<article class:list={["ticket", { compact }]} data-category={p.category} data-reveal={compact ? undefined : ""} style={`--i:${index % 4}`}>
+  <div class="ticket-main">
+    <div class="ticket-top">
+      <span class:list={["stamp", p.condition === "Brand New" ? "stamp-new" : "stamp-used"]}>{p.condition}</span>
+      {p.swap && <span>Swap OK</span>}
+    </div>
+    <Name class="ticket-name">{p.name}</Name>
+    <p class="ticket-specs">{p.specs.join("  ·  ")}</p>
+  </div>
+  <div class="ticket-stub">
+    <p class="ticket-price"><span class="sr-only">Price: </span><span class="cur">₦</span>{amount(p.price)}</p>
+    {!compact && (
+      <div class="ticket-actions">
+        <a class="btn btn-ink" href={waLink(orderMsg)} target="_blank" rel="noopener">
+          <WhatsAppIcon /> Order<span class="sr-only"> {p.name} on WhatsApp</span>
+        </a>
+        {p.swap && (
+          <a class="btn btn-line-ink" href={waLink(swapMsg)} target="_blank" rel="noopener">
+            Swap<span class="sr-only"> my device for {p.name}</span>
+          </a>
+        )}
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .ticket-actions { display: flex; gap: 0.5rem; }
+  .ticket-actions .btn { --h: 2.75rem; flex: 1; padding: 0 1rem; font-size: 0.92rem; }
+  .compact .ticket-name { font-size: 1.2rem; }
+  .compact .ticket-price { font-size: 1.35rem; }
+</style>
