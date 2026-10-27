@@ -4,7 +4,7 @@ export const site = {
   name: "GreenTech Gadget Store",
   shortName: "GreenTech",
   tagline: "Everywhere Green",
-  url: "https://greentech-landing.vercel.app",
+  url: "https://greentech-landing-eight.vercel.app",
   phoneDisplay: "0903 235 9726",
   phoneTel: "+2349032359726",
   whatsapp: "2349032359726",

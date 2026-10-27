@@ -2,7 +2,7 @@ import { defineConfig, envField } from "astro/config";
 import vercel from "@astrojs/vercel";
 
 export default defineConfig({
-  site: "https://greentech-landing.vercel.app",
+  site: "https://greentech-landing-eight.vercel.app",
   // Pages stay static; only the checkout endpoint and the order page run on demand.
   adapter: vercel(),
   build: { inlineStylesheets: "always" },

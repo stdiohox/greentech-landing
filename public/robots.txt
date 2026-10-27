@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://greentech-landing.vercel.app/sitemap.xml
+Sitemap: https://greentech-landing-eight.vercel.app/sitemap.xml
