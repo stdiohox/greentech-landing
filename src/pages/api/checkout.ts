@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { findProduct } from "../../data/products";
+import { POUCH_ID, findProduct } from "../../data/products";
 import { initialize, isConfigured, parseOrder } from "../../lib/paystack";
 import { LIMITS, allow, clientIp } from "../../lib/rate-limit";
 
@@ -14,6 +14,7 @@ export const POST: APIRoute = async ({ request, url, site, redirect, clientAddre
   if (!form || !product) return redirect("/#deals", 303);
 
   const back = (error: string) => redirect(`/checkout/${product.id}?error=${error}#form`, 303);
+  if (product.sold) return back("sold");
 
   const ip = clientIp(() => clientAddress);
   if (!allow(`checkout:${ip}`, LIMITS.checkout.limit, LIMITS.checkout.windowMs)) return back("busy");
@@ -29,10 +30,18 @@ export const POST: APIRoute = async ({ request, url, site, redirect, clientAddre
   const parsed = parseOrder(form);
   if (!parsed.ok) return back(`field-${parsed.field}`);
 
+  // The pouch add-on is only offered with phones, and only while it's in stock.
+  const pouch = findProduct(POUCH_ID);
+  const wantsPouch = parsed.order.addPouch && product.category === "phones";
+  // Don't silently drop a pouch the buyer saw in their total.
+  if (wantsPouch && (!pouch || pouch.sold)) return back("pouch-sold");
+  const addon = wantsPouch ? pouch : undefined;
+  parsed.order.addPouch = Boolean(addon);
+
   // The price comes from products.ts on the server, never from the form.
   // Build the return URL from the configured site, not the request's Host header.
   const base = import.meta.env.DEV || !site ? url.origin : site.origin;
-  const tx = await initialize(product, parsed.order, new URL("/order", base).href);
+  const tx = await initialize(product, parsed.order, new URL("/order", base).href, addon);
   if (!tx) return back("gateway");
   return redirect(tx.url, 303);
 };

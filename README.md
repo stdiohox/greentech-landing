@@ -44,6 +44,17 @@ The site promises a **full refund** in that case (checkout page and FAQ). Issue 
 Paystack dashboard: Transactions → the payment → Refund. Confirm this wording with GreenTech
 before going live.
 
+### Pouch add-on and stock
+
+Phone checkouts offer the "phone-pouch" product as an add-on; the server adds its price and
+the signature covers the total and the add-on choice. Set `sold: true` on any product in
+`products.ts` (then redeploy) to switch off Buy and refuse checkout for it. Pouches have no
+stock count: mark the pouch sold if you run out.
+
+**Staff note:** the "Add-on" line in the Paystack dashboard is informational. Before handing
+over a pouch, check the amount paid equals phone + pouch, or open the buyer's `/order` page,
+which only shows the pouch when the signed order includes it.
+
 ### Rate limiting
 
 `src/lib/rate-limit.ts` caps each visitor IP at 10 checkout attempts and 30 order-page loads

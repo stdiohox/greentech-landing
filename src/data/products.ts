@@ -1,6 +1,6 @@
 // Today's deals. Names, conditions and prices come from the previous site's
 // product table; update them here when stock or prices change. Order = display order.
-export type Category = "phones" | "laptops" | "consoles" | "audio";
+export type Category = "phones" | "laptops" | "consoles" | "audio" | "accessories";
 export type Condition = "Brand New" | "UK Used";
 
 export type Product = {
@@ -12,6 +12,8 @@ export type Product = {
   price: number;
   specs: string[];
   swap: boolean;
+  /** Set true when the unit has sold: Buy is switched off and checkout refuses it. */
+  sold?: boolean;
 };
 
 export const categories: { id: Category; label: string }[] = [
@@ -19,6 +21,7 @@ export const categories: { id: Category; label: string }[] = [
   { id: "laptops", label: "Laptops" },
   { id: "consoles", label: "Consoles" },
   { id: "audio", label: "Audio" },
+  { id: "accessories", label: "Accessories" },
 ];
 
 export const products: Product[] = [
@@ -37,6 +40,8 @@ export const products: Product[] = [
   { id: "switch-oled", name: "Nintendo Switch OLED", category: "consoles", condition: "UK Used", price: 380000, specs: ['7" OLED', "64GB", "Handheld + TV"], swap: true },
   { id: "airpods-pro-2", name: "AirPods Pro (2nd Gen)", category: "audio", condition: "UK Used", price: 120000, specs: ["Noise cancelling", "USB-C"], swap: false },
   { id: "jbl-charge-5", name: "JBL Charge 5", category: "audio", condition: "Brand New", price: 85000, specs: ["20hr battery", "IP67", "Power bank"], swap: false },
+  // Price from the previous site's "Phone Case (Universal)" listing; confirm with GreenTech.
+  { id: "phone-pouch", name: "Protective phone pouch", category: "accessories", condition: "Brand New", price: 3500, specs: ["Protective", "Fits most phone models"], swap: false },
   { id: "bose-soundlink-flex", name: "Bose SoundLink Flex", category: "audio", condition: "Brand New", price: 120000, specs: ["12hr battery", "IP67"], swap: false },
 ];
 
@@ -45,3 +50,6 @@ export const products: Product[] = [
 export const heroPicks = ["iPhone 14 Pro Max 128GB", "PlayStation 5 Disc Edition"];
 
 export const findProduct = (id: string) => products.find((p) => p.id === id);
+
+/** The pouch offered as an add-on when buying a phone. */
+export const POUCH_ID = "phone-pouch";

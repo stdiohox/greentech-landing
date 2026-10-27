@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import MiniHeader from "../components/MiniHeader.astro";
 import WhatsAppIcon from "../components/WhatsAppIcon.astro";
-import { findProduct } from "../data/products";
+import { POUCH_ID, findProduct } from "../data/products";
 import { amount, site, waLink } from "../data/site";
 import { REFERENCE_PATTERN, isConfigured, verify, type Verification } from "../lib/paystack";
 import { LIMITS, allow, clientIp } from "../lib/rate-limit";
@@ -22,7 +22,11 @@ else if (!isConfigured()) result = { state: "error", reference };
 else result = await verify(reference);
 
 const product = result.state === "paid" ? findProduct(result.productId) : undefined;
-const deviceName = product ? `${product.name} (${product.condition})` : "my order";
+const withPouch = result.state === "paid" && result.order.addPouch === true;
+// Marked sold after this payment started: don't promise it, confirm availability instead.
+const soldSince = result.state === "paid" && product?.sold === true;
+const pouchName = findProduct(POUCH_ID)?.name ?? "phone pouch";
+const deviceName = (product ? `${product.name} (${product.condition})` : "my order") + (withPouch ? ` + ${pouchName}` : "");
 const paidMsg = result.state === "paid"
   ? `Hi GreenTech, I just paid ${"₦" + amount(result.amountKobo / 100)} for the ${deviceName}. My payment reference is ${reference}.`
   : "";
@@ -48,7 +52,8 @@ if (result.state === "limited") {
       <section class="card ok" aria-labelledby="t">
         <span class="badge" aria-hidden="true">✓</span>
         <p class="eyebrow">Payment confirmed</p>
-        <h1 id="t">Thank you{firstName ? `, ${firstName}` : ""}. It's yours.</h1>
+        <h1 id="t">Thank you{firstName ? `, ${firstName}` : ""}. {soldSince ? "We're confirming your device." : "It's yours."}</h1>
+        {soldSince && <p class="lead">This unit may have just sold in the shop. We'll confirm on WhatsApp shortly, and if it's gone you get a full refund or a similar device, your choice.</p>}
         <dl class="rows">
           <div><dt>Device</dt><dd>{deviceName}</dd></div>
           <div><dt>Paid</dt><dd class="mono"><span class="cur">₦</span>{amount(result.amountKobo / 100)}</dd></div>

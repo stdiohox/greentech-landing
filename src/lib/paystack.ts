@@ -30,6 +30,8 @@ export type OrderDetails = {
   address: string;
   state: string;
   notes: string;
+  /** Buyer ticked "Add a protective pouch" on a phone checkout. */
+  addPouch: boolean;
 };
 
 /**
@@ -46,6 +48,7 @@ export function parseOrder(form: FormData): { ok: true; order: OrderDetails } | 
     address: get("address"),
     state: get("state"),
     notes: get("notes"),
+    addPouch: get("addPouch") === "1",
   };
   if (order.name.length < 2 || order.name.length > 100) return { ok: false, field: "name" };
   if (!/^\+?[0-9 ()-]{7,20}$/.test(order.phone) || order.phone.replace(/\D/g, "").length < 10) return { ok: false, field: "phone" };
@@ -99,9 +102,10 @@ async function call<T>(path: string, init?: RequestInit): Promise<PaystackEnvelo
 }
 
 /** Starts a hosted-checkout transaction. Returns the Paystack page to send the buyer to. */
-export async function initialize(product: Product, order: OrderDetails, callbackUrl: string) {
+/** `addon` is an extra item bought in the same payment (the pouch with a phone). */
+export async function initialize(product: Product, order: OrderDetails, callbackUrl: string, addon?: Product) {
   const reference = newReference();
-  const amount = toKobo(product.price);
+  const amount = toKobo(product.price + (addon?.price ?? 0));
   const field = (display_name: string, value: string) => ({ display_name, variable_name: display_name.toLowerCase().replace(/\W+/g, "_"), value });
   let res: PaystackEnvelope<{ authorization_url?: string; reference?: string }>;
   try {
@@ -120,6 +124,7 @@ export async function initialize(product: Product, order: OrderDetails, callback
         // Shown on the transaction in the Paystack dashboard, which is the shop's order record.
         custom_fields: [
           field("Device", `${product.name} (${product.condition})`),
+          ...(addon ? [field("Add-on", `${addon.name} (+₦${addon.price.toLocaleString("en-NG")})`)] : []),
           field("Customer", order.name),
           field("Phone", order.phone),
           field("Fulfilment", order.fulfilment === "delivery" ? `Delivery: ${order.address}, ${order.state}` : "Pickup at Computer Village"),

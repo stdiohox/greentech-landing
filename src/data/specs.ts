@@ -156,6 +156,15 @@ export const details: Record<string, ProductDetail> = {
       { title: "Connectivity", rows: [["Wireless", "Bluetooth"], ["Multi-speaker", "JBL PartyBoost"]] },
     ],
   },
+  "phone-pouch": {
+    summary: "A brand-new protective pouch for your phone. Tell us your phone model when you order and we'll confirm the right fit.",
+    highlights: ["Brand new", "Fits most phone models", "Add it when you buy a phone"],
+    partial: true,
+    specs: [
+      { title: "Fit", rows: [["Compatibility", "Most phone models; tell us yours when you order"]] },
+      { title: "Type", rows: [["Style", "Protective pouch"]] },
+    ],
+  },
   "bose-soundlink-flex": {
     summary: "A compact Bose speaker with big, clear sound that's dustproof, waterproof and even floats.",
     highlights: ["Up to 12 hours playtime", "IP67, and it floats", "PositionIQ sound tuning"],

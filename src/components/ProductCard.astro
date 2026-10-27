@@ -34,7 +34,7 @@ const href = `/products/${p.id}`;
   </a>
   <div class="card-top">
     <span class:list={["cond", isNew ? "cond-new" : "cond-used"]}>{isNew ? "Brand new" : "UK used"}</span>
-    {p.swap && variant === "shop" && <span class="swap">Swap OK</span>}
+    {p.sold ? <span class="swap sold-tag">Sold</span> : p.swap && variant === "shop" && <span class="swap">Swap OK</span>}
   </div>
   <Name class="name"><a href={href}>{p.name}</a></Name>
 
@@ -44,7 +44,9 @@ const href = `/products/${p.id}`;
     <p class="price"><span class="sr-only">Price: </span><span class="cur">₦</span>{amount(p.price)}</p>
     {variant === "shop" && (
       <div class="actions">
-        <a class="btn btn-primary buy" href={`/checkout/${p.id}`}>Buy<span class="sr-only"> {p.name}</span></a>
+        {p.sold
+          ? <span class="btn sold-btn" aria-disabled="true">Sold</span>
+          : <a class="btn btn-primary buy" href={`/checkout/${p.id}`}>Buy<span class="sr-only"> {p.name}</span></a>}
         <a class="ask" href={waLink(orderMessage(p))} target="_blank" rel="noopener">
           <WhatsAppIcon /> Ask<span class="sr-only"> about {p.name} on WhatsApp</span>
         </a>
@@ -103,6 +105,8 @@ const href = `/products/${p.id}`;
   .price :global(.cur) { font-weight: 600; }
   .actions { display: flex; align-items: center; gap: 1.1rem; }
   .buy { --h: 2.6rem; padding: 0 1.5rem; font-weight: 500; }
+  .sold-btn { --h: 2.6rem; padding: 0 1.5rem; background: var(--surface-2); color: var(--muted); cursor: default; }
+  .sold-tag { font-weight: 600; }
   .ask { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.75rem; color: var(--green); font-weight: 500; font-size: 0.95rem; text-decoration: none; }
   .ask :global(svg) { width: 1.05em; height: 1.05em; }
   .ask:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -120,7 +124,7 @@ const href = `/products/${p.id}`;
     .card--shop .price { font-size: 1.12rem; }
     .card--shop .foot { gap: 0.5rem; }
     .card--shop .actions { flex-direction: column; align-items: stretch; gap: 0.15rem; }
-    .card--shop .buy { --h: 2.5rem; padding: 0; width: 100%; }
+    .card--shop .buy, .card--shop .sold-btn { --h: 2.5rem; padding: 0; width: 100%; }
     .card--shop .ask { justify-content: center; min-height: 2.5rem; font-size: 0.88rem; }
     .placeholder span { font-size: 0.8rem; }
   }
