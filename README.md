@@ -37,6 +37,21 @@ Paystack's hosted page. Paystack then sends them back to `/order?reference=…`.
   Turn on email notifications for successful payments in Paystack
   (Settings → Preferences) so the shop hears about each order.
 
+### Sold-out refunds
+
+Each listing is a single unit, so one can sell in the shop just before an online order lands.
+The site promises a **full refund** in that case (checkout page and FAQ). Issue it from the
+Paystack dashboard: Transactions → the payment → Refund. Confirm this wording with GreenTech
+before going live.
+
+### Rate limiting
+
+`src/lib/rate-limit.ts` caps each visitor IP at 10 checkout attempts and 30 order-page loads
+per 10 minutes. It is per serverless instance, so it stops bursts rather than enforcing a
+global cap. After the first deploy, add the global backstop in Vercel: Project → Firewall →
+Configure → New Rule → *Request Path* equals `/api/checkout` (and a second rule for
+`/order`) → **Rate Limit**, e.g. 20 requests / 60 s per IP → Deny.
+
 ### Keys
 
 | Variable | Where | Notes |

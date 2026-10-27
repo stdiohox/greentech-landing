@@ -24,6 +24,7 @@ const { product } = Astro.props as { product: Product };
           <li><b>You pay now:</b> <span class="cur">₦</span>{amount(product.price)}, the device price. Nothing is added at checkout.</li>
           <li><b>Delivery:</b> if you choose delivery, we agree the fee with you on WhatsApp and you pay it separately. Pickup at our shop costs nothing extra.</li>
           <li><b>Payment:</b> on Paystack's secure page. GreenTech never sees your card details.</li>
+          <li><b>If it's sold out:</b> if the unit sells before we confirm your order, we tell you on WhatsApp and refund you in full.</li>
         </ul>
         <p class="ask">Want to see the unit first? <a href={waLink(orderMessage(product))} target="_blank" rel="noopener">Ask for a live video on WhatsApp</a></p>
       </aside>
@@ -90,6 +91,7 @@ const { product } = Astro.props as { product: Product };
       "field-state": ["state", "Please choose your state."],
       "field-notes": ["notes", "Please keep your note under 500 characters."],
       gateway: ["", "We couldn't reach Paystack just now. Please try again in a moment, or order on WhatsApp."],
+      busy: ["", "Too many attempts from your connection. Please wait a few minutes and try again, or order on WhatsApp."],
       unavailable: ["", "Online payment isn't available right now. Please order on WhatsApp and we'll sort you out."],
     };
 

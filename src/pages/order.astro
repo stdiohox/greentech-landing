@@ -5,6 +5,7 @@ import WhatsAppIcon from "../components/WhatsAppIcon.astro";
 import { findProduct } from "../data/products";
 import { amount, site, waLink } from "../data/site";
 import { REFERENCE_PATTERN, isConfigured, verify, type Verification } from "../lib/paystack";
+import { LIMITS, allow, clientIp } from "../lib/rate-limit";
 
 export const prerender = false;
 
@@ -13,8 +14,10 @@ const reference = (Astro.url.searchParams.get("reference") ?? Astro.url.searchPa
 Astro.response.headers.set("Cache-Control", "no-store");
 Astro.response.headers.set("Referrer-Policy", "no-referrer");
 
-let result: Verification | { state: "missing" };
+let result: Verification | { state: "missing" } | { state: "limited" };
+const ip = clientIp(() => Astro.clientAddress);
 if (!REFERENCE_PATTERN.test(reference)) result = { state: "missing" };
+else if (!allow(`order:${ip}`, LIMITS.order.limit, LIMITS.order.windowMs)) result = { state: "limited" };
 else if (!isConfigured()) result = { state: "error", reference };
 else result = await verify(reference);
 
@@ -33,6 +36,10 @@ const maskedEmail = result.state === "paid" && result.order.email
   ? result.order.email.replace(/^(.)[^@]*(@.).*(\.[^.]+)$/, "$1***$2***$3")
   : "";
 if (result.state === "missing") Astro.response.status = 400;
+if (result.state === "limited") {
+  Astro.response.status = 429;
+  Astro.response.headers.set("Retry-After", "600");
+}
 ---
 <Base title={result.state === "paid" ? `Payment confirmed | ${site.shortName}` : `Your order | ${site.shortName}`} description="Order status" noindex>
   <MiniHeader help={helpMsg} />
@@ -83,6 +90,17 @@ if (result.state === "missing") Astro.response.status = 400;
         <div class="ctas">
           <a class="btn btn-primary btn-lg" href={`/order?reference=${encodeURIComponent(reference)}`}>Check again</a>
           <a class="btn btn-ghost btn-lg" href={waLink(helpMsg)} target="_blank" rel="noopener"><WhatsAppIcon /> Message us</a>
+        </div>
+      </section>
+    )}
+
+    {result.state === "limited" && (
+      <section class="card" aria-labelledby="t">
+        <p class="eyebrow warn">Please wait a moment</p>
+        <h1 id="t">Too many checks from your connection.</h1>
+        <p class="lead">Try this page again in a few minutes. If you've paid, your money is safe. Message us with your reference <span class="mono">{reference}</span> and we'll confirm it for you.</p>
+        <div class="ctas">
+          <a class="btn btn-primary btn-lg" href={waLink(helpMsg)} target="_blank" rel="noopener"><WhatsAppIcon /> Message us</a>
         </div>
       </section>
     )}

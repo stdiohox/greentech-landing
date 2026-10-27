@@ -1,18 +1,22 @@
 import type { APIRoute } from "astro";
 import { findProduct } from "../../data/products";
 import { initialize, isConfigured, parseOrder } from "../../lib/paystack";
+import { LIMITS, allow, clientIp } from "../../lib/rate-limit";
 
 export const prerender = false;
 
 // Plain HTML form post from /checkout/[id]: on success we 303 to Paystack's
 // hosted page, on any problem we 303 back to the form with a reason.
-export const POST: APIRoute = async ({ request, url, site, redirect }) => {
+export const POST: APIRoute = async ({ request, url, site, redirect, clientAddress }) => {
   const form = await request.formData().catch(() => null);
   const id = String(form?.get("item") ?? "");
   const product = findProduct(id);
   if (!form || !product) return redirect("/#deals", 303);
 
   const back = (error: string) => redirect(`/checkout/${product.id}?error=${error}#form`, 303);
+
+  const ip = clientIp(() => clientAddress);
+  if (!allow(`checkout:${ip}`, LIMITS.checkout.limit, LIMITS.checkout.windowMs)) return back("busy");
 
   // Honeypot: real buyers never see or fill this field.
   if (String(form.get("website") ?? "") !== "") return back("gateway");
