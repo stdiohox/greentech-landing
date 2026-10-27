@@ -1,0 +1,25 @@
+---
+import WhatsAppIcon from "./WhatsAppIcon.astro";
+import { site } from "../data/site";
+interface Props { hello: string }
+const { hello } = Astro.props;
+---
+  <nav class="dock" aria-label="Quick contact">
+    <a class="btn btn-primary" href={hello} target="_blank" rel="noopener"><WhatsAppIcon /> WhatsApp us</a>
+    <a class="btn btn-ghost" href={`tel:${site.phoneTel}`} aria-label={`Call ${site.phoneDisplay}`}>Call</a>
+  </nav>
+
+<style>
+  /* ---------- Mobile dock ---------- */
+  .dock { display: none; }
+  @media (max-width: 760px) {
+    .dock {
+      display: grid; grid-template-columns: 1fr auto; gap: 0.5rem;
+      position: fixed; left: 0.75rem; right: 0.75rem; bottom: max(0.75rem, env(safe-area-inset-bottom)); z-index: 60;
+      padding: 0.45rem; border-radius: 999px; background: var(--surface);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent), 0 12px 30px rgba(var(--shadow-rgb) / 0.2);
+    }
+    .dock .btn { --h: 3rem; }
+    .dock .btn-ghost { padding: 0 1.4rem; }
+  }
+</style>

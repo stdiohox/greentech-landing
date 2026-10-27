@@ -5,6 +5,9 @@ import Logo from "../components/Logo.astro";
 import Hero from "../components/Hero.astro";
 import ProductCard from "../components/ProductCard.astro";
 import WhatsAppIcon from "../components/WhatsAppIcon.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Dock from "../components/Dock.astro";
 import { categories, heroPicks, products, type Category } from "../data/products";
 import { site, waLink } from "../data/site";
 import { productImage } from "../lib/images";
@@ -51,25 +54,7 @@ const faqs = [
   title="UK Used & New iPhones, Phones & Laptops | GreenTech Ikeja"
   description="Tested UK-used and new phones, laptops and consoles in Computer Village, Ikeja. Prices upfront, swap your old device, delivery nationwide."
 >
-  <header class="nav">
-    <div class="nav-island">
-      <a href="#top" class="brand" aria-label="GreenTech Gadget Store, back to top">
-        <Logo size={28} />
-        <span class="brand-word">Green<b>Tech</b></span>
-      </a>
-      <nav aria-label="Sections">
-        <ul class="nav-links">
-          <li><a href="#deals">Shop</a></li>
-          <li><a href="#swap">Swap</a></li>
-          <li><a href="#faq">Help</a></li>
-          <li><a href="#visit">Visit</a></li>
-        </ul>
-      </nav>
-      <a class="btn btn-primary nav-cta" href={hello} target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
-        <WhatsAppIcon /> <span>Chat</span>
-      </a>
-    </div>
-  </header>
+  <SiteHeader hello={hello} />
 
   <main id="main">
     <Hero picks={hero} hello={hello} />
@@ -288,27 +273,8 @@ const faqs = [
     </section>
   </main>
 
-  <footer class="foot">
-    <div class="wrap">
-      <div class="foot-top">
-        <a href="#top" class="brand" aria-label="GreenTech, back to top"><Logo size={24} /><span class="brand-word">Green<b>Tech</b></span></a>
-        <ul class="foot-links">
-          <li><a href="#deals">Shop</a></li>
-          <li><a href="#swap">Swap</a></li>
-          <li><a href="#faq">Help</a></li>
-          <li><a href={site.instagram.url} target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href={site.x.url} target="_blank" rel="noopener">X</a></li>
-          <li><a href="/credits">Photo credits</a></li>
-        </ul>
-      </div>
-      <p class="foot-small">© {new Date().getFullYear()} {site.name}. {site.address}. {site.phoneDisplay}.</p>
-    </div>
-  </footer>
-
-  <nav class="dock" aria-label="Quick contact">
-    <a class="btn btn-primary" href={hello} target="_blank" rel="noopener"><WhatsAppIcon /> WhatsApp us</a>
-    <a class="btn btn-ghost" href={`tel:${site.phoneTel}`} aria-label={`Call ${site.phoneDisplay}`}>Call</a>
-  </nav>
+  <SiteFooter />
+  <Dock hello={hello} />
 
 <script>
   import { waLink } from "../data/site";
@@ -359,8 +325,12 @@ const faqs = [
   document.querySelectorAll<HTMLAnchorElement>(".cat[data-filter]").forEach((a) =>
     a.addEventListener("click", () => apply(a.dataset.filter!)),
   );
+  // Deep link from a product page breadcrumb: /?c=phones#deals opens that category.
+  const initial = new URLSearchParams(location.search).get("c");
+  if (initial && filters?.querySelector(`[data-filter="${CSS.escape(initial)}"]`)) apply(initial);
+
   // Generic links to the price list always show everything.
-  document.querySelectorAll<HTMLAnchorElement>('a[href="#deals"]:not([data-filter])').forEach((a) =>
+  document.querySelectorAll<HTMLAnchorElement>('a[href="#deals"]:not([data-filter]), a[href="/#deals"]:not([data-filter])').forEach((a) =>
     a.addEventListener("click", () => apply("all")),
   );
 
@@ -422,35 +392,6 @@ const faqs = [
 </Base>
 
 <style>
-  /* ---------- Floating island nav ---------- */
-  .nav { position: sticky; top: 0.75rem; z-index: 50; padding-inline: var(--gutter); pointer-events: none; }
-  .nav-island {
-    pointer-events: auto;
-    max-width: 62rem;
-    margin: 0.75rem auto 0;
-    display: flex; align-items: center; gap: 1rem;
-    height: 3.4rem; padding: 0 0.45rem 0 1.1rem;
-    border-radius: 999px;
-    background: var(--nav-bg);
-    backdrop-filter: blur(12px) saturate(1.4);
-    -webkit-backdrop-filter: blur(12px) saturate(1.4);
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent), 0 6px 24px rgba(var(--shadow-rgb) / 0.08);
-  }
-  .brand { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
-  .brand-word { font-family: var(--font-display); font-size: 1.12rem; font-weight: 600; letter-spacing: -0.02em; }
-  .brand-word b { color: var(--green); font-weight: 600; }
-  nav { margin-left: auto; }
-  .nav-links { display: flex; gap: 0.15rem; list-style: none; margin: 0; padding: 0; }
-  .nav-links a { display: block; padding: 0.5rem 0.85rem; border-radius: 999px; text-decoration: none; font-size: 0.9rem; color: var(--muted); transition: color var(--dur-fast), background-color var(--dur-fast); }
-  .nav-links a:hover { color: var(--text); background: color-mix(in srgb, var(--surface-2) 80%, transparent); }
-  .nav-cta { --h: 2.5rem; font-size: 0.9rem; padding: 0 1.05rem; }
-  @media (max-width: 760px) {
-    /* No live blur on phones: it is the most expensive thing to paint while scrolling */
-    .nav-island { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
-    nav { display: none; }
-    .nav-cta { margin-left: auto; }
-  }
-
   /* ---------- Shared section heading: Apple two-tone ---------- */
   .h2 { font-size: var(--text-3xl); font-weight: 600; letter-spacing: -0.025em; line-height: 1.08; max-width: 22ch; }
   .h2 .tone { display: block; color: var(--tone); }
@@ -493,7 +434,7 @@ const faqs = [
   .tile p { color: var(--muted); max-width: 46ch; }
   .checks { list-style: none; padding: 0; margin: auto 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; padding-top: 1.5rem; }
   .checks li { padding: 0.45rem 0.9rem; border-radius: 999px; background: var(--green-soft); color: var(--ok); font-size: 0.85rem; font-weight: 600; }
-  .checks li::before { content: "✓ "; }
+  .checks li::before { content: "✓ "; content: "✓ " / ""; }
   @media (max-width: 860px) { .bento { grid-template-columns: 1fr; } .tile-big { grid-row: auto; } }
 
   /* ---------- Deals ---------- */
@@ -578,25 +519,4 @@ const faqs = [
   @media (max-width: 960px) { .visit-bento { grid-template-columns: 1fr 1fr; } .vtile-main { grid-column: 1 / -1; } }
   @media (max-width: 640px) { .visit-bento { grid-template-columns: 1fr; } }
 
-  /* ---------- Footer: fine print ---------- */
-  .foot { padding-block: 2.5rem 3rem; border-top: 1px solid var(--line); }
-  .foot-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; }
-  .foot-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: 0.85rem; }
-  .foot-links a { color: var(--muted); text-decoration: none; }
-  .foot-links a:hover { color: var(--text); }
-  .foot-small { margin-top: 1.5rem; font-size: 0.78rem; color: var(--muted); }
-
-  /* ---------- Mobile dock ---------- */
-  .dock { display: none; }
-  @media (max-width: 760px) {
-    .dock {
-      display: grid; grid-template-columns: 1fr auto; gap: 0.5rem;
-      position: fixed; left: 0.75rem; right: 0.75rem; bottom: max(0.75rem, env(safe-area-inset-bottom)); z-index: 60;
-      padding: 0.45rem; border-radius: 999px; background: var(--surface);
-      box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent), 0 12px 30px rgba(var(--shadow-rgb) / 0.2);
-    }
-    .dock .btn { --h: 3rem; }
-    .dock .btn-ghost { padding: 0 1.4rem; }
-    .foot { padding-bottom: 6.5rem; }
-  }
 </style>

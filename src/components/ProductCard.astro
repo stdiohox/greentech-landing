@@ -19,26 +19,24 @@ const ratio = img ? img.width / img.height : 1;
 const fit = ratio > 1.6 || ratio < 0.62 ? "contain" : "cover";
 const isNew = p.condition === "Brand New";
 const Name = variant === "shop" ? "h3" : "p";
+const href = `/products/${p.id}`;
 ---
 <article class:list={["card", `card--${variant}`]} data-category={p.category} data-reveal={variant === "shop" ? "" : undefined} style={`--i:${index % 4}`}>
-  <div class:list={["media", `fit-${fit}`]}>
+  <a class:list={["media", `fit-${fit}`]} href={href} tabindex="-1" aria-hidden="true">
     {img ? (
-      <Image src={img} alt={`Photo of a ${p.name}`} widths={[240, 360, 480, 720]} quality={70} sizes={variant === "summary" ? "(max-width: 860px) 90vw, 420px" : "(max-width: 640px) 44vw, (max-width: 1100px) 30vw, 280px"} loading="lazy" />
+      <Image src={img} alt="" widths={[240, 360, 480, 720]} quality={70} sizes={variant === "summary" ? "(max-width: 860px) 90vw, 420px" : "(max-width: 640px) 44vw, (max-width: 1100px) 30vw, 280px"} loading="lazy" />
     ) : (
-      <a class="placeholder" href={waLink(`Hi GreenTech, please send photos of the ${p.name} (${p.condition}).`)} target="_blank" rel="noopener">
+      <span class="placeholder">
         <Logo size={32} />
         <span>Photos on request</span>
-        <b>Ask on WhatsApp ›</b>
-        <span class="sr-only">: photos of the {p.name}</span>
-      </a>
+      </span>
     )}
-  </div>
-
+  </a>
   <div class="card-top">
     <span class:list={["cond", isNew ? "cond-new" : "cond-used"]}>{isNew ? "Brand new" : "UK used"}</span>
     {p.swap && variant === "shop" && <span class="swap">Swap OK</span>}
   </div>
-  <Name class="name">{p.name}</Name>
+  <Name class="name"><a href={href}>{p.name}</a></Name>
 
   <p class="specs">{p.specs.join(" · ")}</p>
 
@@ -85,7 +83,9 @@ const Name = variant === "shop" ? "h3" : "p";
   .swap { font-size: 0.75rem; color: var(--muted); }
   .name { font-family: var(--font-display); font-weight: 600; font-size: 1.125rem; line-height: 1.2; letter-spacing: -0.015em; margin: -0.35rem 0 0; }
 
-  .media { position: relative; aspect-ratio: 1 / 1; border-radius: 1rem; overflow: hidden; background: var(--surface-2); }
+  .name a { color: inherit; text-decoration: none; }
+  .name a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .media { display: block; position: relative; aspect-ratio: 1 / 1; border-radius: 1rem; overflow: hidden; background: var(--surface-2); }
   .media.fit-contain { background: var(--media-contain); }
   .media.fit-contain :global(img) { object-fit: contain; padding: 8%; }
   .media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease-out); filter: var(--photo-filter); }
@@ -95,8 +95,7 @@ const Name = variant === "shop" ? "h3" : "p";
     background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--green) 8%, transparent), transparent 70%), var(--surface-2);
   }
   .placeholder :global(svg) { opacity: 0.85; }
-  .placeholder b { color: var(--green); font-weight: 600; font-size: 0.85rem; }
-  .placeholder:hover b { text-decoration: underline; text-underline-offset: 3px; }
+
 
   .specs { font-size: 0.86rem; color: var(--muted); flex: 1; }
   .foot { display: flex; flex-direction: column; gap: 0.9rem; }
@@ -123,7 +122,7 @@ const Name = variant === "shop" ? "h3" : "p";
     .card--shop .actions { flex-direction: column; align-items: stretch; gap: 0.15rem; }
     .card--shop .buy { --h: 2.5rem; padding: 0; width: 100%; }
     .card--shop .ask { justify-content: center; min-height: 2.5rem; font-size: 0.88rem; }
-    .placeholder span, .placeholder b { font-size: 0.8rem; }
+    .placeholder span { font-size: 0.8rem; }
   }
   .summary .name { min-height: 0; }
 </style>

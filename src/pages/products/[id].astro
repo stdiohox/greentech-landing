@@ -1,0 +1,222 @@
+---
+import type { GetStaticPaths } from "astro";
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import Dock from "../../components/Dock.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import Logo from "../../components/Logo.astro";
+import WhatsAppIcon from "../../components/WhatsAppIcon.astro";
+import { categories, products, type Product } from "../../data/products";
+import { details } from "../../data/specs";
+import { amount, naira, orderMessage, site, swapMessage, waLink } from "../../data/site";
+import { productImage } from "../../lib/images";
+
+export const getStaticPaths = (() =>
+  products.map((product) => {
+    if (!details[product.id]) throw new Error(`specs.ts: no details for "${product.id}"`);
+    return { params: { id: product.id }, props: { product } };
+  })) satisfies GetStaticPaths;
+
+const { product: p } = Astro.props as { product: Product };
+const d = details[p.id];
+const img = productImage(p.id);
+const isNew = p.condition === "Brand New";
+const ratio = img ? img.width / img.height : 1;
+const fit = ratio > 1.6 || ratio < 0.62 ? "contain" : "cover";
+const category = categories.find((c) => c.id === p.category)!;
+const related = [
+  ...products.filter((x) => x.category === p.category && x.id !== p.id),
+  ...products.filter((x) => x.category !== p.category),
+].slice(0, 4);
+const hello = waLink("Hi GreenTech, I saw your website. I'm looking for: ");
+const photosMsg = waLink(`Hi GreenTech, please send photos or a live video of the ${p.name} (${p.condition}).`);
+---
+<Base
+  title={`${p.name} (${p.condition}) price in Lagos | GreenTech`}
+  description={`${p.name}, ${p.condition.toLowerCase()}, ${naira(p.price)}. ${d.summary} Buy online, swap, or ask on WhatsApp. Computer Village, Ikeja.`}
+>
+  <SiteHeader hello={hello} />
+
+  <main id="main" class="wrap pdp">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href={`/?c=${category.id}#deals`}>{category.label}</a></li>
+        <li><span aria-current="page">{p.name}</span></li>
+      </ol>
+    </nav>
+
+    <div class="top">
+      <div class="gallery">
+        <div class="bezel">
+          <div class:list={["frame", fit]}>
+            {img ? (
+              <Image src={img} alt={`Photo of a ${p.name}`} widths={[480, 720, 1000, 1400]} quality={78} sizes="(max-width: 900px) 92vw, 640px" loading="eager" fetchpriority="high" />
+            ) : (
+              <div class="placeholder">
+                <Logo size={56} />
+                <p>We'll send you real photos of this unit.</p>
+                <a class="link" href={photosMsg} target="_blank" rel="noopener">Ask for photos on WhatsApp <span aria-hidden="true">›</span></a>
+              </div>
+            )}
+          </div>
+        </div>
+        <p class="photo-note">
+          {img ? "Photo shows this model, not the exact unit. " : ""}
+          <a class="link" href={photosMsg} target="_blank" rel="noopener">Ask for a live video of this unit <span aria-hidden="true">›</span></a>
+        </p>
+      </div>
+
+      <section class="buy" aria-label="Buy this device">
+        <span class:list={["pill", isNew ? "pill-new" : "pill-used"]}>{isNew ? "Brand new" : "UK used"}</span>
+        <h1>{p.name}</h1>
+        <p class="summary">{d.summary}</p>
+        <p class="price"><span class="sr-only">Price: </span><span class="cur">₦</span>{amount(p.price)}</p>
+        <p class="price-note">The price you pay online. Delivery is agreed and paid separately.</p>
+
+        <a class="btn btn-primary btn-lg buy-now" href={`/checkout/${p.id}`}>Buy now</a>
+        <a class="btn btn-ghost btn-lg" href={waLink(orderMessage(p))} target="_blank" rel="noopener"><WhatsAppIcon /> Ask on WhatsApp</a>
+        {p.swap && <a class="link swap" href={waLink(swapMessage(p))} target="_blank" rel="noopener">Swap your old device for this <span aria-hidden="true">›</span></a>}
+
+        <ul class="assure">
+          <li><b>Tested by us</b><span>Screen, battery, cameras, ports and buttons.</span></li>
+          <li><b>Pick up free in Ikeja</b><span>{site.address}, {site.hours}.</span></li>
+          <li><b>Delivered to all 36 states</b><span>Fee and timing agreed on WhatsApp.</span></li>
+          <li><b>Full refund if it sells out</b><span>If the unit sells before we confirm your order.</span></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="block" aria-labelledby="hl-title">
+      <h2 id="hl-title" class="h2">Highlights.</h2>
+      <ul class="highlights">
+        {d.highlights.map((h) => <li>{h}</li>)}
+      </ul>
+    </section>
+
+    <section class="block" aria-labelledby="spec-title">
+      <h2 id="spec-title" class="h2">Specifications. <span class="tone">{p.name}.</span></h2>
+      <div class="specs">
+        {d.specs.map((g) => (
+          <div class="spec-group">
+            <h3>{g.title}</h3>
+            <dl>
+              {g.rows.map(([k, v]) => (
+                <div class="row"><dt>{k}</dt><dd>{v}</dd></div>
+              ))}
+            </dl>
+          </div>
+        ))}
+        <div class="spec-group">
+          <h3>This unit</h3>
+          <dl>
+            <div class="row"><dt>Condition</dt><dd>{isNew ? "Brand new, never used" : "UK used: pre-owned, imported and tested by us"}</dd></div>
+            <div class="row"><dt>Swap</dt><dd>{p.swap ? "You can swap your old device towards this one" : "Not available for swap"}</dd></div>
+            {!isNew && <div class="row"><dt>Battery & cosmetics</dt><dd>Ask us for this unit's battery health and any marks before you buy</dd></div>}
+          </dl>
+        </div>
+      </div>
+      <p class="spec-note">
+        Manufacturer specifications for this model.{d.partial ? " We've listed only the figures we're sure of; ask us for anything else." : ""}{" "}
+        <a class="link" href={photosMsg} target="_blank" rel="noopener">Ask a question on WhatsApp <span aria-hidden="true">›</span></a>
+      </p>
+    </section>
+
+    <section class="block info" aria-labelledby="how-title">
+      <h2 id="how-title" class="h2">How buying works. <span class="tone">Three ways to get it.</span></h2>
+      <div class="ways">
+        <article><h3>Buy online</h3><p>Tap Buy now, add your details and pay securely on Paystack. We confirm your order on WhatsApp.</p></article>
+        <article><h3>See it first</h3><p>Ask on WhatsApp for a live video of this exact unit, or come and test it at our shop in Computer Village.</p></article>
+        <article><h3>Swap and save</h3><p>Trade in your old device and pay only the difference. We'll value it on WhatsApp.</p></article>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="rel-title">
+      <h2 id="rel-title" class="h2">You might also like.</h2>
+      <div class="related">
+        {related.map((r, i) => <ProductCard product={r} index={i} />)}
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+  <Dock hello={hello} />
+
+  <script>
+    // Reveal related cards (they use the site-wide reveal styling).
+    document.querySelectorAll("[data-reveal]").forEach((el) => el.classList.add("in"));
+  </script>
+</Base>
+
+<style>
+  .pdp { padding-block: 1.5rem 5rem; }
+  .crumbs ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; font-size: 0.85rem; color: var(--muted); }
+  .crumbs li + li::before { content: "›"; margin-right: 0.4rem; opacity: 0.6; }
+  .crumbs a { color: var(--muted); text-decoration: none; }
+  .crumbs a:hover { color: var(--text); }
+  .crumbs [aria-current] { color: var(--text); }
+
+  .top { margin-top: 1.5rem; display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .top > * { min-width: 0; }
+  .bezel { padding: 0.5rem; border-radius: var(--radius-lg); background: color-mix(in srgb, var(--surface-2) 70%, transparent); border: 1px solid color-mix(in srgb, var(--line) 70%, transparent); }
+  .frame { position: relative; aspect-ratio: 1 / 1; border-radius: calc(var(--radius-lg) - 0.5rem); overflow: hidden; background: var(--surface-2); }
+  .frame :global(img) { width: 100%; height: 100%; object-fit: cover; filter: var(--photo-filter); }
+  .frame.contain { background: var(--media-contain); }
+  .frame.contain :global(img) { object-fit: contain; padding: 8%; }
+  .placeholder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 0.75rem; text-align: center; padding: 2rem; color: var(--muted); background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--green) 8%, transparent), transparent 70%), var(--surface-2); }
+  .photo-note { margin-top: 0.9rem; font-size: var(--text-sm); color: var(--muted); }
+
+  .buy { position: sticky; top: 5.5rem; display: grid; gap: 0.75rem; justify-items: start; }
+  .pill { padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+  .pill-new { background: var(--green-soft); color: var(--ok); }
+  .pill-used { background: color-mix(in srgb, var(--warn) 14%, transparent); color: var(--warn); }
+  h1 { font-size: var(--text-3xl); font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; }
+  .summary { color: var(--muted); font-size: var(--text-lg); max-width: 40ch; }
+  .price { margin-top: 0.5rem; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.8rem, 1.5rem + 1.2vw, 2.4rem); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .price-note { margin-top: -0.4rem; font-size: 0.85rem; color: var(--muted); }
+  .btn-lg { --h: 3.25rem; width: 100%; font-size: 1.0625rem; font-weight: 500; }
+  .buy-now { margin-top: 0.5rem; }
+  .link { color: var(--green); font-weight: 500; text-decoration: none; }
+  .link:hover, p .link { text-decoration: underline; text-underline-offset: 3px; }
+  .swap { justify-self: center; padding: 0.35rem 0; }
+  .assure { list-style: none; margin: 0.75rem 0 0; padding: 1.1rem 1.25rem; width: 100%; display: grid; gap: 0.85rem; border-radius: 1.25rem; background: var(--surface); box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
+  .assure li { display: grid; gap: 0.1rem; padding-left: 1.6rem; position: relative; }
+  .assure li::before { content: "✓"; content: "✓" / ""; position: absolute; left: 0; top: 0; width: 1.15rem; height: 1.15rem; border-radius: 50%; display: grid; place-items: center; background: var(--green-soft); color: var(--ok); font-size: 0.7rem; font-weight: 700; }
+  .assure b { font-weight: 600; font-size: 0.95rem; }
+  .assure span { font-size: 0.85rem; color: var(--muted); }
+
+  .block { margin-top: clamp(4rem, 8vw, 6rem); }
+  .h2 { font-size: var(--text-3xl); font-weight: 600; letter-spacing: -0.025em; line-height: 1.08; }
+  .h2 .tone { display: block; color: var(--tone); }
+  .highlights { list-style: none; padding: 0; margin: 1.75rem 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .highlights li { padding: 1.5rem; border-radius: 1.4rem; background: var(--surface); font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; letter-spacing: -0.015em; line-height: 1.2; box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
+
+  .specs { margin-top: 1.75rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(2rem, 5vw, 4rem); border-top: 1px solid var(--line); }
+  .spec-group { padding: 1.4rem 0; border-bottom: 1px solid var(--line); }
+  .spec-group h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.6rem; }
+  .spec-group dl { margin: 0; display: grid; gap: 0.55rem; }
+  .row { display: grid; grid-template-columns: 10rem 1fr; gap: 1rem; font-size: 0.95rem; }
+  .row dt { color: var(--muted); }
+  .row dd { margin: 0; }
+  .spec-note { margin-top: 1.1rem; font-size: var(--text-sm); color: var(--muted); }
+
+  .ways { margin-top: 1.75rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .ways article { padding: clamp(1.4rem, 3vw, 2rem); border-radius: 1.5rem; background: var(--surface); box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
+  .ways h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.015em; }
+  .ways p { margin-top: 0.5rem; color: var(--muted); }
+
+  .related { margin-top: 1.75rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+  @media (max-width: 900px) {
+    .top { grid-template-columns: 1fr; }
+    .buy { position: static; }
+    .specs { grid-template-columns: 1fr; }
+    .highlights, .ways { grid-template-columns: 1fr; }
+    .related { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  }
+  @media (max-width: 480px) {
+    .row { grid-template-columns: 1fr; gap: 0.1rem; }
+  }
+</style>

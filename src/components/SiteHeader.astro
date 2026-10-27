@@ -1,0 +1,56 @@
+---
+import Logo from "./Logo.astro";
+import WhatsAppIcon from "./WhatsAppIcon.astro";
+interface Props { hello: string }
+const { hello } = Astro.props;
+---
+  <header class="nav">
+    <div class="nav-island">
+      <a href="/#top" class="brand" aria-label="GreenTech Gadget Store, back to top">
+        <Logo size={28} />
+        <span class="brand-word">Green<b>Tech</b></span>
+      </a>
+      <nav aria-label="Sections">
+        <ul class="nav-links">
+          <li><a href="/#deals">Shop</a></li>
+          <li><a href="/#swap">Swap</a></li>
+          <li><a href="/#faq">Help</a></li>
+          <li><a href="/#visit">Visit</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-primary nav-cta" href={hello} target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+        <WhatsAppIcon /> <span>Chat</span>
+      </a>
+    </div>
+  </header>
+
+<style>
+  /* ---------- Floating island nav ---------- */
+  .nav { position: sticky; top: 0.75rem; z-index: 50; padding-inline: var(--gutter); pointer-events: none; }
+  .nav-island {
+    pointer-events: auto;
+    max-width: 62rem;
+    margin: 0.75rem auto 0;
+    display: flex; align-items: center; gap: 1rem;
+    height: 3.4rem; padding: 0 0.45rem 0 1.1rem;
+    border-radius: 999px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px) saturate(1.4);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent), 0 6px 24px rgba(var(--shadow-rgb) / 0.08);
+  }
+  .brand { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+  .brand-word { font-family: var(--font-display); font-size: 1.12rem; font-weight: 600; letter-spacing: -0.02em; }
+  .brand-word b { color: var(--green); font-weight: 600; }
+  nav { margin-left: auto; }
+  .nav-links { display: flex; gap: 0.15rem; list-style: none; margin: 0; padding: 0; }
+  .nav-links a { display: block; padding: 0.5rem 0.85rem; border-radius: 999px; text-decoration: none; font-size: 0.9rem; color: var(--muted); transition: color var(--dur-fast), background-color var(--dur-fast); }
+  .nav-links a:hover { color: var(--text); background: color-mix(in srgb, var(--surface-2) 80%, transparent); }
+  .nav-cta { --h: 2.5rem; font-size: 0.9rem; padding: 0 1.05rem; }
+  @media (max-width: 760px) {
+    /* No live blur on phones: it is the most expensive thing to paint while scrolling */
+    .nav-island { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
+    nav { display: none; }
+    .nav-cta { margin-left: auto; }
+  }
+</style>
