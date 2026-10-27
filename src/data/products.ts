@@ -40,7 +40,8 @@ export const products: Product[] = [
   { id: "bose-soundlink-flex", name: "Bose SoundLink Flex", category: "audio", condition: "Brand New", price: 120000, specs: ["12hr battery", "IP67"], swap: false },
 ];
 
-// The three tickets pinned in the hero.
-export const heroPicks = ["iPhone 14 Pro Max 128GB", "PlayStation 5 Disc Edition", 'MacBook Air M2 13"'];
+// Hero "Today's pick" devices. Each needs a photo that really shows that model
+// (src/components/Hero.astro maps product id -> photo).
+export const heroPicks = ["iPhone 14 Pro Max 128GB", "PlayStation 5 Disc Edition"];
 
 export const findProduct = (id: string) => products.find((p) => p.id === id);

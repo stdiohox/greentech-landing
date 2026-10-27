@@ -3,9 +3,10 @@ import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import Logo from "../components/Logo.astro";
 import Ticket from "../components/Ticket.astro";
+import Hero from "../components/Hero.astro";
 import WhatsAppIcon from "../components/WhatsAppIcon.astro";
 import { categories, heroPicks, products } from "../data/products";
-import { orderMessage, site, waLink } from "../data/site";
+import { site, waLink } from "../data/site";
 import phonesImg from "../assets/cat/phones.jpg";
 import laptopsImg from "../assets/cat/laptops.jpg";
 import consolesImg from "../assets/cat/consoles.jpg";
@@ -103,45 +104,7 @@ const faqs = [
   </header>
 
   <main id="main">
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow hero-in" style="--d:0">Computer Village, Ikeja · Delivery nationwide</p>
-          <h1 class="hero-in" style="--d:1">
-            Computer Village prices.<br />
-            <span class="hl">None of the wahala.</span>
-          </h1>
-          <p class="hero-sub hero-in" style="--d:2">
-            Tested UK-used and brand-new phones, laptops and consoles. Prices on this page.
-            Delivery to all 36 states + FCT. Swap your old device and pay only the difference.
-          </p>
-          <div class="hero-ctas hero-in" style="--d:3">
-            <a class="btn btn-primary btn-lg" href={hello} target="_blank" rel="noopener">
-              <WhatsAppIcon /> Chat on WhatsApp
-            </a>
-            <a class="btn btn-ghost btn-lg" href="#deals">See today's prices</a>
-          </div>
-          <ul class="hero-proof hero-in" style="--d:4">
-            <li><span class="tick" aria-hidden="true"></span>Every device tested</li>
-            <li><span class="tick" aria-hidden="true"></span>Prices listed upfront</li>
-            <li><span class="tick" aria-hidden="true"></span>36 states + FCT</li>
-          </ul>
-        </div>
-
-        <div class="hero-board" role="group" aria-label="A few of today's prices">
-          {hero.map((p, i) => (
-            <a class={`pin pin-${i}`} href={waLink(orderMessage(p))} target="_blank" rel="noopener">
-              <span class="sr-only">Order on WhatsApp: </span>
-              <Ticket product={p} compact />
-            </a>
-          ))}
-          <p class="swap-badge">
-            <span>Swap</span> your old phone. Pay the difference.
-          </p>
-        </div>
-      </div>
-    </section>
+    <Hero picks={hero} hello={hello} />
 
     <!-- CATEGORIES -->
     <section class="cats" aria-label="Shop by category">
@@ -492,15 +455,15 @@ const faqs = [
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(10, 15, 10, 0.78);
-    backdrop-filter: blur(14px) saturate(1.4);
-    -webkit-backdrop-filter: blur(14px) saturate(1.4);
-    border-bottom: 1px solid var(--line);
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px) saturate(1.4);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
   }
-  .nav-inner { display: flex; align-items: center; gap: 1.5rem; height: 4.25rem; }
+  .nav-inner { display: flex; align-items: center; gap: 1.5rem; height: 3.75rem; }
   .brand { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-  .brand-word { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; letter-spacing: -0.03em; }
-  .brand-word b { color: var(--green); font-weight: 700; }
+  .brand-word { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; letter-spacing: -0.03em; }
+  .brand-word b { color: var(--green); font-weight: 600; }
   nav { margin-left: auto; }
   .nav-links { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
   .nav-links a {
@@ -513,7 +476,7 @@ const faqs = [
     transition: color var(--dur-fast), background-color var(--dur-fast);
   }
   .nav-links a:hover { color: var(--text); background: var(--surface-2); }
-  .nav-cta { --h: 2.6rem; font-size: var(--text-sm); }
+  .nav-cta { --h: 2.4rem; font-size: var(--text-sm); }
   @media (max-width: 760px) {
     nav { display: none; }
     .nav-cta { margin-left: auto; }
@@ -521,76 +484,6 @@ const faqs = [
   @media (max-width: 380px) {
     .nav-cta span { display: none; }
     .nav-cta { padding: 0 0.85rem; }
-  }
-
-  /* ---------- Hero ---------- */
-  .hero { padding-block: clamp(3rem, 8vw, 6.5rem) clamp(3rem, 6vw, 5rem); }
-  .hero-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
-  .hero h1 { font-size: var(--text-hero); margin-top: 1.4rem; letter-spacing: -0.038em; line-height: 0.95; }
-  .hl { color: var(--green); }
-  .hero-sub { margin-top: 1.6rem; font-size: var(--text-lg); color: var(--muted); max-width: 36rem; }
-  .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2.2rem; }
-  .btn-lg { --h: 3.5rem; padding: 0 1.6rem; font-size: 1.02rem; }
-  .hero-proof { list-style: none; padding: 0; margin: 2rem 0 0; display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; font-size: var(--text-sm); color: var(--muted); }
-  .hero-proof li { display: inline-flex; align-items: center; gap: 0.5rem; }
-  .tick { width: 1rem; height: 1rem; border-radius: 50%; background: var(--green); position: relative; flex: none; }
-  .tick::after { content: ""; position: absolute; left: 0.33rem; top: 0.2rem; width: 0.25rem; height: 0.45rem; border: solid var(--green-ink); border-width: 0 2px 2px 0; transform: rotate(45deg); }
-
-  /* Transform only: the h1 is the LCP element and must paint immediately */
-  .hero-in { animation: rise 900ms var(--ease-out) both; animation-delay: calc(var(--d) * 90ms); }
-  @keyframes rise { from { transform: translateY(22px); } }
-
-  /* Price board: three tickets pinned at angles */
-  .hero-board { position: relative; min-height: 36rem; }
-  .pin { position: absolute; display: block; text-decoration: none; color: inherit; width: min(19rem, 78%); animation: pin-in 1000ms var(--ease-out) both; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.5)); }
-  .pin::before {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    top: -6px;
-    left: 50%;
-    width: 14px;
-    height: 14px;
-    margin-left: -7px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #7dffb6, var(--green) 45%, #00703a);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  .pin-0 { top: 0; left: 0; --r: -5deg; animation-delay: 250ms; }
-  .pin-1 { top: 10.5rem; right: 0; --r: 4deg; animation-delay: 380ms; }
-  .pin-2 { top: 22rem; left: 4%; --r: -2deg; animation-delay: 510ms; }
-  .pin { transform: rotate(var(--r)); }
-  @keyframes pin-in { from { opacity: 0; transform: translateY(-30px) rotate(calc(var(--r) * 3)); } }
-
-  .swap-badge {
-    position: absolute;
-    right: 2%;
-    bottom: -0.5rem;
-    z-index: 3;
-    width: 9.5rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    display: grid;
-    place-content: center;
-    text-align: center;
-    padding: 1rem;
-    background: var(--green);
-    color: var(--green-ink);
-    font-size: 0.82rem;
-    font-weight: 600;
-    line-height: 1.25;
-    transform: rotate(10deg);
-    animation: pin-in 900ms var(--ease-out) 700ms both;
-    --r: 10deg;
-  }
-  .swap-badge span { display: block; font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.2rem; }
-
-  @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-board { min-height: 0; display: flex; gap: 1rem; overflow-x: auto; padding: 1.5rem 0.25rem 1.5rem; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-snap-type: x mandatory; scrollbar-width: none; }
-    .hero-board::-webkit-scrollbar { display: none; }
-    .pin { position: relative; inset: auto; flex: 0 0 15.5rem; width: auto; scroll-snap-align: start; }
-    .swap-badge { display: none; }
   }
 
   /* ---------- Categories ---------- */
@@ -607,9 +500,9 @@ const faqs = [
   .cat :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease-out); z-index: -2; }
   .cat::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(6, 10, 6, 0.92) 8%, rgba(6, 10, 6, 0.2) 55%, transparent); }
   .cat:hover :global(img) { transform: scale(1.05); }
-  .cat-label { position: absolute; left: 1.1rem; right: 1.1rem; bottom: 1rem; display: flex; flex-direction: column; gap: 0.15rem; }
+  .cat-label { color: #fff; position: absolute; left: 1.1rem; right: 1.1rem; bottom: 1rem; display: flex; flex-direction: column; gap: 0.15rem; }
   .cat-name { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
-  .cat-from { font-family: var(--font-mono); font-size: 0.8rem; color: var(--mint); }
+  .cat-from { font-family: var(--font-mono); font-size: 0.8rem; color: #cfeedd; }
   @media (max-width: 700px) {
     .cats-grid { grid-template-columns: repeat(2, 1fr); }
     .cat { aspect-ratio: 1; }
@@ -624,7 +517,7 @@ const faqs = [
   @media (max-width: 860px) { .fear-list { grid-template-columns: 1fr; } }
 
   /* ---------- Deals ---------- */
-  .deals { background: linear-gradient(to bottom, transparent, rgba(23, 32, 23, 0.55) 18%, rgba(23, 32, 23, 0.55) 82%, transparent); }
+  .deals { background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--surface-2) 60%, transparent) 18%, color-mix(in srgb, var(--surface-2) 60%, transparent) 82%, transparent); }
   .deals-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 2rem; }
   .deals-head strong { color: var(--text); }
   .filters { display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -658,7 +551,7 @@ const faqs = [
   @media (max-width: 860px) { .cond-grid { grid-template-columns: 1fr; } }
 
   /* ---------- Swap ---------- */
-  .swap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; padding: clamp(1.5rem, 4vw, 4rem); border-radius: calc(var(--radius) * 1.6); background: radial-gradient(40rem 30rem at 0% 0%, rgba(0, 230, 118, 0.14), transparent 60%), var(--surface); border: 1px solid var(--line); }
+  .swap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; padding: clamp(1.5rem, 4vw, 4rem); border-radius: calc(var(--radius) * 1.6); background: radial-gradient(40rem 30rem at 0% 0%, color-mix(in srgb, var(--green) 10%, transparent), transparent 60%), var(--surface); border: 1px solid var(--line); }
   .swap-copy h2 { font-size: var(--text-3xl); margin-top: 1rem; }
   .lead { font-size: var(--text-lg); color: var(--muted); margin-top: 1.1rem; }
   .steps { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1rem; }
@@ -738,11 +631,11 @@ const faqs = [
       z-index: 60;
       padding: 0.45rem;
       border-radius: 999px;
-      background: rgba(17, 24, 17, 0.9);
+      background: var(--nav-bg);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--line-strong);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 12px 30px rgba(var(--shadow-rgb) / 0.25);
     }
     .dock .btn { --h: 3rem; }
     .dock .btn-ghost { padding: 0 1.4rem; }

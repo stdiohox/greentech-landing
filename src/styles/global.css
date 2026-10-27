@@ -2,23 +2,32 @@
 @import "@fontsource-variable/instrument-sans/wdth.css";
 @import "@fontsource-variable/geist-mono/index.css";
 
+/* GreenTech "Shop window" system: cool off-white, one deep green, calm type.
+   Light is the default; dark follows the visitor's system setting. Every colour is a token. */
 :root {
-  /* GreenTech house colours, carried over from the old site */
-  --bg: #0a0f0a;
-  --surface: #111811;
-  --surface-2: #172017;
-  --line: rgba(185, 245, 200, 0.12);
-  --line-strong: rgba(185, 245, 200, 0.24);
-  --text: #f2f7f2;
-  --muted: #a3b8a7;
-  --green: #00e676;
-  --green-ink: #03140a;
-  --mint: #b9f5c8;
+  --bg: #f5f6f4;
+  --surface: #ffffff;
+  --surface-2: #ebeeea;
+  --line: #dbe2d8;
+  --line-strong: #c3cdc1;
+  --text: #0f1d15;
+  --muted: #4b5b51;
+  --green: #116b42;
+  --green-hover: #0d5a37;
+  --green-ink: #f4faf6;
+  --green-soft: #dcebe2;
+  --ok: #00763a;
+  --warn: #8a5a00;
+  --mint: #116b42;
+  --nav-bg: rgba(245, 246, 244, 0.9);
+  --tone: #7c8780;
+  --photo-filter: none;
+  --shadow-rgb: 20 40 28;
 
-  /* Price-ticket paper */
-  --paper: #f1efe6;
-  --paper-edge: #e3e0d3;
-  --ink: #0c120d;
+  /* Price-ticket paper (always light, in both themes) */
+  --paper: #ffffff;
+  --paper-edge: #e3e8e1;
+  --ink: #0f1d15;
   --ink-muted: #4b564d;
   --stamp-new: #00763a;
   --stamp-used: #8a5a00;
@@ -33,18 +42,44 @@
 
   --radius: 14px;
   --radius-sm: 8px;
+  --radius-lg: 2.2rem;
   --gutter: clamp(1rem, 4vw, 3rem);
-  --max: 1240px;
+  --max: 1200px;
   --section-y: clamp(4rem, 8vw, 6.5rem);
 
   --text-sm: clamp(0.875rem, 0.84rem + 0.15vw, 0.95rem);
   --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
   --text-lg: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
   --text-2xl: clamp(1.5rem, 1.25rem + 1.2vw, 2.25rem);
-  --text-3xl: clamp(2.1rem, 1.5rem + 3vw, 3.75rem);
-  --text-hero: clamp(2.6rem, 1.4rem + 5.6vw, 6.25rem);
+  --text-3xl: clamp(2.1rem, 1.5rem + 3vw, 3.5rem);
+  --text-hero: clamp(2.6rem, 1.5rem + 3.9vw, 4.6rem);
 
-  color-scheme: dark;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1410;
+    --surface: #111c16;
+    --surface-2: #18251e;
+    --line: #22352a;
+    --line-strong: #2f4639;
+    --text: #e8efea;
+    --muted: #a9b9af;
+    --green: #34b072;
+    --green-hover: #45c283;
+    --green-ink: #04140b;
+    --green-soft: #173326;
+    --ok: #5cbf8a;
+    --warn: #e0ad55;
+    --mint: #8fd9b0;
+    --nav-bg: rgba(11, 20, 16, 0.92);
+    --tone: #74827a;
+    --photo-filter: brightness(0.82) contrast(1.05);
+    --shadow-rgb: 0 0 0;
+    --paper: #eef1ec;
+    color-scheme: dark;
+  }
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -76,10 +111,7 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(60rem 40rem at 85% -10%, rgba(0, 230, 118, 0.13), transparent 60%),
-    radial-gradient(40rem 30rem at -10% 40%, rgba(0, 230, 118, 0.05), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background: radial-gradient(60rem 36rem at 85% -12%, color-mix(in srgb, var(--green) 9%, transparent), transparent 60%);
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -88,9 +120,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
   margin: 0;
   text-wrap: balance;
 }
@@ -99,7 +131,6 @@ p { margin: 0; text-wrap: pretty; }
 :focus-visible {
   outline: 2px solid var(--green);
   outline-offset: 3px;
-  border-radius: 4px;
 }
 
 .ticket :focus-visible, .cond-card :focus-visible { outline-color: var(--ink); }
@@ -168,13 +199,13 @@ p { margin: 0; text-wrap: pretty; }
 .btn svg { width: 1.2em; height: 1.2em; flex: none; }
 
 .btn-primary { background: var(--green); color: var(--green-ink); }
-.btn-primary:hover { background: #3dff9a; }
+.btn-primary:hover { background: var(--green-hover); }
 
 .btn-ghost { border-color: var(--line-strong); color: var(--text); }
 .btn-ghost:hover { border-color: var(--green); color: var(--green); }
 
 .btn-ink { background: var(--ink); color: var(--paper); }
-.btn-ink:hover { background: #1d2a1f; }
+.btn-ink:hover { background: #24362b; }
 
 .btn-line-ink { border-color: rgba(12, 18, 13, 0.25); color: var(--ink); }
 .btn-line-ink:hover { border-color: var(--ink); }
@@ -192,6 +223,7 @@ p { margin: 0; text-wrap: pretty; }
   color: var(--ink);
 }
 .ticket[hidden] { display: none; }
+.ticket { filter: drop-shadow(0 1px 1px rgba(var(--shadow-rgb) / 0.08)) drop-shadow(0 8px 18px rgba(var(--shadow-rgb) / 0.08)); }
 .ticket-main, .ticket-stub { background: var(--paper); }
 /* Punched notches sit exactly on the tear line, whatever the ticket's height */
 .ticket-main {

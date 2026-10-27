@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import { site } from "../data/site";
 import displayLatin from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url";
-import displayLatinExt from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-ext-opsz-normal.woff2?url";
 import bodyLatin from "@fontsource-variable/instrument-sans/files/instrument-sans-latin-wdth-normal.woff2?url";
 
 interface Props { title: string; description: string; noindex?: boolean }
@@ -49,7 +48,6 @@ const jsonLd = {
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" as="font" type="font/woff2" href={displayLatin} crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href={displayLatinExt} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={bodyLatin} crossorigin />
     <meta name="theme-color" content="#0a0f0a" />
 
