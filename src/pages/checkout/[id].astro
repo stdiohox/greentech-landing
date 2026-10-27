@@ -17,7 +17,7 @@ const { product } = Astro.props as { product: Product };
     <a class="back" href="/#deals">← All prices</a>
 
     <div class="co-grid">
-      <aside class="summary">
+      <aside class="order-summary">
         <p class="eyebrow">Your order</p>
         <ProductCard product={product} variant="summary" />
         <ul class="facts">
@@ -152,7 +152,7 @@ const { product } = Astro.props as { product: Product };
   .back { color: var(--muted); font-size: var(--text-sm); text-decoration: none; }
   .back:hover { color: var(--green); }
   .co-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; margin-top: 1.5rem; }
-  .summary { display: grid; gap: 1.25rem; position: sticky; top: 1.5rem; }
+  .order-summary { display: grid; gap: 1.25rem; position: sticky; top: 1.5rem; }
   .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; color: var(--muted); font-size: var(--text-sm); }
   .facts b { color: var(--text); }
   .ask { font-size: var(--text-sm); color: var(--muted); }
@@ -168,6 +168,6 @@ const { product } = Astro.props as { product: Product };
   .form-note { font-size: 0.82rem; color: var(--muted); text-align: center; }
   @media (max-width: 860px) {
     .co-grid { grid-template-columns: 1fr; }
-    .summary { position: static; }
+    .order-summary { position: static; }
   }
 </style>

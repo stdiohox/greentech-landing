@@ -11,7 +11,7 @@ const rows = (credits as Credit[]).map((c) => ({ ...c, name: findProduct(c.id)?.
   <MiniHeader />
   <main id="main" class="wrap credits">
     <h1>Photo credits.</h1>
-    <p class="lead">Product photos show the same model as the device on sale, not the exact unit. Ask us on WhatsApp for photos or a live video of the unit you're buying.</p>
+    <p class="lead">Product photos show the same model as the device on sale, not the exact unit. Ask us on WhatsApp for photos or a live video of the unit you're buying. Photos are from Wikimedia Commons and have been cropped, resized and compressed for this site; the Nintendo Switch OLED photo's background was also flattened to white. Each is shared under the licence shown.</p>
     {rows.length ? (
       <ul>
         {rows.map((r) => (

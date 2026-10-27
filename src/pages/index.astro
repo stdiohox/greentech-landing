@@ -8,17 +8,13 @@ import WhatsAppIcon from "../components/WhatsAppIcon.astro";
 import { categories, heroPicks, products, type Category } from "../data/products";
 import { site, waLink } from "../data/site";
 import { productImage } from "../lib/images";
-import phonesImg from "../assets/cat/phones.jpg";
-import laptopsImg from "../assets/cat/laptops.jpg";
-import consolesImg from "../assets/cat/consoles.jpg";
-import audioImg from "../assets/cat/audio.jpg";
 
-// Category tiles prefer an accurate product photo; the older category photos are the fallback.
-const catPhoto: Record<Category, ImageMetadata> = {
-  phones: productImage("iphone-14-pro-max-128gb") ?? phonesImg,
-  laptops: productImage("macbook-air-m2") ?? laptopsImg,
-  consoles: productImage("ps5-disc") ?? consolesImg,
-  audio: productImage("airpods-pro-2") ?? productImage("jbl-charge-5") ?? audioImg,
+// Category tiles use an accurate product photo from that category.
+const catPhoto: Record<Category, ImageMetadata | undefined> = {
+  phones: productImage("iphone-14-pro-max-128gb"),
+  laptops: productImage("macbook-air-m2"),
+  consoles: productImage("ps5-disc"),
+  audio: productImage("airpods-pro-2"),
 };
 const lowest = (id: string) => {
   const prices = products.filter((p) => p.category === id).map((p) => p.price);
@@ -52,7 +48,7 @@ const faqs = [
 ];
 ---
 <Base
-  title="GreenTech Gadget Store | Phones & Laptops, Computer Village"
+  title="UK Used & New iPhones, Phones & Laptops | GreenTech Ikeja"
   description="Tested UK-used and new phones, laptops and consoles in Computer Village, Ikeja. Prices upfront, swap your old device, delivery nationwide."
 >
   <header class="nav">
@@ -86,7 +82,7 @@ const faqs = [
           {categories.map((c, i) => (
             <a class="cat" href="#deals" data-filter={c.id} data-reveal style={`--i:${i}`}>
               <span class="cat-media">
-                <Image src={catPhoto[c.id]} alt="" widths={[240, 360, 520]} sizes="(max-width: 700px) 44vw, 270px" loading="lazy" />
+                {catPhoto[c.id] && <Image src={catPhoto[c.id]!} alt="" widths={[240, 360, 480, 720]} quality={70} sizes="(max-width: 760px) 44vw, 280px" loading="lazy" />}
               </span>
               <span class="cat-text">
                 <span class="cat-name">{c.label}</span>
@@ -295,7 +291,7 @@ const faqs = [
   <footer class="foot">
     <div class="wrap">
       <div class="foot-top">
-        <a href="#top" class="brand" aria-label="Back to top"><Logo size={24} /><span class="brand-word">Green<b>Tech</b></span></a>
+        <a href="#top" class="brand" aria-label="GreenTech, back to top"><Logo size={24} /><span class="brand-word">Green<b>Tech</b></span></a>
         <ul class="foot-links">
           <li><a href="#deals">Shop</a></li>
           <li><a href="#swap">Swap</a></li>
@@ -449,17 +445,22 @@ const faqs = [
   .nav-links a:hover { color: var(--text); background: color-mix(in srgb, var(--surface-2) 80%, transparent); }
   .nav-cta { --h: 2.5rem; font-size: 0.9rem; padding: 0 1.05rem; }
   @media (max-width: 760px) {
+    /* No live blur on phones: it is the most expensive thing to paint while scrolling */
+    .nav-island { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
     nav { display: none; }
     .nav-cta { margin-left: auto; }
   }
 
   /* ---------- Shared section heading: Apple two-tone ---------- */
   .h2 { font-size: var(--text-3xl); font-weight: 600; letter-spacing: -0.025em; line-height: 1.08; max-width: 22ch; }
-  .h2 .tone, .tone-text { color: var(--tone); }
-  .section { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .h2 .tone { display: block; color: var(--tone); }
+  .tone-text { color: var(--muted); }
+  .section { padding-block: var(--section-y); }
   .link { color: var(--green); font-weight: 500; text-decoration: none; }
   .link:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .fine { margin-top: 1rem; font-size: 0.8rem; color: var(--muted); }
+  /* Links inside running text are underlined, so they don't rely on colour alone */
+  p .link { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .fine { margin-top: 1.25rem; font-size: var(--text-sm); color: var(--muted); }
 
   /* ---------- Categories shelf ---------- */
   .cats { padding-bottom: 0; }
@@ -483,12 +484,12 @@ const faqs = [
 
   /* ---------- Why: bento ---------- */
   .bento { margin-top: 2.25rem; display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: auto auto; gap: 1rem; }
-  .tile { padding: 0.45rem; border-radius: 1.9rem; background: color-mix(in srgb, var(--surface-2) 70%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent); }
+  .tile { border-radius: 1.5rem; background: var(--surface); box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
   .tile-big { grid-row: span 2; }
-  .tile-core { height: 100%; display: flex; flex-direction: column; gap: 0.75rem; padding: clamp(1.4rem, 3vw, 2.2rem); border-radius: 1.5rem; background: var(--surface); box-shadow: inset 0 1px 0 rgba(255 255 255 / 0.6); }
+  .tile-core { height: 100%; display: flex; flex-direction: column; gap: 0.75rem; padding: clamp(1.5rem, 3vw, 2.25rem); }
   .tile-kicker { font-size: 0.85rem; font-weight: 600; color: var(--green); }
-  .tile h3 { font-size: clamp(1.35rem, 1.1rem + 1vw, 1.9rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.12; }
-  .tile-big h3 { font-size: clamp(1.7rem, 1.2rem + 2vw, 2.6rem); max-width: 16ch; }
+  .tile h3 { font-size: 1.375rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
+  .tile-big h3 { font-size: var(--text-2xl); line-height: 1.12; max-width: 20ch; }
   .tile p { color: var(--muted); max-width: 46ch; }
   .checks { list-style: none; padding: 0; margin: auto 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; padding-top: 1.5rem; }
   .checks li { padding: 0.45rem 0.9rem; border-radius: 999px; background: var(--green-soft); color: var(--ok); font-size: 0.85rem; font-weight: 600; }
@@ -500,6 +501,7 @@ const faqs = [
   .deals-sub { margin-top: 1rem; color: var(--muted); max-width: 52ch; }
   .deals-sub b { color: var(--text); font-weight: 600; }
   .filters { display: flex; gap: 0.25rem; padding: 0.25rem; border-radius: 999px; background: var(--surface-2); overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+  @media (max-width: 640px) { .filters { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); } }
   .filters::-webkit-scrollbar { display: none; }
   .filters[hidden] { display: none; }
   .filters button {
@@ -517,7 +519,7 @@ const faqs = [
   /* ---------- Condition ---------- */
   .cond-grid { margin-top: 2.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .cond-card { display: grid; gap: 0.75rem; justify-items: start; align-content: start; padding: clamp(1.5rem, 3vw, 2.4rem); border-radius: 1.6rem; background: var(--surface); box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
-  .cond-card h3 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); font-weight: 600; letter-spacing: -0.02em; margin-top: 0.5rem; }
+  .cond-card h3 { font-size: 1.375rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; margin-top: 0.5rem; }
   .cond-card p { color: var(--muted); max-width: 44ch; }
   .pill { padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
   .pill-new { background: var(--green-soft); color: var(--ok); }
@@ -526,7 +528,7 @@ const faqs = [
 
   /* ---------- Swap: double bezel ---------- */
   .shell { padding: 0.5rem; border-radius: 2.4rem; background: color-mix(in srgb, var(--surface-2) 70%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent); }
-  .shell-core { border-radius: 2rem; background: var(--surface); padding: clamp(1.5rem, 4.5vw, 4rem); box-shadow: inset 0 1px 0 rgba(255 255 255 / 0.6); }
+  .shell-core { border-radius: 2rem; background: var(--surface); padding: clamp(1.5rem, 4.5vw, 4rem); box-shadow: inset 0 1px 0 var(--inner-hi); }
   .swap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
   .lead { margin-top: 1.1rem; font-size: var(--text-lg); color: var(--muted); max-width: 40ch; }
   .steps { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 0.9rem; }
@@ -550,6 +552,7 @@ const faqs = [
 
   /* ---------- FAQ ---------- */
   .faq-grid { display: grid; grid-template-columns: 1fr 1.45fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+  .faq-grid > div:first-child { position: sticky; top: 6rem; }
   .faq-help { margin-top: 1.1rem; color: var(--muted); }
   .faq-list { border-top: 1px solid var(--line); }
   details { border-bottom: 1px solid var(--line); }
@@ -558,7 +561,7 @@ const faqs = [
   summary::after { content: "+"; content: "+" / ""; position: absolute; right: 0.25rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; font-weight: 300; color: var(--green); transition: transform 400ms var(--ease-out); }
   details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
   details p { padding: 0 0 1.4rem; color: var(--muted); max-width: 58ch; }
-  @media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; } .faq-grid > div:first-child { position: static; } }
 
   /* ---------- Visit bento ---------- */
   .visit-bento { margin-top: 2.25rem; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 1rem; }
@@ -567,7 +570,8 @@ const faqs = [
   .vtile-main :global(svg g) { stroke: currentColor; }
   .vtile.vtile-main p { color: color-mix(in srgb, var(--green-ink) 85%, transparent); }
   .vtile-main .link { color: var(--green-ink); margin-top: auto; }
-  .vtile h3 { font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.7rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+  .vtile h3 { font-size: 1.375rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
+  .vtile-main :focus-visible { outline-color: var(--green-ink); }
   .vtile p { color: var(--muted); }
   .vtile-ctas { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; padding-top: 0.75rem; }
   .vtile-ctas .btn { --h: 2.6rem; padding: 0 1.2rem; }
@@ -588,8 +592,7 @@ const faqs = [
     .dock {
       display: grid; grid-template-columns: 1fr auto; gap: 0.5rem;
       position: fixed; left: 0.75rem; right: 0.75rem; bottom: max(0.75rem, env(safe-area-inset-bottom)); z-index: 60;
-      padding: 0.45rem; border-radius: 999px; background: var(--nav-bg);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      padding: 0.45rem; border-radius: 999px; background: var(--surface);
       box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent), 0 12px 30px rgba(var(--shadow-rgb) / 0.2);
     }
     .dock .btn { --h: 3rem; }

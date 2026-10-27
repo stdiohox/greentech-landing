@@ -14,26 +14,31 @@ interface Props {
 }
 const { product: p, variant = "shop", index = 0 } = Astro.props;
 const img = productImage(p.id);
+// Square frames; photos far from square are shown whole on white rather than cropped badly.
+const ratio = img ? img.width / img.height : 1;
+const fit = ratio > 1.6 || ratio < 0.62 ? "contain" : "cover";
 const isNew = p.condition === "Brand New";
 const Name = variant === "shop" ? "h3" : "p";
 ---
-<article class:list={["card", variant]} data-category={p.category} data-reveal={variant === "shop" ? "" : undefined} style={`--i:${index % 4}`}>
+<article class:list={["card", `card--${variant}`]} data-category={p.category} data-reveal={variant === "shop" ? "" : undefined} style={`--i:${index % 4}`}>
+  <div class:list={["media", `fit-${fit}`]}>
+    {img ? (
+      <Image src={img} alt={`Photo of a ${p.name}`} widths={[240, 360, 480, 720]} quality={70} sizes={variant === "summary" ? "(max-width: 860px) 90vw, 420px" : "(max-width: 640px) 44vw, (max-width: 1100px) 30vw, 280px"} loading="lazy" />
+    ) : (
+      <a class="placeholder" href={waLink(`Hi GreenTech, please send photos of the ${p.name} (${p.condition}).`)} target="_blank" rel="noopener">
+        <Logo size={32} />
+        <span>Photos on request</span>
+        <b>Ask on WhatsApp ›</b>
+        <span class="sr-only">: photos of the {p.name}</span>
+      </a>
+    )}
+  </div>
+
   <div class="card-top">
     <span class:list={["cond", isNew ? "cond-new" : "cond-used"]}>{isNew ? "Brand new" : "UK used"}</span>
     {p.swap && variant === "shop" && <span class="swap">Swap OK</span>}
   </div>
   <Name class="name">{p.name}</Name>
-
-  <div class="media">
-    {img ? (
-      <Image src={img} alt={p.name} widths={[320, 480, 720]} sizes="(max-width: 640px) 86vw, (max-width: 1100px) 44vw, 280px" loading="lazy" />
-    ) : (
-      <div class="placeholder" role="img" aria-label={`${p.name}: photo on request`}>
-        <Logo size={44} />
-        <span>Ask for real photos of this unit</span>
-      </div>
-    )}
-  </div>
 
   <p class="specs">{p.specs.join(" · ")}</p>
 
@@ -67,25 +72,31 @@ const Name = variant === "shop" ? "h3" : "p";
     transition: transform 500ms var(--ease-out), box-shadow 500ms var(--ease-out);
   }
   .card[hidden] { display: none; }
+  /* Once revealed, hover responds immediately (the reveal's stagger delay no longer applies) */
+  :global(.js) .card.in { transition: transform 500ms var(--ease-out), box-shadow 500ms var(--ease-out), opacity 700ms var(--ease-out); transition-delay: 0s; }
   @media (hover: hover) {
-    .shop:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(var(--shadow-rgb) / 0.05), 0 18px 40px rgba(var(--shadow-rgb) / 0.1); }
-    .shop:hover .media :global(img) { transform: scale(1.03); }
+    .card--shop:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(var(--shadow-rgb) / 0.05), 0 18px 40px rgba(var(--shadow-rgb) / 0.1); }
+    .card--shop:hover .media :global(img) { transform: scale(1.03); }
   }
   .card-top { display: flex; align-items: center; justify-content: space-between; min-height: 1.4rem; }
   .cond { font-size: 0.78rem; font-weight: 600; }
   .cond-new { color: var(--ok); }
   .cond-used { color: var(--warn); }
   .swap { font-size: 0.75rem; color: var(--muted); }
-  .name { font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; line-height: 1.15; letter-spacing: -0.015em; margin: 0; min-height: 2.3em; }
+  .name { font-family: var(--font-display); font-weight: 600; font-size: 1.125rem; line-height: 1.2; letter-spacing: -0.015em; margin: -0.35rem 0 0; }
 
-  .media { position: relative; aspect-ratio: 4 / 3; border-radius: 1rem; overflow: hidden; background: var(--surface-2); }
+  .media { position: relative; aspect-ratio: 1 / 1; border-radius: 1rem; overflow: hidden; background: var(--surface-2); }
+  .media.fit-contain { background: var(--media-contain); }
+  .media.fit-contain :global(img) { object-fit: contain; padding: 8%; }
   .media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease-out); filter: var(--photo-filter); }
   .placeholder {
     position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 0.6rem;
-    text-align: center; padding: 1rem; font-size: 0.82rem; color: var(--muted);
+    text-align: center; padding: 1rem; font-size: 0.85rem; color: var(--muted); text-decoration: none;
     background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--green) 8%, transparent), transparent 70%), var(--surface-2);
   }
   .placeholder :global(svg) { opacity: 0.85; }
+  .placeholder b { color: var(--green); font-weight: 600; font-size: 0.85rem; }
+  .placeholder:hover b { text-decoration: underline; text-underline-offset: 3px; }
 
   .specs { font-size: 0.86rem; color: var(--muted); flex: 1; }
   .foot { display: flex; flex-direction: column; gap: 0.9rem; }
@@ -101,18 +112,18 @@ const Name = variant === "shop" ? "h3" : "p";
 
   /* Phones: compact two-up cards, like Apple's mobile store */
   @media (max-width: 640px) {
-    .shop { padding: 0.9rem 0.85rem 0.95rem; gap: 0.6rem; border-radius: 1.2rem; }
-    .shop .card-top { min-height: 1.1rem; }
-    .shop .swap, .shop .swap-link { display: none; }
-    .shop .name { font-size: 0.98rem; min-height: 2.4em; }
-    .shop .media { border-radius: 0.8rem; aspect-ratio: 1 / 1; }
-    .shop .specs { font-size: 0.76rem; }
-    .shop .price { font-size: 1.12rem; }
-    .shop .foot { gap: 0.5rem; }
-    .shop .actions { flex-direction: column; align-items: stretch; gap: 0.15rem; }
-    .shop .buy { --h: 2.5rem; padding: 0; width: 100%; }
-    .shop .ask { justify-content: center; min-height: 2.5rem; font-size: 0.88rem; }
-    .placeholder span { font-size: 0.72rem; }
+    .card--shop { padding: 0.9rem 0.85rem 0.95rem; gap: 0.6rem; border-radius: 1.2rem; }
+    .card--shop .card-top { min-height: 1.1rem; }
+    .card--shop .swap, .card--shop .swap-link { display: none; }
+    .card--shop .name { font-size: 0.95rem; }
+    .card--shop .media { border-radius: 0.8rem; aspect-ratio: 1 / 1; }
+    .card--shop .specs { font-size: 0.76rem; }
+    .card--shop .price { font-size: 1.12rem; }
+    .card--shop .foot { gap: 0.5rem; }
+    .card--shop .actions { flex-direction: column; align-items: stretch; gap: 0.15rem; }
+    .card--shop .buy { --h: 2.5rem; padding: 0; width: 100%; }
+    .card--shop .ask { justify-content: center; min-height: 2.5rem; font-size: 0.88rem; }
+    .placeholder span, .placeholder b { font-size: 0.8rem; }
   }
   .summary .name { min-height: 0; }
 </style>

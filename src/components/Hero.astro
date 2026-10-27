@@ -36,8 +36,7 @@ for (const p of picks) if (!photos[p.id]) throw new Error(`Hero: no accurate pho
       </div>
     </div>
 
-    <div class="stage hero-in" style="--d:2">
-      <div class="bezel">
+    <div class="stage bezel hero-in" style="--d:2">
         <div class="photo">
           {picks.map((p, i) => (
             <Image
@@ -45,7 +44,7 @@ for (const p of picks) if (!photos[p.id]) throw new Error(`Hero: no accurate pho
               alt={photos[p.id].alt}
               widths={[480, 720, 1000, 1400]}
               sizes="(max-width: 900px) 88vw, 560px"
-              loading="eager"
+              loading={i === 0 ? "eager" : "lazy"}
               fetchpriority={i === 0 ? "high" : "low"}
               data-photo={i}
               class:list={{ on: i === 0 }}
@@ -54,7 +53,6 @@ for (const p of picks) if (!photos[p.id]) throw new Error(`Hero: no accurate pho
             />
           ))}
         </div>
-      </div>
 
       <div class="pick" data-pick>
         <div class="pick-tabs" role="tablist" aria-label="Today's picks">
@@ -128,8 +126,7 @@ for (const p of picks) if (!photos[p.id]) throw new Error(`Hero: no accurate pho
 
 <style>
   .hero { padding-top: clamp(2.5rem, 6vw, 5rem); }
-  .hero-grid { display: grid; grid-template-columns: 1.02fr 1fr; gap: clamp(2.5rem, 6vw, 5.5rem); align-items: start; }
-  .copy { padding-top: clamp(0rem, 6vw, 4.5rem); }
+  .hero-grid { display: grid; grid-template-columns: 1.02fr 1fr; gap: clamp(2.5rem, 6vw, 5.5rem); align-items: center; }
   .hero-grid > * { min-width: 0; }
   .sep { margin-inline: 0.5em; opacity: 0.6; }
 
@@ -155,7 +152,7 @@ for (const p of picks) if (!photos[p.id]) throw new Error(`Hero: no accurate pho
 
   /* Photo in a double bezel, with the pick card overlapping its lower edge */
   .stage { position: relative; }
-  .bezel { padding: 0.5rem; border-radius: var(--radius-lg); background: color-mix(in srgb, var(--surface-2) 70%, transparent); border: 1px solid color-mix(in srgb, var(--line) 70%, transparent); }
+  .bezel { padding: 0.5rem 0.5rem 0.75rem; border-radius: var(--radius-lg); background: color-mix(in srgb, var(--surface-2) 70%, transparent); border: 1px solid color-mix(in srgb, var(--line) 70%, transparent); }
   .photo { position: relative; aspect-ratio: 1 / 1; overflow: hidden; border-radius: calc(var(--radius-lg) - 0.5rem); background: var(--surface-2); }
   .photo :global(img) {
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
@@ -167,7 +164,7 @@ for (const p of picks) if (!photos[p.id]) throw new Error(`Hero: no accurate pho
   .pick {
     position: relative;
     z-index: 2;
-    margin: -4.5rem 1.25rem 0;
+    margin: -4.5rem 0.75rem 0;
     padding: 1.25rem;
     border-radius: 1.5rem;
     background: var(--surface);
@@ -207,7 +204,7 @@ for (const p of picks) if (!photos[p.id]) throw new Error(`Hero: no accurate pho
   @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; }
     .photo { aspect-ratio: 4 / 3; }
-    .pick { margin: -3.5rem 0.75rem 0; }
+    .pick { margin: -3.5rem 0.5rem 0; }
   }
   @media (max-width: 420px) {
     .pick-tabs button { font-size: 0.75rem; padding: 0 0.35rem; }
