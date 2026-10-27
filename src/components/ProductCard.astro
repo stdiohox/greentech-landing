@@ -1,0 +1,118 @@
+---
+import { Image } from "astro:assets";
+import type { Product } from "../data/products";
+import { amount, orderMessage, swapMessage, waLink } from "../data/site";
+import { productImage } from "../lib/images";
+import Logo from "./Logo.astro";
+import WhatsAppIcon from "./WhatsAppIcon.astro";
+
+interface Props {
+  product: Product;
+  /** "summary" is the read-only version used on the checkout page. */
+  variant?: "shop" | "summary";
+  index?: number;
+}
+const { product: p, variant = "shop", index = 0 } = Astro.props;
+const img = productImage(p.id);
+const isNew = p.condition === "Brand New";
+const Name = variant === "shop" ? "h3" : "p";
+---
+<article class:list={["card", variant]} data-category={p.category} data-reveal={variant === "shop" ? "" : undefined} style={`--i:${index % 4}`}>
+  <div class="card-top">
+    <span class:list={["cond", isNew ? "cond-new" : "cond-used"]}>{isNew ? "Brand new" : "UK used"}</span>
+    {p.swap && variant === "shop" && <span class="swap">Swap OK</span>}
+  </div>
+  <Name class="name">{p.name}</Name>
+
+  <div class="media">
+    {img ? (
+      <Image src={img} alt={p.name} widths={[320, 480, 720]} sizes="(max-width: 640px) 86vw, (max-width: 1100px) 44vw, 280px" loading="lazy" />
+    ) : (
+      <div class="placeholder" role="img" aria-label={`${p.name}: photo on request`}>
+        <Logo size={44} />
+        <span>Ask for real photos of this unit</span>
+      </div>
+    )}
+  </div>
+
+  <p class="specs">{p.specs.join(" · ")}</p>
+
+  <div class="foot">
+    <p class="price"><span class="sr-only">Price: </span><span class="cur">₦</span>{amount(p.price)}</p>
+    {variant === "shop" && (
+      <div class="actions">
+        <a class="btn btn-primary buy" href={`/checkout/${p.id}`}>Buy<span class="sr-only"> {p.name}</span></a>
+        <a class="ask" href={waLink(orderMessage(p))} target="_blank" rel="noopener">
+          <WhatsAppIcon /> Ask<span class="sr-only"> about {p.name} on WhatsApp</span>
+        </a>
+        {p.swap && (
+          <a class="ask swap-link" href={waLink(swapMessage(p))} target="_blank" rel="noopener">
+            Swap<span class="sr-only"> my device for {p.name}</span>
+          </a>
+        )}
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.4rem 1.4rem 1.3rem;
+    border-radius: 1.4rem;
+    background: var(--surface);
+    box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06);
+    transition: transform 500ms var(--ease-out), box-shadow 500ms var(--ease-out);
+  }
+  .card[hidden] { display: none; }
+  @media (hover: hover) {
+    .shop:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(var(--shadow-rgb) / 0.05), 0 18px 40px rgba(var(--shadow-rgb) / 0.1); }
+    .shop:hover .media :global(img) { transform: scale(1.03); }
+  }
+  .card-top { display: flex; align-items: center; justify-content: space-between; min-height: 1.4rem; }
+  .cond { font-size: 0.78rem; font-weight: 600; }
+  .cond-new { color: var(--ok); }
+  .cond-used { color: var(--warn); }
+  .swap { font-size: 0.75rem; color: var(--muted); }
+  .name { font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; line-height: 1.15; letter-spacing: -0.015em; margin: 0; min-height: 2.3em; }
+
+  .media { position: relative; aspect-ratio: 4 / 3; border-radius: 1rem; overflow: hidden; background: var(--surface-2); }
+  .media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease-out); filter: var(--photo-filter); }
+  .placeholder {
+    position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 0.6rem;
+    text-align: center; padding: 1rem; font-size: 0.82rem; color: var(--muted);
+    background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--green) 8%, transparent), transparent 70%), var(--surface-2);
+  }
+  .placeholder :global(svg) { opacity: 0.85; }
+
+  .specs { font-size: 0.86rem; color: var(--muted); flex: 1; }
+  .foot { display: flex; flex-direction: column; gap: 0.9rem; }
+  .price { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .price :global(.cur) { font-weight: 600; }
+  .actions { display: flex; align-items: center; gap: 1.1rem; }
+  .buy { --h: 2.6rem; padding: 0 1.5rem; font-weight: 500; }
+  .ask { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.75rem; color: var(--green); font-weight: 500; font-size: 0.95rem; text-decoration: none; }
+  .ask :global(svg) { width: 1.05em; height: 1.05em; }
+  .ask:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .summary { box-shadow: none; border: 1px solid var(--line); }
+
+  /* Phones: compact two-up cards, like Apple's mobile store */
+  @media (max-width: 640px) {
+    .shop { padding: 0.9rem 0.85rem 0.95rem; gap: 0.6rem; border-radius: 1.2rem; }
+    .shop .card-top { min-height: 1.1rem; }
+    .shop .swap, .shop .swap-link { display: none; }
+    .shop .name { font-size: 0.98rem; min-height: 2.4em; }
+    .shop .media { border-radius: 0.8rem; aspect-ratio: 1 / 1; }
+    .shop .specs { font-size: 0.76rem; }
+    .shop .price { font-size: 1.12rem; }
+    .shop .foot { gap: 0.5rem; }
+    .shop .actions { flex-direction: column; align-items: stretch; gap: 0.15rem; }
+    .shop .buy { --h: 2.5rem; padding: 0; width: 100%; }
+    .shop .ask { justify-content: center; min-height: 2.5rem; font-size: 0.88rem; }
+    .placeholder span { font-size: 0.72rem; }
+  }
+  .summary .name { min-height: 0; }
+</style>

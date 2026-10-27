@@ -2,22 +2,30 @@
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import Logo from "../components/Logo.astro";
-import Ticket from "../components/Ticket.astro";
 import Hero from "../components/Hero.astro";
+import ProductCard from "../components/ProductCard.astro";
 import WhatsAppIcon from "../components/WhatsAppIcon.astro";
-import { categories, heroPicks, products } from "../data/products";
+import { categories, heroPicks, products, type Category } from "../data/products";
 import { site, waLink } from "../data/site";
+import { productImage } from "../lib/images";
 import phonesImg from "../assets/cat/phones.jpg";
 import laptopsImg from "../assets/cat/laptops.jpg";
 import consolesImg from "../assets/cat/consoles.jpg";
 import audioImg from "../assets/cat/audio.jpg";
 
-const catImages = { phones: phonesImg, laptops: laptopsImg, consoles: consolesImg, audio: audioImg };
+// Category tiles prefer an accurate product photo; the older category photos are the fallback.
+const catPhoto: Record<Category, ImageMetadata> = {
+  phones: productImage("iphone-14-pro-max-128gb") ?? phonesImg,
+  laptops: productImage("macbook-air-m2") ?? laptopsImg,
+  consoles: productImage("ps5-disc") ?? consolesImg,
+  audio: productImage("airpods-pro-2") ?? productImage("jbl-charge-5") ?? audioImg,
+};
 const lowest = (id: string) => {
   const prices = products.filter((p) => p.category === id).map((p) => p.price);
   if (!prices.length) throw new Error(`No products in category "${id}"`);
   return Math.min(...prices);
 };
+const countIn = (id: string) => products.filter((p) => p.category === id).length;
 const hero = heroPicks.map((n) => {
   const p = products.find((x) => x.name === n);
   if (!p) throw new Error(`heroPicks: no product named "${n}" in products.ts`);
@@ -27,21 +35,6 @@ const hero = heroPicks.map((n) => {
 const hello = waLink("Hi GreenTech, I saw your website. I'm looking for: ");
 const findIt = waLink("Hi GreenTech, I saw your website. I can't find this on your list. I'm looking for: ");
 
-const fears = [
-  {
-    q: "“Is this thing even original?”",
-    a: "Every device is checked before it's listed: screen, battery, cameras, ports, buttons. Ask, and we'll send a live video of the exact unit before you pay.",
-  },
-  {
-    q: "“Am I being overcharged?”",
-    a: "Our prices are on this page before you message us. No “how much you get?”. Buy online and you pay exactly the price you see.",
-  },
-  {
-    q: "“Will it actually reach me?”",
-    a: "We deliver to all 36 states and the FCT. We agree the delivery fee and timing with you on WhatsApp. Or pick it up at our shop for free.",
-  },
-];
-
 const testimonials = [
   { name: "Tunde A.", where: "Lekki", text: "Swapped my old iPhone 11 for a Pixel 9. Fair valuation, no stress. Delivery to Lekki the same day." },
   { name: "Chinwe O.", where: "Yaba", text: "Got my MacBook Air M2 in 24 hours. Genuine UK Used, exactly as described. Going back for the JBL." },
@@ -49,34 +42,13 @@ const testimonials = [
 ];
 
 const faqs = [
-  {
-    q: "Are your phones and laptops original?",
-    a: "Yes. We check every device before it goes on sale. If you're not sure, ask on WhatsApp for photos or a live video of the exact unit before you buy.",
-  },
-  {
-    q: "What does “UK Used” mean?",
-    a: "It's a pre-owned device imported from abroad, usually the UK, that we've tested ourselves. It costs a lot less than brand new. We tell you its exact condition (scratches, battery health) before you buy.",
-  },
-  {
-    q: "Do you deliver outside Lagos?",
-    a: "Yes, to all 36 states and the FCT. The fee and delivery time depend on where you are. We agree both with you on WhatsApp, and you pay the delivery fee separately from the device.",
-  },
-  {
-    q: "How do I pay?",
-    a: "Tap Buy now on any device and pay securely on Paystack. Or message us on WhatsApp first and ask for a live video of the unit, or come and pay in person at our shop in Computer Village.",
-  },
-  {
-    q: "What if it sells out after I pay?",
-    a: "Each unit is one of a kind, so occasionally one sells in the shop just before an online order comes in. If that happens, we tell you on WhatsApp straight away and refund you in full. Or, if you'd like, we help you pick a similar device instead.",
-  },
-  {
-    q: "How does a swap work?",
-    a: "Tell us your device's model, storage and condition with the form above. We send you a valuation on WhatsApp. If you're happy with it, you hand over your old device, pay the difference, and take your new one home.",
-  },
-  {
-    q: "Is the price on this page final?",
-    a: "Yes. If you buy online, you pay exactly the price on the ticket, nothing added at checkout. Gadget prices in Nigeria follow the dollar, so prices on this page can change from day to day.",
-  },
+  { q: "Are your phones and laptops original?", a: "Yes. We check every device before it goes on sale. If you're not sure, ask on WhatsApp for photos or a live video of the exact unit before you buy." },
+  { q: "What does “UK used” mean?", a: "It's a pre-owned device imported from abroad, usually the UK, that we've tested ourselves. It costs a lot less than brand new. We tell you its exact condition (scratches, battery health) before you buy." },
+  { q: "Do you deliver outside Lagos?", a: "Yes, to all 36 states and the FCT. The fee and delivery time depend on where you are. We agree both with you on WhatsApp, and you pay the delivery fee separately from the device." },
+  { q: "How do I pay?", a: "Tap Buy on any device and pay securely on Paystack. Or message us on WhatsApp first and ask for a live video of the unit, or come and pay in person at our shop in Computer Village." },
+  { q: "What if it sells out after I pay?", a: "Each unit is one of a kind, so occasionally one sells in the shop just before an online order comes in. If that happens, we tell you on WhatsApp straight away and refund you in full. Or, if you'd like, we help you pick a similar device instead." },
+  { q: "How does a swap work?", a: "Tell us your device's model, storage and condition with the swap form. We send you a valuation on WhatsApp. If you're happy with it, you hand over your old device, pay the difference, and take your new one home." },
+  { q: "Is the price on this page final?", a: "Yes. If you buy online, you pay exactly the price shown, nothing added at checkout. Gadget prices in Nigeria follow the dollar, so prices on this page can change from day to day." },
 ];
 ---
 <Base
@@ -84,21 +56,21 @@ const faqs = [
   description="Tested UK-used and new phones, laptops and consoles in Computer Village, Ikeja. Prices upfront, swap your old device, delivery nationwide."
 >
   <header class="nav">
-    <div class="wrap nav-inner">
+    <div class="nav-island">
       <a href="#top" class="brand" aria-label="GreenTech Gadget Store, back to top">
-        <Logo size={34} />
+        <Logo size={28} />
         <span class="brand-word">Green<b>Tech</b></span>
       </a>
       <nav aria-label="Sections">
         <ul class="nav-links">
-          <li><a href="#deals">Prices</a></li>
+          <li><a href="#deals">Shop</a></li>
           <li><a href="#swap">Swap</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#faq">Help</a></li>
           <li><a href="#visit">Visit</a></li>
         </ul>
       </nav>
       <a class="btn btn-primary nav-cta" href={hello} target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
-        <WhatsAppIcon /> <span>Chat with us</span>
+        <WhatsAppIcon /> <span>Chat</span>
       </a>
     </div>
   </header>
@@ -106,175 +78,180 @@ const faqs = [
   <main id="main">
     <Hero picks={hero} hello={hello} />
 
-    <!-- CATEGORIES -->
-    <section class="cats" aria-label="Shop by category">
-      <div class="wrap cats-grid">
-        {categories.map((c, i) => (
-          <a class="cat" href="#deals" data-filter={c.id} data-reveal style={`--i:${i}`}>
-            <Image
-              src={catImages[c.id]}
-              alt=""
-              widths={[360, 560, 800]}
-              sizes="(max-width: 700px) 50vw, 25vw"
-              loading="lazy"
-            />
-            <span class="cat-label">
-              <span class="cat-name">{c.label}</span>
-              <span class="cat-from">from <span class="cur">₦</span>{lowest(c.id).toLocaleString("en-NG")}</span>
-              <span class="sr-only">, show in prices</span>
-            </span>
-          </a>
-        ))}
+    <!-- CATEGORIES: an Apple-store style shelf -->
+    <section class="section cats" aria-labelledby="cats-title">
+      <div class="wrap">
+        <h2 class="h2" id="cats-title" data-reveal>Shop by category. <span class="tone">Find your next one.</span></h2>
+        <div class="cats-row">
+          {categories.map((c, i) => (
+            <a class="cat" href="#deals" data-filter={c.id} data-reveal style={`--i:${i}`}>
+              <span class="cat-media">
+                <Image src={catPhoto[c.id]} alt="" widths={[240, 360, 520]} sizes="(max-width: 700px) 44vw, 270px" loading="lazy" />
+              </span>
+              <span class="cat-text">
+                <span class="cat-name">{c.label}</span>
+                <span class="cat-meta">{countIn(c.id)} devices · from <span class="cur">₦</span>{lowest(c.id).toLocaleString("en-NG")}</span>
+                <span class="sr-only">, show in the price list</span>
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
 
-    <!-- FEARS -->
-    <section class="section fears">
+    <!-- WHY: asymmetric bento -->
+    <section class="section why" aria-labelledby="why-title">
       <div class="wrap">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">Why GreenTech</p>
-          <h2>We know how buying a gadget in Lagos goes.</h2>
+        <h2 class="h2" id="why-title" data-reveal>The GreenTech difference. <span class="tone">Buy without the worry.</span></h2>
+        <div class="bento">
+          <article class="tile tile-big" data-reveal style="--i:0">
+            <div class="tile-core">
+              <p class="tile-kicker">Is it original?</p>
+              <h3>Every device is checked before it's listed.</h3>
+              <p>Screen, battery, cameras, ports and buttons. Not sure? Ask on WhatsApp and we'll send a live video of the exact unit before you pay.</p>
+              <ul class="checks" aria-label="What we check">
+                <li>Screen</li><li>Battery</li><li>Cameras</li><li>Ports</li><li>Buttons</li>
+              </ul>
+            </div>
+          </article>
+          <article class="tile" data-reveal style="--i:1">
+            <div class="tile-core">
+              <p class="tile-kicker">Am I overpaying?</p>
+              <h3>The price is on the page.</h3>
+              <p>No “how much you get?”. Buy online and you pay exactly what you see.</p>
+            </div>
+          </article>
+          <article class="tile" data-reveal style="--i:2">
+            <div class="tile-core">
+              <p class="tile-kicker">Will it reach me?</p>
+              <h3>Delivered to all 36 states.</h3>
+              <p>We agree the fee and timing on WhatsApp. Or pick it up in Ikeja for free.</p>
+            </div>
+          </article>
         </div>
-        <ol class="fear-list">
-          {fears.map((f, i) => (
-            <li data-reveal style={`--i:${i}`}>
-              <span class="fear-n" aria-hidden="true">0{i + 1}</span>
-              <h3>{f.q}</h3>
-              <p>{f.a}</p>
-            </li>
-          ))}
-        </ol>
       </div>
     </section>
 
     <!-- DEALS -->
-    <section class="section deals" id="deals">
+    <section class="section deals" id="deals" aria-labelledby="deals-title">
       <div class="wrap">
         <div class="deals-head">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">Today's prices</p>
-            <h2>Pick it. Pay for it. It's yours.</h2>
-            <p>Tap <strong>Buy now</strong> to pay securely with Paystack. Want to see it first? Tap <strong>Ask</strong> and we'll send a live video of the exact unit on WhatsApp.</p>
-          </div>
+          <h2 class="h2" id="deals-title" data-reveal>All devices. <span class="tone">Take your pick.</span></h2>
           <div class="filters" role="group" aria-label="Filter by category" hidden>
             <button type="button" aria-pressed="true" data-filter="all">All</button>
             {categories.map((c) => <button type="button" aria-pressed="false" data-filter={c.id}>{c.label}</button>)}
           </div>
         </div>
+        <p class="deals-sub" data-reveal><b>Buy</b> pays securely with Paystack. <b>Ask</b> gets you a live video of the exact unit on WhatsApp first.</p>
 
         <p class="sr-only" aria-live="polite" id="deal-count"></p>
         <div class="deal-grid">
-          {products.map((p, i) => <Ticket product={p} index={i} />)}
+          {products.map((p, i) => <ProductCard product={p} index={i} />)}
         </div>
 
-        <div class="deals-more" data-reveal>
-          <p><strong>Don't see it?</strong> This is a selection. Tell us the model and budget, and we'll find it.</p>
-          <a class="btn btn-ghost" href={findIt} target="_blank" rel="noopener"><WhatsAppIcon /> Ask for a device</a>
+        <div class="more" data-reveal>
+          <p><b>Don't see it?</b> <span class="tone-text">This is a selection. Tell us the model and your budget, and we'll find it.</span></p>
+          <a class="link" href={findIt} target="_blank" rel="noopener">Ask for a device <span aria-hidden="true">›</span></a>
         </div>
-        <p class="price-note">Prices follow the dollar and can change from day to day. Buy online and you pay the price on the ticket. Delivery is agreed and paid separately.</p>
+        <p class="fine">Prices follow the dollar and can change from day to day. Buy online and you pay the price shown. Delivery is agreed and paid separately.</p>
       </div>
     </section>
 
     <!-- CONDITION -->
-    <section class="section cond">
-      <div class="wrap cond-grid">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">Know what you're buying</p>
-          <h2>Brand New or UK Used? Here's the difference.</h2>
-          <p>Both come tested from us. The difference is the price, and whether someone owned it before you.</p>
-        </div>
-        <div class="cond-cards">
-          <div class="cond-card" data-reveal style="--i:0">
-            <span class="stamp stamp-new">Brand New</span>
-            <h3>Never used</h3>
+    <section class="section cond" aria-labelledby="cond-title">
+      <div class="wrap">
+        <h2 class="h2" id="cond-title" data-reveal>Brand new or UK used. <span class="tone">Know the difference.</span></h2>
+        <div class="cond-grid">
+          <article class="cond-card" data-reveal style="--i:0">
+            <span class="pill pill-new">Brand new</span>
+            <h3>Never used.</h3>
             <p>Straight from the manufacturer, for when you want it untouched.</p>
-          </div>
-          <div class="cond-card" data-reveal style="--i:1">
-            <span class="stamp stamp-used">UK Used</span>
-            <h3>Pre-owned, tested by us</h3>
-            <p>Imported and checked by us: battery, screen, cameras, ports, buttons. Ask us about any unit's exact condition before you buy. It costs a lot less than new.</p>
+          </article>
+          <article class="cond-card" data-reveal style="--i:1">
+            <span class="pill pill-used">UK used</span>
+            <h3>Pre-owned. Tested by us.</h3>
+            <p>Imported and checked by us: battery, screen, cameras, ports, buttons. It costs a lot less than new, and you can ask about any unit's exact condition before you buy.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SWAP: double-bezel panel -->
+    <section class="section swap" id="swap" aria-labelledby="swap-title">
+      <div class="wrap">
+        <div class="shell">
+          <div class="shell-core swap-grid">
+            <div class="swap-copy" data-reveal>
+              <h2 class="h2" id="swap-title">Swap it. <span class="tone">Upgrade it.</span></h2>
+              <p class="lead">Trade in your old phone for something newer and pay only the difference, or sell it to us for cash. We send you a valuation on WhatsApp, and you decide.</p>
+              <ol class="steps">
+                <li><b>1</b><span>Tell us what you have.</span></li>
+                <li><b>2</b><span>Get a valuation on WhatsApp.</span></li>
+                <li><b>3</b><span>Hand it over, pay the difference, take your upgrade home.</span></li>
+              </ol>
+            </div>
+
+            <form class="swap-form" id="swap-form" data-reveal style="--i:1" novalidate>
+              <fieldset class="mode">
+                <legend class="sr-only">What do you want to do?</legend>
+                <label><input type="radio" name="mode" value="swap" checked /> <span>Swap it</span></label>
+                <label><input type="radio" name="mode" value="sell" /> <span>Sell for cash</span></label>
+              </fieldset>
+
+              <div class="field">
+                <label for="f-device">Your device</label>
+                <input id="f-device" name="device" required autocomplete="off" placeholder="e.g. iPhone 12 Pro, 128GB" />
+                <p class="err" id="f-device-err" role="alert" hidden>Tell us the model so we can value it.</p>
+              </div>
+
+              <div class="field">
+                <label for="f-condition">Condition</label>
+                <select id="f-condition" name="condition">
+                  <option>Like new, no scratches</option>
+                  <option selected>Good, light signs of use</option>
+                  <option>Fair, visible scratches or dents</option>
+                  <option>Has a fault (screen, battery, etc.)</option>
+                </select>
+              </div>
+
+              <div class="field" data-swap-only>
+                <label for="f-want">What do you want instead? <span class="opt">(optional)</span></label>
+                <input id="f-want" name="want" autocomplete="off" placeholder="e.g. iPhone 14 Pro Max" />
+              </div>
+
+              <button class="btn btn-primary btn-lg" type="submit"><WhatsAppIcon /> <span data-label>Get my swap value</span></button>
+              <p class="form-note">Opens WhatsApp with your details filled in. You send it yourself; nothing is stored here.</p>
+            </form>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SWAP -->
-    <section class="section swap" id="swap">
-      <div class="wrap"><div class="swap-grid">
-        <div class="swap-copy" data-reveal>
-          <p class="eyebrow">Swap or sell</p>
-          <h2>What's your old phone worth? Find out today.</h2>
-          <p class="lead">Swap it for something newer and pay only the difference, or sell it to us for cash. We send you a valuation on WhatsApp, and you decide.</p>
-          <ol class="steps">
-            <li><b>1</b><span>Tell us what you have, with the form.</span></li>
-            <li><b>2</b><span>We send you a valuation on WhatsApp.</span></li>
-            <li><b>3</b><span>Happy with it? Hand it over, pay the difference, and take your upgrade home.</span></li>
-          </ol>
-        </div>
-
-        <form class="swap-form" id="swap-form" data-reveal style="--i:1" novalidate>
-          <fieldset class="mode">
-            <legend class="sr-only">What do you want to do?</legend>
-            <label><input type="radio" name="mode" value="swap" checked /> <span>Swap it</span></label>
-            <label><input type="radio" name="mode" value="sell" /> <span>Sell for cash</span></label>
-          </fieldset>
-
-          <div class="field">
-            <label for="f-device">Your device</label>
-            <input id="f-device" name="device" required autocomplete="off" placeholder="e.g. iPhone 12 Pro, 128GB" />
-            <p class="err" id="f-device-err" role="alert" hidden>Tell us the model so we can value it.</p>
-          </div>
-
-          <div class="field">
-            <label for="f-condition">Condition</label>
-            <select id="f-condition" name="condition">
-              <option>Like new, no scratches</option>
-              <option selected>Good, light signs of use</option>
-              <option>Fair, visible scratches or dents</option>
-              <option>Has a fault (screen, battery, etc.)</option>
-            </select>
-          </div>
-
-          <div class="field" data-swap-only>
-            <label for="f-want">What do you want instead? <span class="opt">(optional)</span></label>
-            <input id="f-want" name="want" autocomplete="off" placeholder="e.g. iPhone 14 Pro Max" />
-          </div>
-
-          <button class="btn btn-primary btn-lg" type="submit"><WhatsAppIcon /> <span data-label>Get my swap value</span></button>
-          <p class="form-note">This opens WhatsApp with your details filled in. You send it yourself, and nothing is stored here.</p>
-        </form>
-      </div></div>
-    </section>
-
     <!-- TESTIMONIALS -->
-    <section class="section voices">
+    <section class="section voices" aria-labelledby="voices-title">
       <div class="wrap">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">From our customers</p>
-          <h2>They came for one gadget. They came back for the next.</h2>
-        </div>
+        <h2 class="h2" id="voices-title" data-reveal>From our customers. <span class="tone">In their words.</span></h2>
         <div class="voice-grid">
           {testimonials.map((t, i) => (
             <figure class="voice" data-reveal style={`--i:${i}`}>
-              <blockquote>{t.text}</blockquote>
-              <figcaption><b>{t.name}</b> · {t.where}</figcaption>
+              <blockquote>“{t.text}”</blockquote>
+              <figcaption><b>{t.name}</b> <span>{t.where}</span></figcaption>
             </figure>
           ))}
         </div>
-        <p class="voices-more">
-          See unboxings and deliveries on Instagram:{" "}
-          <a href={site.instagram.url} target="_blank" rel="noopener">{site.instagram.handle}</a>
+        <p class="voices-more" data-reveal>
+          Unboxings and deliveries on Instagram:{" "}
+          <a class="link" href={site.instagram.url} target="_blank" rel="noopener">{site.instagram.handle} <span aria-hidden="true">›</span></a>
         </p>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section faq" id="faq">
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
       <div class="wrap faq-grid">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">Questions</p>
-          <h2>Before you ask.</h2>
-          <p>Still unsure? <a href={hello} target="_blank" rel="noopener">Message us</a>. A real person replies.</p>
+        <div data-reveal>
+          <h2 class="h2" id="faq-title">Questions? <span class="tone">Answers.</span></h2>
+          <p class="faq-help">Still unsure? <a class="link" href={hello} target="_blank" rel="noopener">Message us <span aria-hidden="true">›</span></a> A real person replies.</p>
         </div>
         <div class="faq-list">
           {faqs.map((f) => (
@@ -287,48 +264,48 @@ const faqs = [
       </div>
     </section>
 
-    <!-- VISIT + CLOSE -->
-    <section class="section visit" id="visit">
+    <!-- VISIT + CLOSE: bento -->
+    <section class="section visit" id="visit" aria-labelledby="visit-title">
       <div class="wrap">
-        <div class="close" data-reveal>
-          <Logo size={64} class="close-logo" />
-          <h2>Tell us what you want.<br /><span class="hl">We'll tell you straight.</span></h2>
-          <div class="close-ctas">
-            <a class="btn btn-primary btn-lg" href={hello} target="_blank" rel="noopener"><WhatsAppIcon /> Chat on WhatsApp</a>
-            <a class="btn btn-ghost btn-lg" href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay}</a>
-          </div>
-        </div>
-
-        <div class="visit-grid">
-          <div class="visit-item" data-reveal style="--i:0">
-            <p class="v-label">Shop</p>
-            <p class="v-value">{site.address}</p>
-            <a href={site.mapsUrl} target="_blank" rel="noopener">Get directions →</a>
-          </div>
-          <div class="visit-item" data-reveal style="--i:1">
-            <p class="v-label">Open</p>
-            <p class="v-value">{site.hours}</p>
-            <span class="v-hint">Message first and we'll have your device ready.</span>
-          </div>
-          <div class="visit-item" data-reveal style="--i:2">
-            <p class="v-label">Delivery</p>
-            <p class="v-value">All 36 states + FCT</p>
-            <span class="v-hint">Fee agreed on WhatsApp, paid separately.</span>
-          </div>
+        <h2 class="h2" id="visit-title" data-reveal>Come and see it. <span class="tone">Or have it delivered.</span></h2>
+        <div class="visit-bento">
+          <article class="vtile vtile-main" data-reveal style="--i:0">
+            <Logo size={40} />
+            <h3>{site.address}</h3>
+            <p>{site.hours}. Message us first and we'll have your device ready to test.</p>
+            <a class="link" href={site.mapsUrl} target="_blank" rel="noopener">Get directions <span aria-hidden="true">›</span></a>
+          </article>
+          <article class="vtile" data-reveal style="--i:1">
+            <h3>Talk to a person.</h3>
+            <p>WhatsApp or call, Mon–Sat. We pick up.</p>
+            <div class="vtile-ctas">
+              <a class="btn btn-primary" href={hello} target="_blank" rel="noopener"><WhatsAppIcon /> WhatsApp</a>
+              <a class="link" href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay} <span aria-hidden="true">›</span></a>
+            </div>
+          </article>
+          <article class="vtile" data-reveal style="--i:2">
+            <h3>Delivered nationwide.</h3>
+            <p>All 36 states and the FCT. Fee and timing agreed on WhatsApp, paid separately from the device.</p>
+          </article>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="foot">
-    <div class="wrap foot-inner">
-      <p class="brand-word">Green<b>Tech</b> <span>· {site.tagline}</span></p>
-      <ul>
-        <li><a href={site.instagram.url} target="_blank" rel="noopener">Instagram {site.instagram.handle}</a></li>
-        <li><a href={site.x.url} target="_blank" rel="noopener">X {site.x.handle}</a></li>
-        <li><a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a></li>
-      </ul>
-      <p class="foot-small">© {new Date().getFullYear()} {site.name}. Computer Village, Ikeja, Lagos.</p>
+    <div class="wrap">
+      <div class="foot-top">
+        <a href="#top" class="brand" aria-label="Back to top"><Logo size={24} /><span class="brand-word">Green<b>Tech</b></span></a>
+        <ul class="foot-links">
+          <li><a href="#deals">Shop</a></li>
+          <li><a href="#swap">Swap</a></li>
+          <li><a href="#faq">Help</a></li>
+          <li><a href={site.instagram.url} target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href={site.x.url} target="_blank" rel="noopener">X</a></li>
+          <li><a href="/credits">Photo credits</a></li>
+        </ul>
+      </div>
+      <p class="foot-small">© {new Date().getFullYear()} {site.name}. {site.address}. {site.phoneDisplay}.</p>
     </div>
   </footer>
 
@@ -336,7 +313,6 @@ const faqs = [
     <a class="btn btn-primary" href={hello} target="_blank" rel="noopener"><WhatsAppIcon /> WhatsApp us</a>
     <a class="btn btn-ghost" href={`tel:${site.phoneTel}`} aria-label={`Call ${site.phoneDisplay}`}>Call</a>
   </nav>
-
 
 <script>
   import { waLink } from "../data/site";
@@ -360,13 +336,13 @@ const faqs = [
   // Safety net: never leave content hidden for long, whatever happens above.
   setTimeout(revealAll, 4000);
 
-  // Category filter. Without JS every deal stays visible and the buttons stay hidden.
+  // Category filter. Without JS every device stays visible and the buttons stay hidden.
   const filters = document.querySelector<HTMLElement>(".filters");
-  const tickets = document.querySelectorAll<HTMLElement>(".deal-grid .ticket");
+  const cards = document.querySelectorAll<HTMLElement>(".deal-grid .card");
   const count = document.getElementById("deal-count");
   const apply = (cat: string) => {
     let shown = 0;
-    tickets.forEach((t) => {
+    cards.forEach((t) => {
       const match = cat === "all" || t.dataset.category === cat;
       t.hidden = !match;
       if (match) {
@@ -450,192 +426,171 @@ const faqs = [
 </Base>
 
 <style>
-  /* ---------- Nav ---------- */
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
+  /* ---------- Floating island nav ---------- */
+  .nav { position: sticky; top: 0.75rem; z-index: 50; padding-inline: var(--gutter); pointer-events: none; }
+  .nav-island {
+    pointer-events: auto;
+    max-width: 62rem;
+    margin: 0.75rem auto 0;
+    display: flex; align-items: center; gap: 1rem;
+    height: 3.4rem; padding: 0 0.45rem 0 1.1rem;
+    border-radius: 999px;
     background: var(--nav-bg);
     backdrop-filter: blur(12px) saturate(1.4);
     -webkit-backdrop-filter: blur(12px) saturate(1.4);
-    border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent), 0 6px 24px rgba(var(--shadow-rgb) / 0.08);
   }
-  .nav-inner { display: flex; align-items: center; gap: 1.5rem; height: 3.75rem; }
-  .brand { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-  .brand-word { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; letter-spacing: -0.03em; }
+  .brand { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+  .brand-word { font-family: var(--font-display); font-size: 1.12rem; font-weight: 600; letter-spacing: -0.02em; }
   .brand-word b { color: var(--green); font-weight: 600; }
   nav { margin-left: auto; }
-  .nav-links { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
-  .nav-links a {
-    display: block;
-    padding: 0.5rem 0.85rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-size: var(--text-sm);
-    color: var(--muted);
-    transition: color var(--dur-fast), background-color var(--dur-fast);
-  }
-  .nav-links a:hover { color: var(--text); background: var(--surface-2); }
-  .nav-cta { --h: 2.4rem; font-size: var(--text-sm); }
+  .nav-links { display: flex; gap: 0.15rem; list-style: none; margin: 0; padding: 0; }
+  .nav-links a { display: block; padding: 0.5rem 0.85rem; border-radius: 999px; text-decoration: none; font-size: 0.9rem; color: var(--muted); transition: color var(--dur-fast), background-color var(--dur-fast); }
+  .nav-links a:hover { color: var(--text); background: color-mix(in srgb, var(--surface-2) 80%, transparent); }
+  .nav-cta { --h: 2.5rem; font-size: 0.9rem; padding: 0 1.05rem; }
   @media (max-width: 760px) {
     nav { display: none; }
     .nav-cta { margin-left: auto; }
   }
-  @media (max-width: 380px) {
-    .nav-cta span { display: none; }
-    .nav-cta { padding: 0 0.85rem; }
-  }
 
-  /* ---------- Categories ---------- */
-  .cats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+  /* ---------- Shared section heading: Apple two-tone ---------- */
+  .h2 { font-size: var(--text-3xl); font-weight: 600; letter-spacing: -0.025em; line-height: 1.08; max-width: 22ch; }
+  .h2 .tone, .tone-text { color: var(--tone); }
+  .section { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .link { color: var(--green); font-weight: 500; text-decoration: none; }
+  .link:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .fine { margin-top: 1rem; font-size: 0.8rem; color: var(--muted); }
+
+  /* ---------- Categories shelf ---------- */
+  .cats { padding-bottom: 0; }
+  .cats-row { margin-top: 2.25rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
   .cat {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    border-radius: var(--radius);
-    overflow: hidden;
-    text-decoration: none;
-    isolation: isolate;
-    border: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 0.9rem; text-decoration: none;
+    padding: 0.5rem 0.5rem 1.1rem; border-radius: 1.6rem; background: var(--surface);
+    box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06);
+    transition: transform 500ms var(--ease-out), box-shadow 500ms var(--ease-out);
   }
-  .cat :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease-out); z-index: -2; }
-  .cat::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(6, 10, 6, 0.92) 8%, rgba(6, 10, 6, 0.2) 55%, transparent); }
-  .cat:hover :global(img) { transform: scale(1.05); }
-  .cat-label { color: #fff; position: absolute; left: 1.1rem; right: 1.1rem; bottom: 1rem; display: flex; flex-direction: column; gap: 0.15rem; }
-  .cat-name { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
-  .cat-from { font-family: var(--font-mono); font-size: 0.8rem; color: #cfeedd; }
-  @media (max-width: 700px) {
-    .cats-grid { grid-template-columns: repeat(2, 1fr); }
-    .cat { aspect-ratio: 1; }
+  .cat-media { display: block; aspect-ratio: 4 / 3; border-radius: 1.15rem; overflow: hidden; background: var(--surface-2); }
+  .cat-media :global(img) { width: 100%; height: 100%; object-fit: cover; filter: var(--photo-filter); transition: transform 700ms var(--ease-out); }
+  .cat-text { display: grid; gap: 0.15rem; padding-inline: 0.75rem; }
+  .cat-name { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; letter-spacing: -0.015em; }
+  .cat-meta { font-size: 0.85rem; color: var(--muted); }
+  @media (hover: hover) {
+    .cat:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(var(--shadow-rgb) / 0.05), 0 18px 40px rgba(var(--shadow-rgb) / 0.1); }
+    .cat:hover .cat-media :global(img) { transform: scale(1.04); }
   }
+  @media (max-width: 760px) { .cats-row { grid-template-columns: 1fr 1fr; gap: 0.75rem; } }
 
-  /* ---------- Fears ---------- */
-  .fear-list { list-style: none; padding: 0; margin: clamp(2.5rem, 5vw, 4rem) 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-  .fear-list li { background: var(--bg); padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-direction: column; gap: 0.9rem; }
-  .fear-n { font-family: var(--font-mono); font-size: 0.8rem; color: var(--green); }
-  .fear-list h3 { font-size: var(--text-2xl); letter-spacing: -0.025em; line-height: 1.05; }
-  .fear-list p { color: var(--muted); }
-  @media (max-width: 860px) { .fear-list { grid-template-columns: 1fr; } }
+  /* ---------- Why: bento ---------- */
+  .bento { margin-top: 2.25rem; display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: auto auto; gap: 1rem; }
+  .tile { padding: 0.45rem; border-radius: 1.9rem; background: color-mix(in srgb, var(--surface-2) 70%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent); }
+  .tile-big { grid-row: span 2; }
+  .tile-core { height: 100%; display: flex; flex-direction: column; gap: 0.75rem; padding: clamp(1.4rem, 3vw, 2.2rem); border-radius: 1.5rem; background: var(--surface); box-shadow: inset 0 1px 0 rgba(255 255 255 / 0.6); }
+  .tile-kicker { font-size: 0.85rem; font-weight: 600; color: var(--green); }
+  .tile h3 { font-size: clamp(1.35rem, 1.1rem + 1vw, 1.9rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.12; }
+  .tile-big h3 { font-size: clamp(1.7rem, 1.2rem + 2vw, 2.6rem); max-width: 16ch; }
+  .tile p { color: var(--muted); max-width: 46ch; }
+  .checks { list-style: none; padding: 0; margin: auto 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; padding-top: 1.5rem; }
+  .checks li { padding: 0.45rem 0.9rem; border-radius: 999px; background: var(--green-soft); color: var(--ok); font-size: 0.85rem; font-weight: 600; }
+  .checks li::before { content: "✓ "; }
+  @media (max-width: 860px) { .bento { grid-template-columns: 1fr; } .tile-big { grid-row: auto; } }
 
   /* ---------- Deals ---------- */
-  .deals { background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--surface-2) 60%, transparent) 18%, color-mix(in srgb, var(--surface-2) 60%, transparent) 82%, transparent); }
-  .deals-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 2rem; }
-  .deals-head strong { color: var(--text); }
-  .filters { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .deals-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.25rem 2rem; }
+  .deals-sub { margin-top: 1rem; color: var(--muted); max-width: 52ch; }
+  .deals-sub b { color: var(--text); font-weight: 600; }
+  .filters { display: flex; gap: 0.25rem; padding: 0.25rem; border-radius: 999px; background: var(--surface-2); overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+  .filters::-webkit-scrollbar { display: none; }
   .filters[hidden] { display: none; }
   .filters button {
-    min-height: 2.75rem;
-    padding: 0 1.1rem;
-    border-radius: 999px;
-    border: 1px solid var(--line-strong);
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    font-size: var(--text-sm);
-    font-weight: 500;
-    transition: background-color var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+    flex: none; min-height: 2.5rem; padding: 0 1.1rem; border: 0; border-radius: 999px; background: transparent;
+    color: var(--muted); cursor: pointer; font-size: 0.9rem; font-weight: 500;
+    transition: background-color var(--dur-fast), color var(--dur-fast), box-shadow var(--dur-fast);
   }
-  .filters button:hover { color: var(--text); border-color: var(--mint); }
-  .filters button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--green-ink); }
-  .deal-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr)); gap: 1rem; }
-  .deals-more { margin-top: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; padding: 1.5rem clamp(1.25rem, 3vw, 2rem); border: 1px dashed var(--line-strong); border-radius: var(--radius); }
-  .deals-more p { color: var(--muted); }
-  .deals-more strong { color: var(--text); }
-  .price-note { margin-top: 1rem; font-size: var(--text-sm); color: var(--muted); }
+  .filters button:hover { color: var(--text); }
+  .filters button[aria-pressed="true"] { background: var(--surface); color: var(--text); box-shadow: inset 0 0 0 1.5px var(--green), 0 1px 3px rgba(var(--shadow-rgb) / 0.12); }
+  .deal-grid { margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr)); gap: 1rem; }
+  @media (max-width: 640px) { .deal-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; } }
+  .more { margin-top: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 2rem; padding: 1.4rem 1.6rem; border-radius: 1.4rem; background: var(--surface); }
+  .more b { font-weight: 600; }
 
   /* ---------- Condition ---------- */
-  .cond-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
-  .cond-cards { display: grid; gap: 1rem; }
-  .cond-card { background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 1.6rem 1.75rem; display: grid; gap: 0.6rem; justify-items: start; }
-  .cond-card h3 { font-size: 1.5rem; letter-spacing: -0.02em; margin-top: 0.4rem; }
-  .cond-card p { color: var(--ink-muted); }
-  @media (max-width: 860px) { .cond-grid { grid-template-columns: 1fr; } }
+  .cond-grid { margin-top: 2.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .cond-card { display: grid; gap: 0.75rem; justify-items: start; align-content: start; padding: clamp(1.5rem, 3vw, 2.4rem); border-radius: 1.6rem; background: var(--surface); box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
+  .cond-card h3 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); font-weight: 600; letter-spacing: -0.02em; margin-top: 0.5rem; }
+  .cond-card p { color: var(--muted); max-width: 44ch; }
+  .pill { padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+  .pill-new { background: var(--green-soft); color: var(--ok); }
+  .pill-used { background: color-mix(in srgb, var(--warn) 14%, transparent); color: var(--warn); }
+  @media (max-width: 760px) { .cond-grid { grid-template-columns: 1fr; } }
 
-  /* ---------- Swap ---------- */
-  .swap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; padding: clamp(1.5rem, 4vw, 4rem); border-radius: calc(var(--radius) * 1.6); background: radial-gradient(40rem 30rem at 0% 0%, color-mix(in srgb, var(--green) 10%, transparent), transparent 60%), var(--surface); border: 1px solid var(--line); }
-  .swap-copy h2 { font-size: var(--text-3xl); margin-top: 1rem; }
-  .lead { font-size: var(--text-lg); color: var(--muted); margin-top: 1.1rem; }
-  .steps { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1rem; }
-  .steps li { display: flex; gap: 1rem; align-items: baseline; }
-  .steps b { flex: none; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--green); color: var(--green); font-family: var(--font-mono); font-size: 0.85rem; }
-
-  .swap-form { display: grid; gap: 1.1rem; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 2rem); }
-  .swap-form .btn { width: 100%; margin-top: 0.4rem; }
-  .form-note { font-size: 0.82rem; color: var(--muted); text-align: center; }
+  /* ---------- Swap: double bezel ---------- */
+  .shell { padding: 0.5rem; border-radius: 2.4rem; background: color-mix(in srgb, var(--surface-2) 70%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent); }
+  .shell-core { border-radius: 2rem; background: var(--surface); padding: clamp(1.5rem, 4.5vw, 4rem); box-shadow: inset 0 1px 0 rgba(255 255 255 / 0.6); }
+  .swap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .lead { margin-top: 1.1rem; font-size: var(--text-lg); color: var(--muted); max-width: 40ch; }
+  .steps { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 0.9rem; }
+  .steps li { display: flex; gap: 0.9rem; align-items: baseline; }
+  .steps b { flex: none; width: 1.8rem; height: 1.8rem; display: grid; place-items: center; border-radius: 50%; background: var(--green-soft); color: var(--ok); font-size: 0.85rem; font-weight: 600; }
+  .swap-form { display: grid; gap: 1.1rem; padding: clamp(1.25rem, 3vw, 1.75rem); border-radius: 1.4rem; background: var(--bg); }
+  .swap-form .btn { width: 100%; margin-top: 0.3rem; }
+  .btn-lg { --h: 3rem; padding: 0 1.5rem; font-size: 1.0625rem; font-weight: 500; }
+  .form-note { font-size: 0.8rem; color: var(--muted); text-align: center; }
   @media (max-width: 860px) { .swap-grid { grid-template-columns: 1fr; } }
 
   /* ---------- Testimonials ---------- */
-  .voice-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .voice { margin: 0; padding: 1.75rem; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; }
-  .voice blockquote { margin: 0; font-size: var(--text-lg); line-height: 1.45; }
-  .voice blockquote::before { content: "“"; display: block; font-family: var(--font-display); font-size: 3rem; line-height: 0.6; color: var(--green); margin-bottom: 0.6rem; }
-  .voice figcaption { font-size: var(--text-sm); color: var(--muted); }
-  .voice figcaption b { color: var(--text); }
+  .voice-grid { margin-top: 2.25rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .voice { margin: 0; padding: clamp(1.5rem, 3vw, 2rem); border-radius: 1.6rem; background: var(--surface); display: flex; flex-direction: column; justify-content: space-between; gap: 1.75rem; box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
+  .voice blockquote { margin: 0; font-family: var(--font-display); font-size: clamp(1.15rem, 1rem + 0.5vw, 1.35rem); font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
+  .voice figcaption { display: grid; font-size: 0.9rem; }
+  .voice figcaption b { font-weight: 600; }
+  .voice figcaption span { color: var(--muted); }
   .voices-more { margin-top: 1.5rem; color: var(--muted); font-size: var(--text-sm); }
-  .voices-more a { color: var(--green); }
   @media (max-width: 860px) { .voice-grid { grid-template-columns: 1fr; } }
 
   /* ---------- FAQ ---------- */
-  .faq-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
-  .faq-grid .section-head a { color: var(--green); }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1.45fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+  .faq-help { margin-top: 1.1rem; color: var(--muted); }
   .faq-list { border-top: 1px solid var(--line); }
   details { border-bottom: 1px solid var(--line); }
-  summary {
-    list-style: none;
-    cursor: pointer;
-    padding: 1.3rem 2.5rem 1.3rem 0;
-    position: relative;
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-  }
+  summary { list-style: none; cursor: pointer; padding: 1.3rem 2.5rem 1.3rem 0; position: relative; font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; }
   summary::-webkit-details-marker { display: none; }
-  summary::after { content: "+"; content: "+" / ""; position: absolute; right: 0.25rem; top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-size: 1.4rem; color: var(--green); transition: transform var(--dur-fast) var(--ease-out); }
+  summary::after { content: "+"; content: "+" / ""; position: absolute; right: 0.25rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; font-weight: 300; color: var(--green); transition: transform 400ms var(--ease-out); }
   details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
-  summary:hover { color: var(--mint); }
-  details p { padding: 0 0 1.4rem; color: var(--muted); max-width: 40rem; }
+  details p { padding: 0 0 1.4rem; color: var(--muted); max-width: 58ch; }
   @media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; } }
 
-  /* ---------- Visit / close ---------- */
-  .close { text-align: center; display: grid; justify-items: center; gap: 1.5rem; padding-bottom: clamp(3rem, 6vw, 5rem); }
-  .close h2 { font-size: var(--text-hero); letter-spacing: -0.045em; line-height: 0.95; }
-  .close-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 0.5rem; }
-  .visit-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
-  .visit-item { padding: 1.75rem 1.5rem 0 0; display: grid; gap: 0.35rem; align-content: start; }
-  .v-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); }
-  .v-value { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
-  .visit-item a { color: var(--mint); font-size: var(--text-sm); }
-  .v-hint { color: var(--muted); font-size: var(--text-sm); }
-  @media (max-width: 760px) { .visit-grid { grid-template-columns: 1fr; } }
+  /* ---------- Visit bento ---------- */
+  .visit-bento { margin-top: 2.25rem; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 1rem; }
+  .vtile { display: flex; flex-direction: column; gap: 0.7rem; padding: clamp(1.5rem, 3vw, 2.2rem); border-radius: 1.6rem; background: var(--surface); box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
+  .vtile-main { background: var(--green); color: var(--green-ink); }
+  .vtile-main :global(svg g) { stroke: currentColor; }
+  .vtile.vtile-main p { color: color-mix(in srgb, var(--green-ink) 85%, transparent); }
+  .vtile-main .link { color: var(--green-ink); margin-top: auto; }
+  .vtile h3 { font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.7rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+  .vtile p { color: var(--muted); }
+  .vtile-ctas { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; padding-top: 0.75rem; }
+  .vtile-ctas .btn { --h: 2.6rem; padding: 0 1.2rem; }
+  @media (max-width: 960px) { .visit-bento { grid-template-columns: 1fr 1fr; } .vtile-main { grid-column: 1 / -1; } }
+  @media (max-width: 640px) { .visit-bento { grid-template-columns: 1fr; } }
 
-  /* ---------- Footer ---------- */
-  .foot { border-top: 1px solid var(--line); padding-block: 2.5rem; }
-  .foot-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; }
-  .foot-inner .brand-word span { color: var(--muted); font-family: var(--font-body); font-size: var(--text-sm); font-weight: 400; letter-spacing: 0; }
-  .foot ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: var(--text-sm); }
-  .foot a { color: var(--muted); text-decoration: none; }
-  .foot a:hover { color: var(--green); }
-  .foot-small { width: 100%; font-size: 0.8rem; color: var(--muted); }
+  /* ---------- Footer: fine print ---------- */
+  .foot { padding-block: 2.5rem 3rem; border-top: 1px solid var(--line); }
+  .foot-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; }
+  .foot-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: 0.85rem; }
+  .foot-links a { color: var(--muted); text-decoration: none; }
+  .foot-links a:hover { color: var(--text); }
+  .foot-small { margin-top: 1.5rem; font-size: 0.78rem; color: var(--muted); }
 
   /* ---------- Mobile dock ---------- */
   .dock { display: none; }
   @media (max-width: 760px) {
     .dock {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 0.5rem;
-      position: fixed;
-      left: 0.75rem;
-      right: 0.75rem;
-      bottom: max(0.75rem, env(safe-area-inset-bottom));
-      z-index: 60;
-      padding: 0.45rem;
-      border-radius: 999px;
-      background: var(--nav-bg);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid var(--line-strong);
-      box-shadow: 0 12px 30px rgba(var(--shadow-rgb) / 0.25);
+      display: grid; grid-template-columns: 1fr auto; gap: 0.5rem;
+      position: fixed; left: 0.75rem; right: 0.75rem; bottom: max(0.75rem, env(safe-area-inset-bottom)); z-index: 60;
+      padding: 0.45rem; border-radius: 999px; background: var(--nav-bg);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent), 0 12px 30px rgba(var(--shadow-rgb) / 0.2);
     }
     .dock .btn { --h: 3rem; }
     .dock .btn-ghost { padding: 0 1.4rem; }

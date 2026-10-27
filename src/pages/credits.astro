@@ -1,0 +1,37 @@
+---
+import Base from "../layouts/Base.astro";
+import MiniHeader from "../components/MiniHeader.astro";
+import { findProduct } from "../data/products";
+import credits from "../data/credits.json";
+
+type Credit = { id: string; source_url: string; author: string; licence: string; licence_url?: string };
+const rows = (credits as Credit[]).map((c) => ({ ...c, name: findProduct(c.id)?.name ?? c.id }));
+---
+<Base title="Photo credits | GreenTech" description="Credits for the product photos on this site." noindex>
+  <MiniHeader />
+  <main id="main" class="wrap credits">
+    <h1>Photo credits.</h1>
+    <p class="lead">Product photos show the same model as the device on sale, not the exact unit. Ask us on WhatsApp for photos or a live video of the unit you're buying.</p>
+    {rows.length ? (
+      <ul>
+        {rows.map((r) => (
+          <li>
+            <b>{r.name}</b>
+            <span>Photo by {r.author}, <a href={r.source_url} target="_blank" rel="noopener">source</a>, {r.licence_url ? <a href={r.licence_url} target="_blank" rel="noopener">{r.licence}</a> : r.licence}.</span>
+          </li>
+        ))}
+      </ul>
+    ) : <p>No third-party photos are in use.</p>}
+    <p><a href="/">← Back to GreenTech</a></p>
+  </main>
+</Base>
+
+<style>
+  .credits { padding-block: 3rem 5rem; max-width: 46rem; }
+  h1 { font-size: var(--text-3xl); }
+  .lead { margin-top: 1rem; color: var(--muted); }
+  ul { list-style: none; padding: 0; margin: 2rem 0; border-top: 1px solid var(--line); }
+  li { display: grid; gap: 0.2rem; padding: 1rem 0; border-bottom: 1px solid var(--line); font-size: 0.92rem; }
+  li span { color: var(--muted); }
+  a { color: var(--green); }
+</style>

@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import Base from "../../layouts/Base.astro";
 import MiniHeader from "../../components/MiniHeader.astro";
-import Ticket from "../../components/Ticket.astro";
+import ProductCard from "../../components/ProductCard.astro";
 import { products, type Product } from "../../data/products";
 import { NIGERIAN_STATES } from "../../data/states";
 import { amount, naira, orderMessage, site, waLink } from "../../data/site";
@@ -19,7 +19,7 @@ const { product } = Astro.props as { product: Product };
     <div class="co-grid">
       <aside class="summary">
         <p class="eyebrow">Your order</p>
-        <Ticket product={product} compact />
+        <ProductCard product={product} variant="summary" />
         <ul class="facts">
           <li><b>You pay now:</b> <span class="cur">₦</span>{amount(product.price)}, the device price. Nothing is added at checkout.</li>
           <li><b>Delivery:</b> if you choose delivery, we agree the fee with you on WhatsApp and you pay it separately. Pickup at our shop costs nothing extra.</li>
