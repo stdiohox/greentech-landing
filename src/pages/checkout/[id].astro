@@ -3,15 +3,14 @@ import type { GetStaticPaths } from "astro";
 import Base from "../../layouts/Base.astro";
 import MiniHeader from "../../components/MiniHeader.astro";
 import ProductCard from "../../components/ProductCard.astro";
-import { POUCH_ID, findProduct, products, type Product } from "../../data/products";
+import { PHONE_EXTRAS, products, type Product } from "../../data/products";
 import { NIGERIAN_STATES } from "../../data/states";
-import { amount, naira, orderMessage, site, waLink } from "../../data/site";
+import { PRICE_VARIES, amount, naira, orderMessage, site, waLink } from "../../data/site";
 
-export const getStaticPaths = (() => products.map((product) => ({ params: { id: product.id }, props: { product } }))) satisfies GetStaticPaths;
+export const getStaticPaths = (() => products.filter((p) => !p.priceTo).map((product) => ({ params: { id: product.id }, props: { product } }))) satisfies GetStaticPaths;
 
 const { product } = Astro.props as { product: Product };
-const pouchItem = findProduct(POUCH_ID);
-const pouch = product.category === "phones" && pouchItem && !pouchItem.sold ? pouchItem : undefined;
+const isPhone = product.category === "phones";
 ---
 <Base title={`Buy ${product.name} | ${site.shortName}`} description={`Checkout: ${product.name} (${product.condition}), ${naira(product.price)}.`} noindex>
   <MiniHeader help={`Hi GreenTech, I need help buying the ${product.name}.`} />
@@ -23,7 +22,9 @@ const pouch = product.category === "phones" && pouchItem && !pouchItem.sold ? po
         <p class="eyebrow">Your order</p>
         <ProductCard product={product} variant="summary" />
         <ul class="facts">
-          <li><b>You pay now:</b> <span class="cur">₦</span>{amount(product.price)}, the device price{pouch ? ", plus the pouch if you add it" : ""}. Nothing else is added at checkout.</li>
+          <li><b>You pay now:</b> <span class="cur">₦</span>{amount(product.price)}, the device price. Nothing else is added at checkout.</li>
+          {isPhone && <li><b>Comes with:</b> {PHONE_EXTRAS}, at no extra cost.</li>}
+          {isPhone && <li><b>Price:</b> {PRICE_VARIES} <a href={waLink(orderMessage(product))} target="_blank" rel="noopener">Confirm today's price on WhatsApp</a> before you pay.</li>}
           <li><b>Delivery:</b> if you choose delivery, we agree the fee with you on WhatsApp and you pay it separately. Pickup at our shop costs nothing extra.</li>
           <li><b>Payment:</b> on Paystack's secure page. GreenTech never sees your card details.</li>
           <li><b>If it's sold out:</b> if the unit sells before we confirm your order, we tell you on WhatsApp and refund you in full.</li>
@@ -76,23 +77,13 @@ const pouch = product.category === "phones" && pouchItem && !pouchItem.sold ? po
         </div>
         <p class="pickup-note" data-pickup hidden>Collect it at {site.address}, {site.hours}. We'll message you on WhatsApp when it's ready.</p>
 
-        {pouch && (
-          <label class="addon">
-            <input type="checkbox" name="addPouch" value="1" data-addon={pouch.price} />
-            <span>
-              <b>Add a {pouch.name.toLowerCase()}</b>
-              <span class="addon-meta">+<span class="cur">₦</span>{amount(pouch.price)}. Brand new, fitted for this phone.</span>
-            </span>
-          </label>
-        )}
-
         <div class="field">
           <label for="c-notes">Anything we should know? <span class="opt">(optional)</span></label>
           <textarea id="c-notes" name="notes" maxlength="500" rows="3"></textarea>
         </div>
 
         <button class="btn btn-primary btn-lg pay" type="submit">
-          <span>Pay <span class="cur">₦</span><span data-total={product.price}>{amount(product.price)}</span> with Paystack</span>
+          <span>Pay <span class="cur">₦</span><span>{amount(product.price)}</span> with Paystack</span>
         </button>
         <p class="form-note">You'll go to Paystack to pay, then come back here for your confirmation.</p>
       </form>
@@ -112,7 +103,6 @@ const pouch = product.category === "phones" && pouchItem && !pouchItem.sold ? po
         "field-address": ["address", "Please enter your delivery address."],
         "field-state": ["state", "Please choose your state."],
         "field-notes": ["notes", "Please keep your note under 500 characters."],
-        "pouch-sold": ["addPouch", "Sorry, the pouch has just sold out. Untick it to buy the phone on its own, or ask us on WhatsApp."],
       sold: ["", "Sorry, this unit has just sold. Message us on WhatsApp and we'll find you a similar one."],
         gateway: ["", "We couldn't reach Paystack just now. Please try again in a moment, or order on WhatsApp."],
         busy: ["", "Too many attempts from your connection. Please wait a few minutes and try again, or order on WhatsApp."],
@@ -157,17 +147,6 @@ const pouch = product.category === "phones" && pouchItem && !pouchItem.sold ? po
       form.addEventListener("change", sync);
       sync();
 
-      // Live total on the pay button when the pouch add-on is ticked.
-      const totalEl = form.querySelector<HTMLElement>("[data-total]");
-      const addon = form.querySelector<HTMLInputElement>("[data-addon]");
-      const showTotal = () => {
-        if (!totalEl) return;
-        const total = Number(totalEl.dataset.total) + (addon?.checked ? Number(addon.dataset.addon) : 0);
-        totalEl.textContent = total.toLocaleString("en-NG");
-      };
-      addon?.addEventListener("change", showTotal);
-      showTotal();
-
       form.addEventListener("submit", () => {
         const data: Record<string, string> = {};
         new FormData(form).forEach((v, k) => k !== "item" && (data[k] = String(v)));
@@ -192,6 +171,7 @@ const pouch = product.category === "phones" && pouchItem && !pouchItem.sold ? po
   .order-summary { display: grid; gap: 1.25rem; position: sticky; top: 1.5rem; }
   .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; color: var(--muted); font-size: var(--text-sm); }
   .facts b { color: var(--text); }
+  .facts a { color: var(--green); }
   .ask { font-size: var(--text-sm); color: var(--muted); }
   .ask a { color: var(--green); }
   .co-form { display: grid; gap: 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 2.25rem); }
@@ -200,11 +180,6 @@ const pouch = product.category === "phones" && pouchItem && !pouchItem.sold ? po
   .form-error[hidden], .pickup-note[hidden] { display: none; }
   .pickup-note { font-size: var(--text-sm); color: var(--muted); margin-top: -0.25rem; }
   .pay { width: 100%; margin-top: 0.4rem; }
-  .addon { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.9rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--line-strong); background: var(--bg); cursor: pointer; }
-  .addon input { width: 1.15rem; height: 1.15rem; margin-top: 0.15rem; accent-color: var(--green); flex: none; }
-  .addon b { display: block; font-weight: 600; }
-  .addon-meta { font-size: var(--text-sm); color: var(--muted); }
-  .addon:has(input:checked) { border-color: var(--green); background: color-mix(in srgb, var(--green) 6%, var(--bg)); }
   .sold-note { gap: 0.9rem; }
   .sold-note p { color: var(--muted); }
   .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }

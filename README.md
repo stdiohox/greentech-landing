@@ -13,8 +13,11 @@ npm run build           # type-check + build to .vercel/output
 
 ## Editing content
 
-- **Products and prices:** `src/data/products.ts`. The checkout charges whatever price is in
-  this file, so redeploy after a price change. Never reuse an `id` for a different device,
+- **Phone price lists:** `src/data/phones.ts`, one model per entry and one line per storage / SIM
+  option. Specs for those models are in `src/data/phone-specs.json`. A line with `{ to: ... }` is a
+  price range: it shows on the site but sells on WhatsApp only, with no online checkout.
+- **Other products and prices:** `src/data/products.ts`. The checkout charges whatever price is in
+  these files, so redeploy after a price change. Never reuse an `id` for a different device,
   because `/checkout/<id>` links are built from it.
 - **Phone, WhatsApp, address, socials:** `src/data/site.ts`.
 
@@ -44,16 +47,12 @@ The site promises a **full refund** in that case (checkout page and FAQ). Issue 
 Paystack dashboard: Transactions → the payment → Refund. Confirm this wording with GreenTech
 before going live.
 
-### Pouch add-on and stock
+### What comes with a phone, and stock
 
-Phone checkouts offer the "phone-pouch" product as an add-on; the server adds its price and
-the signature covers the total and the add-on choice. Set `sold: true` on any product in
-`products.ts` (then redeploy) to switch off Buy and refuse checkout for it. Pouches have no
-stock count: mark the pouch sold if you run out.
-
-**Staff note:** the "Add-on" line in the Paystack dashboard is informational. Before handing
-over a pouch, check the amount paid equals phone + pouch, or open the buyer's `/order` page,
-which only shows the pouch when the signed order includes it.
+Every phone comes with a screen guard, pouch and cable at no extra cost (`PHONE_EXTRAS` in
+`products.ts`), shown on the product page, checkout, order page and the Paystack "Comes with"
+field. The `phone-pouch` product stays on sale as a spare. Set `sold: true` on any product in
+`products.ts` (then redeploy) to switch off Buy and refuse checkout for it.
 
 ### Rate limiting
 

@@ -1,11 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
 import MiniHeader from "../components/MiniHeader.astro";
-import { findProduct } from "../data/products";
+import { products } from "../data/products";
 import credits from "../data/credits.json";
 
 type Credit = { id: string; source_url: string; author: string; licence: string; licence_url?: string };
-const rows = (credits as Credit[]).map((c) => ({ ...c, name: findProduct(c.id)?.name ?? c.id }));
+const rows = (credits as Credit[]).map((c) => ({ ...c, name: products.find((p) => p.id === c.id || p.model === c.id)?.modelName ?? products.find((p) => p.id === c.id)?.name ?? c.id }));
 ---
 <Base title="Photo credits | GreenTech" description="Credits for the product photos on this site." noindex>
   <MiniHeader />

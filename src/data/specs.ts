@@ -3,54 +3,13 @@
 // particular unit. Where we aren't sure of a figure we leave it out rather than guess;
 // the page tells buyers to ask about anything not listed.
 
+import phoneSpecs from "./phone-specs.json";
+import type { Product } from "./products";
+
 export type SpecGroup = { title: string; rows: [label: string, value: string][] };
 export type ProductDetail = { summary: string; highlights: string[]; specs: SpecGroup[]; partial?: boolean };
 
 export const details: Record<string, ProductDetail> = {
-  "iphone-14-pro-max-128gb": {
-    summary: "Apple's 2022 flagship, with the Dynamic Island, an always-on ProMotion display and a 48MP main camera.",
-    highlights: ["48MP Pro camera system", "Dynamic Island", "Always-on ProMotion display"],
-    specs: [
-      { title: "Display", rows: [["Size", '6.7" Super Retina XDR (OLED)'], ["Refresh rate", "ProMotion, up to 120Hz"], ["Always-on", "Yes"]] },
-      { title: "Performance", rows: [["Chip", "A16 Bionic"], ["Storage", "128GB"]] },
-      { title: "Cameras", rows: [["Rear", "48MP Main, 12MP Ultra Wide, 12MP 3x Telephoto"], ["Front", "12MP TrueDepth"]] },
-      { title: "Battery & charging", rows: [["Video playback", "Up to 29 hours"], ["Port", "Lightning"]] },
-      { title: "Build & connectivity", rows: [["Network", "5G"], ["Security", "Face ID"], ["Water resistance", "IP68"], ["Released", "2022"]] },
-    ],
-  },
-  "iphone-13-128gb": {
-    summary: "A dependable everyday iPhone with a bright OLED display, the A15 Bionic chip and dual 12MP cameras.",
-    highlights: ["A15 Bionic", "Dual 12MP cameras", "5G"],
-    specs: [
-      { title: "Display", rows: [["Size", '6.1" Super Retina XDR (OLED)']] },
-      { title: "Performance", rows: [["Chip", "A15 Bionic"], ["Storage", "128GB"]] },
-      { title: "Cameras", rows: [["Rear", "12MP Wide, 12MP Ultra Wide"], ["Front", "12MP TrueDepth"]] },
-      { title: "Battery & charging", rows: [["Video playback", "Up to 19 hours"], ["Port", "Lightning"]] },
-      { title: "Build & connectivity", rows: [["Network", "5G"], ["Security", "Face ID"], ["Water resistance", "IP68"], ["Released", "2021"]] },
-    ],
-  },
-  "galaxy-s24-ultra": {
-    summary: "Samsung's 2024 flagship with a titanium frame, a built-in S Pen and a 200MP main camera.",
-    highlights: ["200MP main camera", "Built-in S Pen", "Snapdragon 8 Gen 3 for Galaxy"],
-    specs: [
-      { title: "Display", rows: [["Size", '6.8" QHD+ Dynamic AMOLED 2X'], ["Refresh rate", "Up to 120Hz"]] },
-      { title: "Performance", rows: [["Chip", "Snapdragon 8 Gen 3 for Galaxy"], ["RAM", "12GB"], ["Storage", "Ask us which capacity this unit has"]] },
-      { title: "Cameras", rows: [["Rear", "200MP Wide, 12MP Ultra Wide, 50MP 5x Telephoto, 10MP 3x Telephoto"], ["Front", "12MP"]] },
-      { title: "Battery & charging", rows: [["Battery", "5,000mAh"], ["Wired charging", "Up to 45W"], ["Port", "USB-C"]] },
-      { title: "Build & connectivity", rows: [["Frame", "Titanium"], ["S Pen", "Built in"], ["Network", "5G"], ["Water resistance", "IP68"], ["Released", "2024"]] },
-    ],
-  },
-  "pixel-9-128gb": {
-    summary: "Google's 2024 Pixel with the Tensor G4 chip, a 120Hz Actua display and Google's best camera software.",
-    highlights: ["Tensor G4", "50MP + 48MP cameras", "7 years of OS updates"],
-    specs: [
-      { title: "Display", rows: [["Size", '6.3" Actua (OLED)'], ["Refresh rate", "Up to 120Hz"]] },
-      { title: "Performance", rows: [["Chip", "Google Tensor G4"], ["RAM", "12GB"], ["Storage", "128GB"]] },
-      { title: "Cameras", rows: [["Rear", "50MP Wide, 48MP Ultra Wide"], ["Front", "10.5MP"]] },
-      { title: "Battery & charging", rows: [["Battery", "4,700mAh"], ["Port", "USB-C"]] },
-      { title: "Build & connectivity", rows: [["Network", "5G"], ["Water resistance", "IP68"], ["Software updates", "7 years of OS and security updates"], ["Released", "2024"]] },
-    ],
-  },
   "galaxy-a56-5g": {
     summary: "A mid-range Samsung that punches up: a large 120Hz AMOLED screen, 50MP camera and fast 45W charging.",
     highlights: ["6.7\" 120Hz AMOLED", "50MP main camera", "45W fast charging"],
@@ -157,8 +116,8 @@ export const details: Record<string, ProductDetail> = {
     ],
   },
   "phone-pouch": {
-    summary: "A brand-new protective pouch for your phone. Tell us your phone model when you order and we'll confirm the right fit.",
-    highlights: ["Brand new", "Fits most phone models", "Add it when you buy a phone"],
+    summary: "A spare protective pouch for your phone. Every phone we sell already comes with one. Tell us your phone model when you order and we'll confirm the right fit.",
+    highlights: ["Brand new", "Fits most phone models", "A spare or replacement"],
     partial: true,
     specs: [
       { title: "Fit", rows: [["Compatibility", "Most phone models; tell us yours when you order"]] },
@@ -175,3 +134,7 @@ export const details: Record<string, ProductDetail> = {
     ],
   },
 };
+
+/** Price-list phones share their model's specs; everything else has its own entry above. */
+export const detailFor = (p: Product): ProductDetail | undefined =>
+  p.model ? { ...(phoneSpecs as unknown as Record<string, ProductDetail>)[p.model], partial: true } : details[p.id];

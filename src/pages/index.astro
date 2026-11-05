@@ -8,8 +8,8 @@ import WhatsAppIcon from "../components/WhatsAppIcon.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import Dock from "../components/Dock.astro";
-import { categories, heroPicks, products, type Category } from "../data/products";
-import { site, waLink } from "../data/site";
+import { PHONE_EXTRAS, categories, featuredModels, heroPicks, products, shopCards, type Category } from "../data/products";
+import { PRICE_VARIES, site, waLink } from "../data/site";
 import { productImage } from "../lib/images";
 
 // Category tiles use an accurate product photo from that category.
@@ -25,7 +25,7 @@ const lowest = (id: string) => {
   if (!prices.length) throw new Error(`No products in category "${id}"`);
   return Math.min(...prices);
 };
-const countIn = (id: string) => products.filter((p) => p.category === id).length;
+const countIn = (id: string) => shopCards.filter((c) => c.lead.category === id).length;
 const hero = heroPicks.map((n) => {
   const p = products.find((x) => x.name === n);
   if (!p) throw new Error(`heroPicks: no product named "${n}" in products.ts`);
@@ -48,7 +48,8 @@ const faqs = [
   { q: "How do I pay?", a: "Tap Buy on any device and pay securely on Paystack. Or message us on WhatsApp first and ask for a live video of the unit, or come and pay in person at our shop in Computer Village." },
   { q: "What if it sells out after I pay?", a: "Each unit is one of a kind, so occasionally one sells in the shop just before an online order comes in. If that happens, we tell you on WhatsApp straight away and refund you in full. Or, if you'd like, we help you pick a similar device instead." },
   { q: "How does a swap work?", a: "Tell us your device's model, storage and condition with the swap form. We send you a valuation on WhatsApp. If you're happy with it, you hand over your old device, pay the difference, and take your new one home." },
-  { q: "Is the price on this page final?", a: "Yes. If you buy online, you pay exactly the price shown, nothing added at checkout. Gadget prices in Nigeria follow the dollar, so prices on this page can change from day to day." },
+  { q: "What comes with a phone?", a: `Every phone comes with a ${PHONE_EXTRAS}, at no extra cost.` },
+  { q: "Is the price on this page final?", a: `If you buy online, you pay exactly the price shown, nothing added at checkout. ${PRICE_VARIES} Gadget prices in Nigeria also follow the dollar, so they can change from day to day. Ask us on WhatsApp for today's price of the exact unit.` },
 ];
 ---
 <Base
@@ -72,7 +73,7 @@ const faqs = [
               </span>
               <span class="cat-text">
                 <span class="cat-name">{c.label}</span>
-                <span class="cat-meta">{countIn(c.id)} devices · from <span class="cur">₦</span>{lowest(c.id).toLocaleString("en-NG")}</span>
+                <span class="cat-meta">{countIn(c.id)} {countIn(c.id) === 1 ? "model" : "models"} · from <span class="cur">₦</span>{lowest(c.id).toLocaleString("en-NG")}</span>
                 <span class="sr-only">, show in the price list</span>
               </span>
             </a>
@@ -124,18 +125,31 @@ const faqs = [
             {categories.map((c) => <button type="button" aria-pressed="false" data-filter={c.id}>{c.label}</button>)}
           </div>
         </div>
-        <p class="deals-sub" data-reveal><b>Buy</b> pays securely with Paystack. <b>Ask</b> gets you a live video of the exact unit on WhatsApp first.</p>
+        <p class="deals-sub" data-reveal><b>Buy</b> pays securely with Paystack. <b>Ask</b> gets you a live video of the exact unit on WhatsApp first. Every phone comes with a {PHONE_EXTRAS}.</p>
 
-        <p class="sr-only" aria-live="polite" id="deal-count"></p>
-        <div class="deal-grid">
-          {products.map((p, i) => <ProductCard product={p} index={i} />)}
+        <div class="shop-tools" hidden>
+          <input class="shop-search" id="shop-search" type="search" aria-label="Search devices" placeholder="Search, e.g. S23 Ultra or iPhone 13" autocomplete="off" />
+          <div class="filters brands" role="group" aria-label="Filter phones by brand" hidden>
+            <button type="button" aria-pressed="true" data-brand="all">All phones</button>
+            <button type="button" aria-pressed="false" data-brand="iPhone">iPhone</button>
+            <button type="button" aria-pressed="false" data-brand="Samsung">Samsung</button>
+            <button type="button" aria-pressed="false" data-brand="Google Pixel">Google Pixel</button>
+            <button type="button" aria-pressed="false" data-brand="other">Others</button>
+          </div>
         </div>
+
+        <p class="sr-only" aria-live="polite" aria-atomic="true" id="deal-count"></p>
+        <div class="deal-grid">
+          {shopCards.map((c, i) => <ProductCard product={c.lead} options={c.options} featured={featuredModels.has(c.key)} index={i} />)}
+        </div>
+        <p class="no-match" id="no-match" hidden>Nothing matches that. <a class="link" href={findIt} target="_blank" rel="noopener">Ask us for it on WhatsApp <span aria-hidden="true">›</span></a></p>
+        <div class="show-all"><button type="button" class="btn btn-ghost btn-lg" id="show-all" hidden>Show all {shopCards.length} models</button></div>
 
         <div class="more" data-reveal>
           <p><b>Don't see it?</b> <span class="tone-text">This is a selection. Tell us the model and your budget, and we'll find it.</span></p>
           <a class="link" href={findIt} target="_blank" rel="noopener">Ask for a device <span aria-hidden="true">›</span></a>
         </div>
-        <p class="fine">Prices follow the dollar and can change from day to day. Buy online and you pay the price shown. Delivery is agreed and paid separately.</p>
+        <p class="fine">{PRICE_VARIES} Prices also follow the dollar and can change from day to day, so ask us on WhatsApp for today's price of the exact unit. Buy online and you pay the price shown. Delivery is agreed and paid separately.</p>
       </div>
     </section>
 
@@ -303,19 +317,73 @@ const faqs = [
   const filters = document.querySelector<HTMLElement>(".filters");
   const cards = document.querySelectorAll<HTMLElement>(".deal-grid .card");
   const count = document.getElementById("deal-count");
-  const apply = (cat: string) => {
+  const tools = document.querySelector<HTMLElement>(".shop-tools");
+  const brands = document.querySelector<HTMLElement>(".brands");
+  const search = document.getElementById("shop-search") as HTMLInputElement | null;
+  const showAll = document.getElementById("show-all");
+  const noMatch = document.getElementById("no-match");
+  // "All" opens on a short selection until the visitor asks for everything or searches.
+  const state = { cat: "all", brand: "all", expanded: false };
+  // Debounced so screen readers don't hear a count for every letter typed; silent on load.
+  let timer: number;
+  let loaded = false;
+  const announce = (message: string) => {
+    if (!loaded) {
+      loaded = true;
+      return;
+    }
+    clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      if (count && count.textContent !== message) count.textContent = message;
+    }, 500);
+  };
+  const render = () => {
+    const q = (search?.value ?? "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+    const capped = state.cat === "all" && !state.expanded && !q;
     let shown = 0;
     cards.forEach((t) => {
-      const match = cat === "all" || t.dataset.category === cat;
+      const match =
+        (state.cat === "all" || t.dataset.category === state.cat) &&
+        (state.cat !== "phones" || state.brand === "all" || t.dataset.brand === state.brand) &&
+        (!q || (t.dataset.search ?? "").includes(q)) &&
+        (!capped || t.dataset.featured !== undefined);
       t.hidden = !match;
       if (match) {
         shown++;
         t.classList.add("in");
       }
     });
-    filters?.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === cat)));
-    if (count) count.textContent = `Showing ${shown} ${shown === 1 ? "device" : "devices"}`;
+    filters?.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === state.cat)));
+    brands?.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.brand === state.brand)));
+    if (brands) brands.hidden = state.cat !== "phones";
+    if (showAll) showAll.hidden = !capped;
+    if (noMatch) noMatch.hidden = shown > 0;
+    announce(shown === 0 ? "No models match. You can ask us for it on WhatsApp." : `Showing ${shown} ${shown === 1 ? "model" : "models"}${state.cat === "phones" ? ". Brand filter available." : ""}`);
   };
+  const apply = (cat: string) => {
+    state.cat = cat;
+    state.brand = "all";
+    state.expanded = false;
+    if (search) search.value = "";
+    render();
+  };
+  if (tools) tools.hidden = false;
+  search?.addEventListener("input", render);
+  showAll?.addEventListener("click", () => {
+    const was = new Set(Array.from(cards).filter((c) => !c.hidden));
+    state.expanded = true;
+    render();
+    // The button has just hidden itself: move focus to the first newly shown model.
+    Array.from(cards).find((c) => !c.hidden && !was.has(c))?.querySelector<HTMLElement>(".name a")?.focus();
+  });
+  brands?.addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest("button");
+    if (b?.dataset.brand) {
+      state.brand = b.dataset.brand;
+      render();
+    }
+  });
+  render();
   if (filters) {
     filters.hidden = false;
     filters.addEventListener("click", (e) => {
@@ -455,6 +523,16 @@ const faqs = [
   }
   .filters button:hover { color: var(--text); }
   .filters button[aria-pressed="true"] { background: var(--surface); color: var(--text); box-shadow: inset 0 0 0 1.5px var(--green), 0 1px 3px rgba(var(--shadow-rgb) / 0.12); }
+  .shop-tools { margin-top: 1.5rem; display: grid; gap: 0.75rem; }
+  .shop-tools[hidden] { display: none; }
+  .shop-search { width: 100%; max-width: 28rem; min-height: 2.9rem; padding: 0 1.1rem; border: 1px solid #6f8574; border-radius: 999px; background: var(--surface); color: var(--text); font-size: 1rem; }
+  .shop-search::placeholder { color: var(--muted); opacity: 1; }
+  #show-all { border-color: #6f8574; }
+  .filters.brands { justify-self: start; flex-wrap: wrap; overflow: visible; -webkit-mask-image: none; mask-image: none; border-radius: 1.4rem; }
+  .brands button { min-height: 2.75rem; }
+  .no-match { margin-top: 1.5rem; color: var(--muted); }
+  .no-match[hidden], #show-all[hidden] { display: none; }
+  .show-all { margin-top: 1.5rem; display: flex; justify-content: center; }
   .deal-grid { margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr)); gap: 1rem; }
   @media (max-width: 640px) { .deal-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; } }
   .more { margin-top: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 2rem; padding: 1.4rem 1.6rem; border-radius: 1.4rem; background: var(--surface); }

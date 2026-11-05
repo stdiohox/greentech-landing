@@ -11,8 +11,18 @@ interface Props {
   /** "summary" is the read-only version used on the checkout page. */
   variant?: "shop" | "summary";
   index?: number;
+  /** Every storage / SIM option of this model. More than one replaces the single price. */
+  options?: Product[];
+  featured?: boolean;
 }
-const { product: p, variant = "shop", index = 0 } = Astro.props;
+const { product: p, variant = "shop", index = 0, options = [], featured = false } = Astro.props;
+const many = options.length > 1;
+const title = many ? p.modelName! : p.name;
+// Lets search find "s23ultra" or "iphone 13 256".
+const squash = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "");
+const searchText = [p.name, ...options.map((o) => o.name)].map(squash).join(" ");
+const askModel = `Hi GreenTech, I saw your website. I'm interested in the ${p.modelName} (${p.condition}). Which options do you have today, and at what price? Please send a live video of the exact unit.`;
+const swapModel = `Hi GreenTech, I saw your website. I want to swap my old device for the ${p.modelName} (${p.condition}). My device is: `;
 const img = productImage(p.id);
 // Square frames; photos far from square are shown whole on white rather than cropped badly.
 const ratio = img ? img.width / img.height : 1;
@@ -21,7 +31,7 @@ const isNew = p.condition === "Brand New";
 const Name = variant === "shop" ? "h3" : "p";
 const href = `/products/${p.id}`;
 ---
-<article class:list={["card", `card--${variant}`]} data-category={p.category} data-reveal={variant === "shop" ? "" : undefined} style={`--i:${index % 4}`}>
+<article class:list={["card", `card--${variant}`]} data-category={p.category} data-brand={p.brand ?? "other"} data-search={searchText} data-featured={featured ? "" : undefined} data-reveal={variant === "shop" ? "" : undefined} style={`--i:${index % 4}`}>
   <a class:list={["media", `fit-${fit}`]} href={href} tabindex="-1" aria-hidden="true">
     {img ? (
       <Image src={img} alt="" widths={[240, 360, 480, 720]} quality={70} sizes={variant === "summary" ? "(max-width: 860px) 90vw, 420px" : "(max-width: 640px) 44vw, (max-width: 1100px) 30vw, 280px"} loading="lazy" />
@@ -34,25 +44,37 @@ const href = `/products/${p.id}`;
   </a>
   <div class="card-top">
     <span class:list={["cond", isNew ? "cond-new" : "cond-used"]}>{isNew ? "Brand new" : "UK used"}</span>
-    {p.sold ? <span class="swap sold-tag">Sold</span> : p.swap && variant === "shop" && <span class="swap">Swap OK</span>}
+    {(many ? options.every((o) => o.sold) : p.sold) ? <span class="swap sold-tag">Sold</span> : p.swap && variant === "shop" && <span class="swap">Swap OK</span>}
   </div>
-  <Name class="name"><a href={href}>{p.name}</a></Name>
+  <Name class="name"><a href={href}>{title}</a></Name>
 
   <p class="specs">{p.specs.join(" · ")}</p>
 
   <div class="foot">
-    <p class="price"><span class="sr-only">Price: </span><span class="cur">₦</span>{amount(p.price)}</p>
+    {many ? (
+      <ul class="options">
+        {options.map((o) => (
+          <li><a href={`/products/${o.id}`}><span class="opt-name">{o.option || "Standard"}<span class="sr-only">, {o.modelName}</span></span>{o.sold ? <span class="opt-price">Sold</span> : <span class="opt-price"><span class="cur">₦</span>{amount(o.price)}</span>}</a></li>
+        ))}
+      </ul>
+    ) : (
+      <p class="price"><span class="sr-only">Price: </span><span class="cur">₦</span>{amount(p.price)}{p.priceTo && <> <span class="price-to">to</span> <span class="cur">₦</span>{amount(p.priceTo)}</>}</p>
+    )}
     {variant === "shop" && (
       <div class="actions">
-        {p.sold
+        {!many && (p.sold
           ? <span class="btn sold-btn" aria-disabled="true">Sold</span>
-          : <a class="btn btn-primary buy" href={`/checkout/${p.id}`}>Buy<span class="sr-only"> {p.name}</span></a>}
-        <a class="ask" href={waLink(orderMessage(p))} target="_blank" rel="noopener">
-          <WhatsAppIcon /> Ask<span class="sr-only"> about {p.name} on WhatsApp</span>
-        </a>
+          : p.priceTo
+            ? <a class="btn btn-primary buy" href={waLink(orderMessage(p))} target="_blank" rel="noopener">Get price<span class="sr-only"> of {p.name} on WhatsApp</span></a>
+            : <a class="btn btn-primary buy" href={`/checkout/${p.id}`}>Buy<span class="sr-only"> {p.name}</span></a>)}
+        {!p.priceTo && (
+          <a class="ask" href={waLink(many ? askModel : orderMessage(p))} target="_blank" rel="noopener">
+            <WhatsAppIcon /> Ask<span class="sr-only"> about {title} on WhatsApp</span>
+          </a>
+        )}
         {p.swap && (
-          <a class="ask swap-link" href={waLink(swapMessage(p))} target="_blank" rel="noopener">
-            Swap<span class="sr-only"> my device for {p.name}</span>
+          <a class="ask swap-link" href={waLink(many ? swapModel : swapMessage(p))} target="_blank" rel="noopener">
+            Swap<span class="sr-only"> my device for {title}</span>
           </a>
         )}
       </div>
@@ -103,6 +125,13 @@ const href = `/products/${p.id}`;
   .foot { display: flex; flex-direction: column; gap: 0.9rem; }
   .price { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
   .price :global(.cur) { font-weight: 600; }
+  .price-to { font-size: 0.6em; font-weight: 500; color: var(--muted); }
+  .options { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .options li { border-bottom: 1px solid var(--line); }
+  .options a { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 0.75rem; min-height: 2.75rem; padding-block: 0.4rem; color: inherit; text-decoration: none; font-size: 0.86rem; }
+  .options a:hover .opt-name { text-decoration: underline; text-underline-offset: 3px; }
+  .opt-name { color: var(--muted); }
+  .opt-price { font-family: var(--font-display); font-weight: 600; font-size: 0.98rem; font-variant-numeric: tabular-nums; }
   .actions { display: flex; align-items: center; gap: 1.1rem; }
   .buy { --h: 2.6rem; padding: 0 1.5rem; font-weight: 500; }
   .sold-btn { --h: 2.6rem; padding: 0 1.5rem; background: var(--surface-2); color: var(--muted); cursor: default; }

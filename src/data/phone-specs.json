@@ -1,0 +1,6474 @@
+{
+ "iphone-7": {
+  "summary": "An older, affordable iPhone with Touch ID and a compact 4.7 inch screen. Fine for calls, messaging and basic apps.",
+  "highlights": [
+   "Compact 4.7\" body",
+   "Touch ID home button",
+   "Water and dust resistant"
+  ],
+  "cardSpecs": [
+   "4.7\" LCD",
+   "A10 Fusion",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "4.7\" Retina HD (LCD)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A10 Fusion"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide"
+     ],
+     [
+      "Front",
+      "7MP FaceTime HD"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 13 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Touch ID"
+     ],
+     [
+      "Water resistance",
+      "IP67"
+     ],
+     [
+      "Released",
+      "2016"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-se-2": {
+  "summary": "A compact iPhone with a home button and a fast chip, suited to people who want a small, simple phone.",
+  "highlights": [
+   "Compact 4.7\" body",
+   "Touch ID home button",
+   "Fast A13 chip"
+  ],
+  "cardSpecs": [
+   "4.7\" LCD",
+   "A13 Bionic",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "4.7\" Retina HD (LCD)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A13 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide"
+     ],
+     [
+      "Front",
+      "7MP FaceTime HD"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 13 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Touch ID"
+     ],
+     [
+      "Water resistance",
+      "IP67"
+     ],
+     [
+      "Released",
+      "2020"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-xr": {
+  "summary": "An affordable Face ID iPhone with a large LCD screen and good battery life for its age.",
+  "highlights": [
+   "Face ID",
+   "Large 6.1\" screen",
+   "Strong battery life"
+  ],
+  "cardSpecs": [
+   "6.1\" LCD",
+   "A12 Bionic",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Liquid Retina (LCD)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A12 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide"
+     ],
+     [
+      "Front",
+      "7MP TrueDepth"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 16 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP67"
+     ],
+     [
+      "Released",
+      "2018"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-11": {
+  "summary": "A good-value iPhone with a dual camera and a bright LCD screen. Handles daily apps and photos well.",
+  "highlights": [
+   "Dual 12MP cameras",
+   "Night mode",
+   "Long battery life"
+  ],
+  "cardSpecs": [
+   "6.1\" LCD",
+   "A13 Bionic",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Liquid Retina HD (LCD)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A13 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 17 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2019"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-11-pro-max": {
+  "summary": "A large-screen iPhone with an OLED display and three cameras, good for photos and video.",
+  "highlights": [
+   "Triple 12MP cameras",
+   "OLED display",
+   "Large 6.5\" screen"
+  ],
+  "cardSpecs": [
+   "6.5\" OLED",
+   "A13 Bionic",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.5\" Super Retina XDR (OLED)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A13 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Ultra Wide, 12MP Telephoto"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 20 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2019"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-12": {
+  "summary": "The first iPhone range with 5G and an OLED screen across the line. A solid all-round phone.",
+  "highlights": [
+   "5G",
+   "OLED display",
+   "MagSafe accessories"
+  ],
+  "cardSpecs": [
+   "6.1\" OLED",
+   "A14 Bionic",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Super Retina XDR (OLED)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A14 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 17 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2020"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-12-pro": {
+  "summary": "A 5G iPhone with a telephoto lens and LiDAR sensor, good for better low-light photos and zoom.",
+  "highlights": [
+   "Telephoto lens (2x)",
+   "LiDAR scanner",
+   "MagSafe accessories"
+  ],
+  "cardSpecs": [
+   "6.1\" OLED",
+   "A14 Bionic",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Super Retina XDR (OLED)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A14 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Ultra Wide, 12MP Telephoto, LiDAR"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 17 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2020"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-12-pro-max": {
+  "summary": "A big-screen 5G iPhone with a larger main sensor and 2.5x telephoto, good for photos and video.",
+  "highlights": [
+   "Large 6.7\" screen",
+   "Telephoto lens (2.5x)",
+   "LiDAR scanner"
+  ],
+  "cardSpecs": [
+   "6.7\" OLED",
+   "A14 Bionic",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Super Retina XDR (OLED)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A14 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Ultra Wide, 12MP Telephoto, LiDAR"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 20 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2020"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-13": {
+  "summary": "A dependable 5G iPhone with great battery life and a smaller notch. Good value for everyday use.",
+  "highlights": [
+   "Sensor-shift stabilisation",
+   "Cinematic mode video",
+   "Good battery life"
+  ],
+  "cardSpecs": [
+   "6.1\" OLED",
+   "A15 Bionic",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Super Retina XDR (OLED)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A15 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 19 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2021"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-14": {
+  "summary": "A 5G iPhone with an improved main camera and Crash Detection. A safe pick for everyday use.",
+  "highlights": [
+   "Improved low-light camera",
+   "Crash Detection",
+   "Emergency SOS via satellite"
+  ],
+  "cardSpecs": [
+   "6.1\" OLED",
+   "A15 Bionic",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Super Retina XDR (OLED)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A15 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Main, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth (autofocus)"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 20 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-14-plus": {
+  "summary": "A large-screen iPhone with strong battery life for people who watch a lot of video.",
+  "highlights": [
+   "Large 6.7\" screen",
+   "Long battery life",
+   "Crash Detection"
+  ],
+  "cardSpecs": [
+   "6.7\" OLED",
+   "A15 Bionic",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Super Retina XDR (OLED)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A15 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Main, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth (autofocus)"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 26 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-14-pro": {
+  "summary": "A Pro iPhone with a 48MP camera, 120Hz screen and Dynamic Island for demanding photo and video users.",
+  "highlights": [
+   "48MP main camera",
+   "120Hz ProMotion",
+   "Always-On display"
+  ],
+  "cardSpecs": [
+   "6.1\" OLED",
+   "A16 Bionic",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Super Retina XDR (OLED), 120Hz ProMotion"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A16 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Main, 12MP Ultra Wide, 12MP Telephoto (3x)"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth (autofocus)"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 23 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-14-pro-max": {
+  "summary": "The big-screen 14 Pro with the longest battery life of its generation, for heavy daily use.",
+  "highlights": [
+   "48MP main camera",
+   "Large 6.7\" 120Hz screen",
+   "Dynamic Island"
+  ],
+  "cardSpecs": [
+   "6.7\" OLED",
+   "A16 Bionic",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Super Retina XDR (OLED), 120Hz ProMotion"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A16 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Main, 12MP Ultra Wide, 12MP Telephoto (3x)"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth (autofocus)"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 29 hours"
+     ],
+     [
+      "Port",
+      "Lightning"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-15": {
+  "summary": "The first standard iPhone with USB-C and Dynamic Island, with a sharper 48MP main camera.",
+  "highlights": [
+   "USB-C charging",
+   "48MP main camera",
+   "Dynamic Island"
+  ],
+  "cardSpecs": [
+   "6.1\" OLED",
+   "A16 Bionic",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Super Retina XDR (OLED)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A16 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Main, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth (autofocus)"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 20 hours"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2023"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-15-plus": {
+  "summary": "A large-screen iPhone with USB-C and long battery life for video and gaming.",
+  "highlights": [
+   "USB-C charging",
+   "Large 6.7\" screen",
+   "48MP main camera"
+  ],
+  "cardSpecs": [
+   "6.7\" OLED",
+   "A16 Bionic",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Super Retina XDR (OLED)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A16 Bionic"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Main, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth (autofocus)"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 26 hours"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2023"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-15-pro": {
+  "summary": "A titanium Pro iPhone with a 3x telephoto and a fast chip for demanding photo and gaming use.",
+  "highlights": [
+   "Titanium body",
+   "3x telephoto camera",
+   "Action button"
+  ],
+  "cardSpecs": [
+   "6.1\" OLED",
+   "A17 Pro",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Super Retina XDR (OLED), 120Hz ProMotion"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A17 Pro"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Main, 12MP Ultra Wide, 12MP Telephoto (3x)"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth (autofocus)"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 23 hours"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2023"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-15-pro-max": {
+  "summary": "A large titanium iPhone with a 5x telephoto lens, aimed at zoom photography and heavy use.",
+  "highlights": [
+   "5x telephoto camera",
+   "Titanium body",
+   "Large 6.7\" 120Hz screen"
+  ],
+  "cardSpecs": [
+   "6.7\" OLED",
+   "A17 Pro",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Super Retina XDR (OLED), 120Hz ProMotion"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A17 Pro"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Main, 12MP Ultra Wide, 12MP Telephoto (5x)"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth (autofocus)"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 29 hours"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2023"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-16": {
+  "summary": "A well-rounded iPhone with the Camera Control button and a fast A18 chip.",
+  "highlights": [
+   "Camera Control button",
+   "Action button",
+   "USB-C charging"
+  ],
+  "cardSpecs": [
+   "6.1\" OLED",
+   "A18",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Super Retina XDR (OLED)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A18"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Fusion, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth (autofocus)"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 22 hours"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2024"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-16-plus": {
+  "summary": "A large-screen iPhone with excellent battery life for video, gaming and long days out.",
+  "highlights": [
+   "Large 6.7\" screen",
+   "Long battery life",
+   "Camera Control button"
+  ],
+  "cardSpecs": [
+   "6.7\" OLED",
+   "A18",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Super Retina XDR (OLED)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A18"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Fusion, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP TrueDepth (autofocus)"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 27 hours"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2024"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-air": {
+  "summary": "A very thin iPhone with a single rear camera and Pro chip, for people who value a light phone.",
+  "highlights": [
+   "Ultra-thin design",
+   "A19 Pro chip",
+   "6.5\" 120Hz screen"
+  ],
+  "cardSpecs": [
+   "6.5\" OLED",
+   "A19 Pro",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.5\" Super Retina XDR (OLED), 120Hz ProMotion"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A19 Pro"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Fusion (single camera)"
+     ],
+     [
+      "Front",
+      "18MP Center Stage"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 27 hours"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2025"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-17": {
+  "summary": "The standard iPhone with a 120Hz screen, dual 48MP cameras and 256GB starting storage.",
+  "highlights": [
+   "120Hz ProMotion screen",
+   "Dual 48MP cameras",
+   "18MP Center Stage front camera"
+  ],
+  "cardSpecs": [
+   "6.3\" OLED",
+   "A19",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.3\" Super Retina XDR (OLED), 120Hz ProMotion"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A19"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Fusion, 48MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "18MP Center Stage"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 30 hours"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2025"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-17-pro": {
+  "summary": "A Pro iPhone with three 48MP cameras including a 4x telephoto, for photo and video work.",
+  "highlights": [
+   "Triple 48MP cameras",
+   "4x telephoto camera",
+   "A19 Pro chip"
+  ],
+  "cardSpecs": [
+   "6.3\" OLED",
+   "A19 Pro",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.3\" Super Retina XDR (OLED), 120Hz ProMotion"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A19 Pro"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Main, 48MP Ultra Wide, 48MP Telephoto (4x)"
+     ],
+     [
+      "Front",
+      "18MP Center Stage"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 33 hours"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2025"
+     ]
+    ]
+   }
+  ]
+ },
+ "iphone-17-pro-max": {
+  "summary": "The largest iPhone 17, with the longest battery life and three 48MP cameras.",
+  "highlights": [
+   "Large 6.9\" 120Hz screen",
+   "Longest battery life",
+   "Triple 48MP cameras"
+  ],
+  "cardSpecs": [
+   "6.9\" OLED",
+   "A19 Pro",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.9\" Super Retina XDR (OLED), 120Hz ProMotion"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "A19 Pro"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Main, 48MP Ultra Wide, 48MP Telephoto (4x)"
+     ],
+     [
+      "Front",
+      "18MP Center Stage"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Video playback",
+      "Up to 39 hours"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Face ID"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2025"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-6": {
+  "summary": "An affordable Google phone with Tensor chip and strong camera software, good for photos on a budget.",
+  "highlights": [
+   "Google Tensor chip",
+   "50MP main camera",
+   "Clean Android"
+  ],
+  "cardSpecs": [
+   "6.4\" OLED",
+   "Tensor",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.4\" OLED, 90Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "8MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4614 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2021"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-6-pro": {
+  "summary": "A large Google phone with 120Hz screen and a 4x telephoto, good for zoom photos and clean Android.",
+  "highlights": [
+   "4x telephoto camera",
+   "120Hz LTPO screen",
+   "Google Tensor chip"
+  ],
+  "cardSpecs": [
+   "6.7\" OLED",
+   "Tensor",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" LTPO OLED, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 48MP Telephoto (4x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "11.1MP Ultra Wide"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5003 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2021"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-7": {
+  "summary": "A compact Google phone with a good camera and clean software for everyday use.",
+  "highlights": [
+   "Google Tensor G2",
+   "50MP main camera",
+   "Clean Android"
+  ],
+  "cardSpecs": [
+   "6.3\" OLED",
+   "Tensor G2",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.3\" OLED, 90Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor G2"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10.8MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4355 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-7-pro": {
+  "summary": "A large Google phone with a 5x telephoto and 120Hz screen, strong for photos and video.",
+  "highlights": [
+   "5x telephoto camera",
+   "120Hz LTPO screen",
+   "Google Tensor G2"
+  ],
+  "cardSpecs": [
+   "6.7\" OLED",
+   "Tensor G2",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" LTPO OLED, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor G2"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 48MP Telephoto (5x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10.8MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5000 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-8": {
+  "summary": "A compact Google phone with a bright 120Hz screen and a camera that handles low light well.",
+  "highlights": [
+   "120Hz screen",
+   "Google Tensor G3",
+   "Clean Android"
+  ],
+  "cardSpecs": [
+   "6.2\" OLED",
+   "Tensor G3",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.2\" OLED, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor G3"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10.5MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4575 mAh"
+     ],
+     [
+      "Wired charging",
+      "27W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2023"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-8-pro": {
+  "summary": "A large Google phone with a 5x telephoto and a flat 120Hz LTPO screen, good for photography.",
+  "highlights": [
+   "5x telephoto camera",
+   "120Hz LTPO screen",
+   "Google Tensor G3"
+  ],
+  "cardSpecs": [
+   "6.7\" OLED",
+   "Tensor G3",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" LTPO OLED, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor G3"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 48MP Telephoto (5x), 48MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10.5MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5050 mAh"
+     ],
+     [
+      "Wired charging",
+      "30W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2023"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-9": {
+  "summary": "A compact Google phone with a bright screen, Tensor G4 and strong everyday photos.",
+  "highlights": [
+   "Google Tensor G4",
+   "50MP main camera",
+   "Bright 120Hz screen"
+  ],
+  "cardSpecs": [
+   "6.3\" OLED",
+   "Tensor G4",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.3\" OLED, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor G4"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 48MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10.5MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4700 mAh"
+     ],
+     [
+      "Wired charging",
+      "27W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2024"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-9-pro": {
+  "summary": "A compact Pro Google phone with a 5x telephoto and a sharp LTPO screen.",
+  "highlights": [
+   "5x telephoto camera",
+   "42MP front camera",
+   "LTPO 120Hz screen"
+  ],
+  "cardSpecs": [
+   "6.3\" OLED",
+   "Tensor G4",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.3\" LTPO OLED, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor G4"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 48MP Telephoto (5x), 48MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "42MP Ultra Wide"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4700 mAh"
+     ],
+     [
+      "Wired charging",
+      "27W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2024"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-9-pro-xl": {
+  "summary": "A large Pro Google phone with a 5x telephoto and a big battery for long days.",
+  "highlights": [
+   "5x telephoto camera",
+   "Large 6.8\" screen",
+   "42MP front camera"
+  ],
+  "cardSpecs": [
+   "6.8\" OLED",
+   "Tensor G4",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.8\" LTPO OLED, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor G4"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 48MP Telephoto (5x), 48MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "42MP Ultra Wide"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5060 mAh"
+     ],
+     [
+      "Wired charging",
+      "37W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2024"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-10": {
+  "summary": "A Google phone with Tensor G5 and, for the first time on the standard model, a telephoto camera.",
+  "highlights": [
+   "Google Tensor G5",
+   "5x telephoto camera",
+   "Bright 120Hz screen"
+  ],
+  "cardSpecs": [
+   "6.3\" OLED",
+   "Tensor G5",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.3\" OLED, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor G5"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "48MP Wide, 10.8MP Telephoto (5x), 13MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10.5MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4970 mAh"
+     ],
+     [
+      "Wired charging",
+      "30W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2025"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-10-pro": {
+  "summary": "A compact Pro Google phone with Tensor G5, a 5x telephoto and a sharp LTPO screen.",
+  "highlights": [
+   "Google Tensor G5",
+   "5x telephoto camera",
+   "42MP front camera"
+  ],
+  "cardSpecs": [
+   "6.3\" OLED",
+   "Tensor G5",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.3\" LTPO OLED, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor G5"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 48MP Telephoto (5x), 48MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "42MP Ultra Wide"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4870 mAh"
+     ],
+     [
+      "Wired charging",
+      "30W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2025"
+     ]
+    ]
+   }
+  ]
+ },
+ "pixel-10-pro-xl": {
+  "summary": "The largest Pixel 10, with the biggest battery and fastest charging of the range.",
+  "highlights": [
+   "Large 6.8\" screen",
+   "Biggest battery in range",
+   "5x telephoto camera"
+  ],
+  "cardSpecs": [
+   "6.8\" OLED",
+   "Tensor G5",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.8\" LTPO OLED, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Google Tensor G5"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 48MP Telephoto (5x), 48MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "42MP Ultra Wide"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5200 mAh"
+     ],
+     [
+      "Wired charging",
+      "45W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2025"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s8": {
+  "summary": "An older Samsung flagship with a curved edge-to-edge screen and a headphone jack.",
+  "highlights": [
+   "Curved Quad HD+ screen",
+   "Headphone jack",
+   "microSD slot"
+  ],
+  "cardSpecs": [
+   "5.8\" AMOLED",
+   "Exynos 8895",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "5.8\" Quad HD+ Super AMOLED"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 8895 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP"
+     ],
+     [
+      "Front",
+      "8MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3000 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Fingerprint (rear), iris scanner, face recognition"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2017"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s8-plus": {
+  "summary": "A larger version of the S8 with a bigger battery, still with a headphone jack.",
+  "highlights": [
+   "Large curved screen",
+   "Headphone jack",
+   "microSD slot"
+  ],
+  "cardSpecs": [
+   "6.2\" AMOLED",
+   "Exynos 8895",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.2\" Quad HD+ Super AMOLED"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 8895 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP"
+     ],
+     [
+      "Front",
+      "8MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3500 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Fingerprint (rear), iris scanner, face recognition"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2017"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s9": {
+  "summary": "A compact Samsung flagship with a variable aperture camera, headphone jack and microSD slot.",
+  "highlights": [
+   "Variable aperture camera",
+   "Headphone jack",
+   "microSD slot"
+  ],
+  "cardSpecs": [
+   "5.8\" AMOLED",
+   "Exynos 9810",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "5.8\" Quad HD+ Super AMOLED"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 9810 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP (dual aperture)"
+     ],
+     [
+      "Front",
+      "8MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3000 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Fingerprint (rear), iris scanner, face recognition"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2018"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s9-plus": {
+  "summary": "A larger S9 with a second telephoto camera and bigger battery.",
+  "highlights": [
+   "Dual rear cameras",
+   "Headphone jack",
+   "microSD slot"
+  ],
+  "cardSpecs": [
+   "6.2\" AMOLED",
+   "Exynos 9810",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.2\" Quad HD+ Super AMOLED"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 9810 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide (dual aperture), 12MP Telephoto (2x)"
+     ],
+     [
+      "Front",
+      "8MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3500 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Fingerprint (rear), iris scanner, face recognition"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2018"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s10e": {
+  "summary": "The smaller, cheaper S10 with a flat screen, side fingerprint reader and headphone jack.",
+  "highlights": [
+   "Compact 5.8\" body",
+   "Headphone jack",
+   "Dual rear cameras"
+  ],
+  "cardSpecs": [
+   "5.8\" AMOLED",
+   "Exynos 9820",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "5.8\" Dynamic AMOLED (Full HD+)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 9820 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 16MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3100 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Side-mounted fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2019"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s10": {
+  "summary": "A Samsung flagship with triple cameras and an under-display fingerprint reader, still with a headphone jack.",
+  "highlights": [
+   "Triple rear cameras",
+   "Headphone jack",
+   "microSD slot"
+  ],
+  "cardSpecs": [
+   "6.1\" AMOLED",
+   "Exynos 9820",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Dynamic AMOLED (Quad HD+)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 9820 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Telephoto, 16MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3400 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2019"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s10-plus": {
+  "summary": "A large S10 with the biggest battery of the range and a dual front camera.",
+  "highlights": [
+   "Large 6.4\" screen",
+   "Triple rear cameras",
+   "Headphone jack"
+  ],
+  "cardSpecs": [
+   "6.4\" AMOLED",
+   "Exynos 9820",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.4\" Dynamic AMOLED (Quad HD+)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 9820 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Telephoto, 16MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP + 8MP depth"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4100 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2019"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s20-fe": {
+  "summary": "A value Galaxy with a 120Hz screen and telephoto lens, a good all-rounder.",
+  "highlights": [
+   "120Hz screen",
+   "3x telephoto camera",
+   "Large 4500 mAh battery"
+  ],
+  "cardSpecs": [
+   "6.5\" AMOLED",
+   "120Hz",
+   "4G/5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.5\" Super AMOLED, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Varies by model (Exynos 990 on 4G, Snapdragon 865 on 5G)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Ultra Wide, 8MP Telephoto (3x)"
+     ],
+     [
+      "Front",
+      "32MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4500 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G or 5G, depending on model"
+     ],
+     [
+      "Security",
+      "Under-display optical fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2020"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s20": {
+  "summary": "A compact Samsung flagship with a 120Hz screen and strong zoom for its age.",
+  "highlights": [
+   "120Hz screen",
+   "64MP telephoto",
+   "Compact 6.2\" body"
+  ],
+  "cardSpecs": [
+   "6.2\" AMOLED",
+   "120Hz",
+   "4G/5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.2\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 990 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 64MP Telephoto, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4000 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G or 5G, depending on model"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2020"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s20-plus": {
+  "summary": "A larger S20 with a bigger battery and extra depth sensor, with a 120Hz screen.",
+  "highlights": [
+   "120Hz screen",
+   "Large 6.7\" screen",
+   "64MP telephoto"
+  ],
+  "cardSpecs": [
+   "6.7\" AMOLED",
+   "120Hz",
+   "4G/5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 990 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 64MP Telephoto, 12MP Ultra Wide, depth sensor"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4500 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G or 5G, depending on model"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2020"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s20-ultra": {
+  "summary": "The top S20 with a 108MP camera, 100x Space Zoom and a large QHD+ 120Hz screen.",
+  "highlights": [
+   "108MP main camera",
+   "Periscope zoom (4x optical)",
+   "Large 5000 mAh battery"
+  ],
+  "cardSpecs": [
+   "6.9\" AMOLED",
+   "120Hz",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.9\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 990 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "108MP Wide, 48MP Periscope Telephoto (4x), 12MP Ultra Wide, depth sensor"
+     ],
+     [
+      "Front",
+      "40MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5000 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2020"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s21": {
+  "summary": "A compact Samsung flagship with a 120Hz screen and a flat plastic back, lighter than the S20.",
+  "highlights": [
+   "120Hz screen",
+   "64MP telephoto",
+   "Compact 6.2\" body"
+  ],
+  "cardSpecs": [
+   "6.2\" AMOLED",
+   "Exynos 2100",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.2\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 2100 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 64MP Telephoto, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4000 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2021"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s21-plus": {
+  "summary": "A larger S21 with a bigger battery and a glass back.",
+  "highlights": [
+   "Large 6.7\" 120Hz screen",
+   "64MP telephoto",
+   "Glass back"
+  ],
+  "cardSpecs": [
+   "6.7\" AMOLED",
+   "Exynos 2100",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 2100 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 64MP Telephoto, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4800 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2021"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s21-ultra": {
+  "summary": "The top S21 with a 108MP camera, two telephoto lenses and S Pen support.",
+  "highlights": [
+   "108MP main camera",
+   "Two telephoto lenses (3x and 10x)",
+   "S Pen support"
+  ],
+  "cardSpecs": [
+   "6.8\" AMOLED",
+   "Exynos 2100",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.8\" Dynamic AMOLED 2X (QHD+), 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 2100 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "108MP Wide, 10MP Telephoto (3x), 10MP Telephoto (10x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "40MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5000 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2021"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s21-fe": {
+  "summary": "A value Galaxy with a 120Hz screen and a triple camera, a good alternative to the S21.",
+  "highlights": [
+   "120Hz screen",
+   "3x telephoto camera",
+   "Large 4500 mAh battery"
+  ],
+  "cardSpecs": [
+   "6.4\" AMOLED",
+   "120Hz",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.4\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Varies by region (Exynos 2100 or Snapdragon 888)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Ultra Wide, 8MP Telephoto (3x)"
+     ],
+     [
+      "Front",
+      "32MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4500 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display optical fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s22": {
+  "summary": "A compact Samsung flagship with a 50MP main camera and flat edges, easy to hold.",
+  "highlights": [
+   "50MP main camera",
+   "Compact 6.1\" body",
+   "120Hz screen"
+  ],
+  "cardSpecs": [
+   "6.1\" AMOLED",
+   "Exynos 2200",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 2200 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 10MP Telephoto (3x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3700 mAh"
+     ],
+     [
+      "Wired charging",
+      "25W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s22-plus": {
+  "summary": "A larger S22 with a bigger battery and faster charging.",
+  "highlights": [
+   "Large 6.6\" screen",
+   "45W charging",
+   "50MP main camera"
+  ],
+  "cardSpecs": [
+   "6.6\" AMOLED",
+   "Exynos 2200",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.6\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 2200 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 10MP Telephoto (3x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4500 mAh"
+     ],
+     [
+      "Wired charging",
+      "45W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s22-ultra": {
+  "summary": "A Galaxy with a built-in S Pen and a 108MP camera, for note-takers and zoom photos.",
+  "highlights": [
+   "Built-in S Pen",
+   "108MP main camera",
+   "10x optical telephoto"
+  ],
+  "cardSpecs": [
+   "6.8\" AMOLED",
+   "Exynos 2200",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.8\" Dynamic AMOLED 2X (QHD+), 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 2200 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "108MP Wide, 10MP Telephoto (3x), 10MP Telephoto (10x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "40MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5000 mAh"
+     ],
+     [
+      "Wired charging",
+      "45W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s23": {
+  "summary": "A compact Samsung flagship with a fast Snapdragon chip and good battery life for its size.",
+  "highlights": [
+   "Snapdragon 8 Gen 2 for Galaxy",
+   "12MP front camera",
+   "Compact 6.1\" body"
+  ],
+  "cardSpecs": [
+   "6.1\" AMOLED",
+   "SD 8 Gen 2",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.1\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Gen 2 for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 10MP Telephoto (3x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3900 mAh"
+     ],
+     [
+      "Wired charging",
+      "25W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2023"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s23-plus": {
+  "summary": "A larger S23 with a bigger battery and faster charging.",
+  "highlights": [
+   "Large 6.6\" screen",
+   "45W charging",
+   "Snapdragon 8 Gen 2 for Galaxy"
+  ],
+  "cardSpecs": [
+   "6.6\" AMOLED",
+   "SD 8 Gen 2",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.6\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Gen 2 for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 10MP Telephoto (3x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4700 mAh"
+     ],
+     [
+      "Wired charging",
+      "45W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2023"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s23-ultra": {
+  "summary": "A Galaxy with a 200MP camera and built-in S Pen, strong for zoom photos and notes.",
+  "highlights": [
+   "200MP main camera",
+   "Built-in S Pen",
+   "10x optical telephoto"
+  ],
+  "cardSpecs": [
+   "6.8\" AMOLED",
+   "SD 8 Gen 2",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.8\" Dynamic AMOLED 2X (QHD+), 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Gen 2 for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "200MP Wide, 10MP Telephoto (3x), 10MP Telephoto (10x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5000 mAh"
+     ],
+     [
+      "Wired charging",
+      "45W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2023"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s24": {
+  "summary": "A compact Samsung flagship with Galaxy AI features and a bright flat screen.",
+  "highlights": [
+   "Galaxy AI features",
+   "Bright 120Hz screen",
+   "50MP main camera"
+  ],
+  "cardSpecs": [
+   "6.2\" AMOLED",
+   "Exynos 2400",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.2\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 2400 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 10MP Telephoto (3x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4000 mAh"
+     ],
+     [
+      "Wired charging",
+      "25W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2024"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s24-plus": {
+  "summary": "A larger S24 with a QHD+ screen, bigger battery and Galaxy AI features.",
+  "highlights": [
+   "QHD+ 120Hz screen",
+   "45W charging",
+   "Galaxy AI features"
+  ],
+  "cardSpecs": [
+   "6.7\" AMOLED",
+   "Exynos 2400",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Dynamic AMOLED 2X (QHD+), 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 2400 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 10MP Telephoto (3x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4900 mAh"
+     ],
+     [
+      "Wired charging",
+      "45W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2024"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s24-ultra": {
+  "summary": "A titanium Galaxy with a 200MP camera, S Pen and a flat screen, for zoom photos and note-taking.",
+  "highlights": [
+   "Titanium frame",
+   "200MP main camera",
+   "Built-in S Pen"
+  ],
+  "cardSpecs": [
+   "6.8\" AMOLED",
+   "SD 8 Gen 3",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.8\" Dynamic AMOLED 2X (QHD+), 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Gen 3 for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "200MP Wide, 10MP Telephoto (3x), 50MP Periscope Telephoto (5x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5000 mAh"
+     ],
+     [
+      "Wired charging",
+      "45W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2024"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s25": {
+  "summary": "A compact Samsung flagship with the Snapdragon 8 Elite chip and Galaxy AI features.",
+  "highlights": [
+   "Snapdragon 8 Elite for Galaxy",
+   "Galaxy AI features",
+   "Compact 6.2\" body"
+  ],
+  "cardSpecs": [
+   "6.2\" AMOLED",
+   "SD 8 Elite",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.2\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Elite for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 10MP Telephoto (3x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4000 mAh"
+     ],
+     [
+      "Wired charging",
+      "25W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2025"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s25-plus": {
+  "summary": "A larger S25 with a bigger battery, 45W charging and Galaxy AI features.",
+  "highlights": [
+   "Large 6.7\" QHD+ screen",
+   "45W charging",
+   "Snapdragon 8 Elite for Galaxy"
+  ],
+  "cardSpecs": [
+   "6.7\" AMOLED",
+   "SD 8 Elite",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Dynamic AMOLED 2X (QHD+), 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Elite for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 10MP Telephoto (3x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4900 mAh"
+     ],
+     [
+      "Wired charging",
+      "45W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2025"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s25-ultra": {
+  "summary": "A titanium Galaxy with a 200MP camera and S Pen, for heavy users and zoom photography.",
+  "highlights": [
+   "200MP main camera",
+   "Built-in S Pen",
+   "5x periscope telephoto"
+  ],
+  "cardSpecs": [
+   "6.9\" AMOLED",
+   "SD 8 Elite",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.9\" Dynamic AMOLED 2X (QHD+), 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Elite for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "200MP Wide, 10MP Telephoto (3x), 50MP Periscope Telephoto (5x), 50MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5000 mAh"
+     ],
+     [
+      "Wired charging",
+      "45W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2025"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s26-plus": {
+  "summary": "A larger Galaxy with a big QHD+ screen and 45W charging, with Galaxy AI features.",
+  "highlights": [
+   "Large 6.7\" QHD+ screen",
+   "45W charging",
+   "Galaxy AI features"
+  ],
+  "cardSpecs": [
+   "6.7\" AMOLED",
+   "Galaxy AI",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Dynamic AMOLED 2X (QHD+), 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Varies by region; ask us about this unit"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 10MP Telephoto (3x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4900 mAh"
+     ],
+     [
+      "Wired charging",
+      "45W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2026"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-s26-ultra": {
+  "summary": "The top Galaxy S with a 200MP camera, S Pen, and the fastest charging of the S range.",
+  "highlights": [
+   "200MP main camera",
+   "Built-in S Pen",
+   "60W charging"
+  ],
+  "cardSpecs": [
+   "6.9\" AMOLED",
+   "SD 8 Elite Gen 5",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.9\" Dynamic AMOLED 2X (QHD+), 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Elite Gen 5 for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "200MP Wide, 10MP Telephoto (3x), 50MP Periscope Telephoto (5x), 50MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "12MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "5000 mAh"
+     ],
+     [
+      "Wired charging",
+      "60W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2026"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-note-8": {
+  "summary": "Samsung's first dual-camera Note with an S Pen and large curved screen. Older but still capable.",
+  "highlights": [
+   "Built-in S Pen",
+   "Dual rear cameras",
+   "Headphone jack"
+  ],
+  "cardSpecs": [
+   "6.3\" AMOLED",
+   "Exynos 8895",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.3\" Quad HD+ Super AMOLED"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 8895 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Telephoto (2x)"
+     ],
+     [
+      "Front",
+      "8MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3300 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Fingerprint (rear), iris scanner, face recognition"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2017"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-note-9": {
+  "summary": "A Note with a big battery, Bluetooth S Pen and headphone jack. A strong pick for note-takers.",
+  "highlights": [
+   "Bluetooth S Pen",
+   "Large 4000 mAh battery",
+   "Headphone jack"
+  ],
+  "cardSpecs": [
+   "6.4\" AMOLED",
+   "Exynos 9810",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.4\" Quad HD+ Super AMOLED"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 9810 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide (dual aperture), 12MP Telephoto (2x)"
+     ],
+     [
+      "Front",
+      "8MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4000 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Fingerprint (rear), iris scanner, face recognition"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2018"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-note-10": {
+  "summary": "A compact Note with a flat screen, S Pen and fast charging, without a headphone jack.",
+  "highlights": [
+   "S Pen with air gestures",
+   "25W charging",
+   "Compact 6.3\" body"
+  ],
+  "cardSpecs": [
+   "6.3\" AMOLED",
+   "Exynos 9825",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.3\" Dynamic AMOLED (Full HD+)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 9825 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Telephoto (2x), 16MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3500 mAh"
+     ],
+     [
+      "Wired charging",
+      "25W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2019"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-note-10-plus": {
+  "summary": "A large Note with a QHD+ screen, big battery, S Pen and microSD slot.",
+  "highlights": [
+   "Large 6.8\" QHD+ screen",
+   "45W charging",
+   "microSD slot"
+  ],
+  "cardSpecs": [
+   "6.8\" AMOLED",
+   "Exynos 9825",
+   "4G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.8\" Dynamic AMOLED (QHD+)"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 9825 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Telephoto (2x), 16MP Ultra Wide, depth sensor"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4300 mAh"
+     ],
+     [
+      "Wired charging",
+      "45W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G LTE"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2019"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-note-20": {
+  "summary": "A Note with S Pen and 5G in a lighter plastic-back body, a value way into the Note line.",
+  "highlights": [
+   "S Pen",
+   "64MP telephoto",
+   "Lighter plastic back"
+  ],
+  "cardSpecs": [
+   "6.7\" AMOLED",
+   "Exynos 990",
+   "4G/5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.7\" Super AMOLED Plus (Full HD+), 60Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 990 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 64MP Telephoto, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4300 mAh"
+     ],
+     [
+      "Wired charging",
+      "25W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G or 5G, depending on model"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2020"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-note-20-ultra": {
+  "summary": "The top Note with a 120Hz QHD+ screen, 108MP camera and S Pen, for power users.",
+  "highlights": [
+   "120Hz QHD+ screen",
+   "108MP main camera",
+   "5x periscope telephoto"
+  ],
+  "cardSpecs": [
+   "6.9\" AMOLED",
+   "Exynos 990",
+   "4G/5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Size",
+      "6.9\" Dynamic AMOLED 2X (QHD+), 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Exynos 990 (UK and Europe)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "108MP Wide, 12MP Periscope Telephoto (5x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4500 mAh"
+     ],
+     [
+      "Wired charging",
+      "25W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "4G or 5G, depending on model"
+     ],
+     [
+      "Security",
+      "Under-display ultrasonic fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP68"
+     ],
+     [
+      "Released",
+      "2020"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-z-flip-3": {
+  "summary": "A pocketable folding phone with a small cover screen, good for people who want a compact flip.",
+  "highlights": [
+   "Folds to pocket size",
+   "1.9\" cover screen",
+   "120Hz inner screen"
+  ],
+  "cardSpecs": [
+   "6.7\" foldable",
+   "SD 888",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Inner display",
+      "6.7\" Foldable Dynamic AMOLED 2X, 120Hz"
+     ],
+     [
+      "Cover display",
+      "1.9\" Super AMOLED"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 888 (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3300 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Side-mounted fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IPX8"
+     ],
+     [
+      "Released",
+      "2021"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-z-flip-4": {
+  "summary": "A pocketable folding phone with a faster chip and bigger battery than the Flip 3.",
+  "highlights": [
+   "Folds to pocket size",
+   "FlexCam hands-free shooting",
+   "Snapdragon 8+ Gen 1"
+  ],
+  "cardSpecs": [
+   "6.7\" foldable",
+   "SD 8+ Gen 1",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Inner display",
+      "6.7\" Foldable Dynamic AMOLED 2X, 120Hz"
+     ],
+     [
+      "Cover display",
+      "1.9\" Super AMOLED"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8+ Gen 1 (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3700 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Side-mounted fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IPX8"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-z-flip-5": {
+  "summary": "A flip phone with a large 3.4 inch cover screen for checking messages without opening it.",
+  "highlights": [
+   "3.4\" cover screen",
+   "Flat-folding hinge",
+   "Folds to pocket size"
+  ],
+  "cardSpecs": [
+   "6.7\" foldable",
+   "SD 8 Gen 2",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Inner display",
+      "6.7\" Foldable Dynamic AMOLED 2X, 120Hz"
+     ],
+     [
+      "Cover display",
+      "3.4\" Super AMOLED"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Gen 2 for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "3700 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Side-mounted fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IPX8"
+     ],
+     [
+      "Released",
+      "2023"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-z-flip-6": {
+  "summary": "A flip phone with a 50MP main camera and Galaxy AI features, folding to pocket size.",
+  "highlights": [
+   "50MP main camera",
+   "3.4\" cover screen",
+   "Galaxy AI features"
+  ],
+  "cardSpecs": [
+   "6.7\" foldable",
+   "SD 8 Gen 3",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Inner display",
+      "6.7\" Foldable Dynamic LTPO AMOLED 2X, 120Hz"
+     ],
+     [
+      "Cover display",
+      "3.4\" Super AMOLED"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Gen 3 for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4000 mAh"
+     ],
+     [
+      "Wired charging",
+      "25W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Side-mounted fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP48"
+     ],
+     [
+      "Released",
+      "2024"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-z-fold-3": {
+  "summary": "A book-style folding phone that opens to a tablet-size screen, with S Pen support.",
+  "highlights": [
+   "7.6\" inner screen",
+   "S Pen support",
+   "Triple rear cameras"
+  ],
+  "cardSpecs": [
+   "7.6\" foldable",
+   "SD 888",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Inner display",
+      "7.6\" Foldable Dynamic AMOLED 2X, 120Hz"
+     ],
+     [
+      "Cover display",
+      "6.2\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 888 (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "12MP Wide, 12MP Telephoto (2x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP cover, 4MP under-display inner"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4400 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Side-mounted fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IPX8"
+     ],
+     [
+      "Released",
+      "2021"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-z-fold-4": {
+  "summary": "A book-style folding phone with a 50MP camera and multitasking taskbar for working on a big screen.",
+  "highlights": [
+   "7.6\" inner screen",
+   "50MP main camera",
+   "Taskbar multitasking"
+  ],
+  "cardSpecs": [
+   "7.6\" foldable",
+   "SD 8+ Gen 1",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Inner display",
+      "7.6\" Foldable Dynamic AMOLED 2X, 120Hz"
+     ],
+     [
+      "Cover display",
+      "6.2\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8+ Gen 1 (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 12MP Ultra Wide, 10MP Telephoto (3x)"
+     ],
+     [
+      "Front",
+      "10MP cover, 4MP under-display inner"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4400 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Side-mounted fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IPX8"
+     ],
+     [
+      "Released",
+      "2022"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-z-fold-5": {
+  "summary": "A slimmer book-style folding phone with a flat-folding hinge and a tablet-size inner screen.",
+  "highlights": [
+   "7.6\" inner screen",
+   "Flat-folding hinge",
+   "50MP main camera"
+  ],
+  "cardSpecs": [
+   "7.6\" foldable",
+   "SD 8 Gen 2",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Inner display",
+      "7.6\" Foldable Dynamic AMOLED 2X, 120Hz"
+     ],
+     [
+      "Cover display",
+      "6.2\" Dynamic AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Gen 2 for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 12MP Ultra Wide, 10MP Telephoto (3x)"
+     ],
+     [
+      "Front",
+      "10MP cover, 4MP under-display inner"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4400 mAh"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Side-mounted fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IPX8"
+     ],
+     [
+      "Released",
+      "2023"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-z-fold-6": {
+  "summary": "A book-style folding phone with a wider cover screen and Galaxy AI features for multitasking.",
+  "highlights": [
+   "7.6\" inner screen",
+   "Wider 6.3\" cover screen",
+   "Galaxy AI features"
+  ],
+  "cardSpecs": [
+   "7.6\" foldable",
+   "SD 8 Gen 3",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Inner display",
+      "7.6\" Foldable Dynamic LTPO AMOLED 2X, 120Hz"
+     ],
+     [
+      "Cover display",
+      "6.3\" Dynamic LTPO AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Gen 3 for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "50MP Wide, 10MP Telephoto (3x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP cover, 4MP under-display inner"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4400 mAh"
+     ],
+     [
+      "Wired charging",
+      "25W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Side-mounted fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP48"
+     ],
+     [
+      "Released",
+      "2024"
+     ]
+    ]
+   }
+  ]
+ },
+ "galaxy-z-fold-7": {
+  "summary": "A thin book-style folding phone with an 8 inch inner screen and 200MP main camera.",
+  "highlights": [
+   "8.0\" inner screen",
+   "200MP main camera",
+   "Much thinner body"
+  ],
+  "cardSpecs": [
+   "8.0\" foldable",
+   "SD 8 Elite",
+   "5G"
+  ],
+  "specs": [
+   {
+    "title": "Display",
+    "rows": [
+     [
+      "Inner display",
+      "8.0\" Foldable Dynamic LTPO AMOLED 2X, 120Hz"
+     ],
+     [
+      "Cover display",
+      "6.5\" Dynamic LTPO AMOLED 2X, 120Hz"
+     ]
+    ]
+   },
+   {
+    "title": "Performance",
+    "rows": [
+     [
+      "Chip",
+      "Snapdragon 8 Elite for Galaxy (all regions)"
+     ]
+    ]
+   },
+   {
+    "title": "Cameras",
+    "rows": [
+     [
+      "Rear",
+      "200MP Wide, 10MP Telephoto (3x), 12MP Ultra Wide"
+     ],
+     [
+      "Front",
+      "10MP cover, 10MP inner"
+     ]
+    ]
+   },
+   {
+    "title": "Battery & charging",
+    "rows": [
+     [
+      "Capacity",
+      "4400 mAh"
+     ],
+     [
+      "Wired charging",
+      "25W"
+     ],
+     [
+      "Port",
+      "USB-C"
+     ]
+    ]
+   },
+   {
+    "title": "Build & connectivity",
+    "rows": [
+     [
+      "Network",
+      "5G"
+     ],
+     [
+      "Security",
+      "Side-mounted fingerprint"
+     ],
+     [
+      "Water resistance",
+      "IP48"
+     ],
+     [
+      "Released",
+      "2025"
+     ]
+    ]
+   }
+  ]
+ }
+}

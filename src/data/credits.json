@@ -1,13 +1,13 @@
 [
   {
-    "id": "iphone-14-pro-max-128gb",
+    "id": "iphone-14-pro-max",
     "source_url": "https://commons.wikimedia.org/wiki/File:IPhone_14_Pro_Max_Deep_purple_A2896_China,_Hong_Kong_and_Macao_version_rear.jpg",
     "author": "茅野ふたば",
     "licence": "CC BY-SA 4.0",
     "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
   },
   {
-    "id": "iphone-13-128gb",
+    "id": "iphone-13",
     "source_url": "https://commons.wikimedia.org/wiki/File:IPhone_13_camera_lens_group.jpg",
     "author": "人工知能",
     "licence": "CC BY-SA 4.0",
@@ -21,7 +21,7 @@
     "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
   },
   {
-    "id": "pixel-9-128gb",
+    "id": "pixel-9",
     "source_url": "https://commons.wikimedia.org/wiki/File:Camera_of_Google_Pixel_9_-_3.jpg",
     "author": "Kyu3a",
     "licence": "CC BY-SA 4.0",
@@ -89,5 +89,173 @@
     "author": "TaurusEmerald",
     "licence": "CC BY-SA 4.0",
     "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "iphone-7",
+    "source_url": "https://commons.wikimedia.org/wiki/File:IPhone_7_(2).jpg",
+    "author": "cicwdn on Pixabay",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0"
+  },
+  {
+    "id": "iphone-se-2",
+    "source_url": "https://commons.wikimedia.org/wiki/File:IPhone_SE_(2020)_Product_Red.jpg",
+    "author": "Seth Whales",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "iphone-xr",
+    "source_url": "https://commons.wikimedia.org/wiki/File:IPhone_XR.jpg",
+    "author": "Asdaiang14453",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "iphone-14",
+    "source_url": "https://commons.wikimedia.org/wiki/File:IPhone_14_Product_Red.jpg",
+    "author": "Hajoon0102",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "iphone-14-plus",
+    "source_url": "https://commons.wikimedia.org/wiki/File:A_blue_iPhone_14_Plus.jpg",
+    "author": "Kskhh",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "iphone-14-pro",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Back_of_the_iPhone_14_Pro.jpg",
+    "author": "Hajoon0102",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "iphone-15",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Back_of_iPhone_15.jpg",
+    "author": "ThePhotoGraphIc",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "iphone-15-pro",
+    "source_url": "https://commons.wikimedia.org/wiki/File:IPhone_15_pro.png",
+    "author": "Ka Kit Pang",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "iphone-15-pro-max",
+    "source_url": "https://commons.wikimedia.org/wiki/File:IPhone_15_pro_max.png",
+    "author": "Ka Kit Pang",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "iphone-air",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Space_Black_iPhone_Air.jpg",
+    "author": "Ahmad Ali Karim",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0"
+  },
+  {
+    "id": "iphone-17",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Black_iPhone_17.jpg",
+    "author": "Ahmad Ali Karim",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0"
+  },
+  {
+    "id": "iphone-17-pro-max",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Silver_iPhone_17_Pro_Max.jpg",
+    "author": "Ahmad Ali Karim",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0"
+  },
+  {
+    "id": "pixel-6",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Google_Pixel_6_Sorta_Seafoam_rear.jpg",
+    "author": "IXTA9839",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "pixel-8",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Google_Pixel_8_Rose_rear.jpg",
+    "author": "IXTA9839",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "pixel-8-pro",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Google_Pixel_8_Pro.jpg",
+    "author": "SimonWaldherr",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "pixel-9-pro-xl",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Google_Pixel_9_Pro_XL_(back).jpg",
+    "author": "D.328",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "pixel-10-pro",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Arrière_du_Google_Pixel_10_Pro_pierre_de_lune_de_256_Go.jpg",
+    "author": "Fabe56",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "galaxy-s9-plus",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S9+_standby_mode,_charging.jpg",
+    "author": "Skorp24",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "galaxy-s10e",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S10e_(47175669981).jpg",
+    "author": "Kārlis Dambrāns",
+    "licence": "CC BY 2.0",
+    "licence_url": "https://creativecommons.org/licenses/by/2.0"
+  },
+  {
+    "id": "galaxy-s20-ultra",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Rückseite_Galaxy_S20_Ultra_20200305.jpg",
+    "author": "PantheraLeo1359531",
+    "licence": "CC BY 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by/4.0"
+  },
+  {
+    "id": "galaxy-note-8",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Back_of_the_Samsung_Galaxy_Note_8.jpg",
+    "author": "Hajoon0102",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "galaxy-note-9",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Rear_of_a_blue_Samsung_Galaxy_Note_9_(Lavender_Purple).jpg",
+    "author": "ChrisRebb",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0"
+  },
+  {
+    "id": "galaxy-z-fold-3",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Galaxy_Z_Fold3_5G.jpg",
+    "author": "Ka Kit Pang",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "id": "galaxy-z-flip-3",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_Z_Flip3.jpg",
+    "author": "Ka Kit Pang Google LLC",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0"
   }
 ]

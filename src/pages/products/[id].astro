@@ -8,36 +8,38 @@ import Dock from "../../components/Dock.astro";
 import ProductCard from "../../components/ProductCard.astro";
 import Logo from "../../components/Logo.astro";
 import WhatsAppIcon from "../../components/WhatsAppIcon.astro";
-import { POUCH_ID, categories, findProduct, products, type Product } from "../../data/products";
-import { details } from "../../data/specs";
-import { amount, naira, orderMessage, site, swapMessage, waLink } from "../../data/site";
+import { PHONE_EXTRAS, categories, products, type Product } from "../../data/products";
+import { detailFor } from "../../data/specs";
+import { PRICE_VARIES, amount, orderMessage, priceText, site, swapMessage, waLink } from "../../data/site";
 import { productImage } from "../../lib/images";
 
 export const getStaticPaths = (() =>
   products.map((product) => {
-    if (!details[product.id]) throw new Error(`specs.ts: no details for "${product.id}"`);
+    if (!detailFor(product)) throw new Error(`specs.ts: no details for "${product.id}"`);
     return { params: { id: product.id }, props: { product } };
   })) satisfies GetStaticPaths;
 
 const { product: p } = Astro.props as { product: Product };
-const d = details[p.id];
+const d = detailFor(p)!;
 const img = productImage(p.id);
 const isNew = p.condition === "Brand New";
 const ratio = img ? img.width / img.height : 1;
 const fit = ratio > 1.6 || ratio < 0.62 ? "contain" : "cover";
 const category = categories.find((c) => c.id === p.category)!;
+const isPhone = p.category === "phones";
+// The other storage / SIM options of the same model.
+const options = p.model ? products.filter((x) => x.model === p.model) : [];
 const related = [
-  ...products.filter((x) => x.category === p.category && x.id !== p.id),
+  ...products.filter((x) => p.brand && x.brand === p.brand && x.model !== p.model),
+  ...products.filter((x) => x.category === p.category && x.id !== p.id && x.model !== p.model),
   ...products.filter((x) => x.category !== p.category),
-].slice(0, 4);
+].filter((x, i, all) => all.findIndex((y) => (y.model ?? y.id) === (x.model ?? x.id)) === i).slice(0, 4);
 const hello = waLink("Hi GreenTech, I saw your website. I'm looking for: ");
-const pouch = findProduct(POUCH_ID);
-const pairs = p.category === "phones" && pouch && !pouch.sold ? pouch : undefined;
 const photosMsg = waLink(`Hi GreenTech, please send photos or a live video of the ${p.name} (${p.condition}).`);
 ---
 <Base
   title={`${p.name} (${p.condition}) price in Lagos | GreenTech`}
-  description={`${p.name}, ${p.condition.toLowerCase()}, ${naira(p.price)}. ${d.summary} Buy online, swap, or ask on WhatsApp. Computer Village, Ikeja.`}
+  description={`${p.name}, ${p.condition.toLowerCase()}, ${priceText(p)}. ${d.summary} Buy online, swap, or ask on WhatsApp. Computer Village, Ikeja.`}
 >
   <SiteHeader hello={hello} />
 
@@ -75,19 +77,35 @@ const photosMsg = waLink(`Hi GreenTech, please send photos or a live video of th
         <span class:list={["pill", isNew ? "pill-new" : "pill-used"]}>{isNew ? "Brand new" : "UK used"}</span>
         <h1>{p.name}</h1>
         <p class="summary">{d.summary}</p>
-        <p class="price"><span class="sr-only">Price: </span><span class="cur">₦</span>{amount(p.price)}</p>
-        <p class="price-note">The price you pay online. Delivery is agreed and paid separately.</p>
+        <p class="price"><span class="sr-only">Price: </span><span class="cur">₦</span>{amount(p.price)}{p.priceTo && <> <span class="price-to">to</span> <span class="cur">₦</span>{amount(p.priceTo)}</>}</p>
+        <p class="price-note">
+          {p.priceTo ? "The price depends on the unit. Ask us on WhatsApp for today's price." : "The price you pay online. Delivery is agreed and paid separately."}
+          {isPhone && ` ${PRICE_VARIES}`}
+        </p>
+        {options.length > 1 && (
+          <nav class="options" aria-label={`${p.modelName} options`}>
+            {options.map((o) => (
+              <a href={`/products/${o.id}`} aria-current={o.id === p.id ? "page" : undefined}>
+                <span>{o.option || "Standard"}</span>
+                <span class="option-price"><span class="cur">₦</span>{amount(o.price)}</span>
+              </a>
+            ))}
+          </nav>
+        )}
         <p class:list={["stock", { "stock-sold": p.sold }]}>
-          <span class="stock-dot" aria-hidden="true"></span>{p.sold ? "Sold. Ask us for a similar one." : "In stock in Ikeja, ready for pickup or delivery"}
+          <span class="stock-dot" aria-hidden="true"></span>{p.sold ? "Sold. Ask us for a similar one." : isPhone ? "Stock changes by supplier. Ask us to confirm this one before you pay" : "In stock in Ikeja, ready for pickup or delivery"}
         </p>
 
         {p.sold
           ? <a class="btn btn-primary btn-lg buy-now" href={waLink(`Hi GreenTech, the ${p.name} has sold. Do you have a similar one?`)} target="_blank" rel="noopener"><WhatsAppIcon /> Ask for a similar one</a>
-          : <a class="btn btn-primary btn-lg buy-now" href={`/checkout/${p.id}`}>Buy now</a>}
-        {!p.sold && <a class="btn btn-ghost btn-lg" href={waLink(orderMessage(p))} target="_blank" rel="noopener"><WhatsAppIcon /> Ask on WhatsApp</a>}
+          : p.priceTo
+            ? <a class="btn btn-primary btn-lg buy-now" href={waLink(orderMessage(p))} target="_blank" rel="noopener"><WhatsAppIcon /> Ask for today's price</a>
+            : <a class="btn btn-primary btn-lg buy-now" href={`/checkout/${p.id}`}>Buy now</a>}
+        {!p.sold && !p.priceTo && <a class="btn btn-ghost btn-lg" href={waLink(orderMessage(p))} target="_blank" rel="noopener"><WhatsAppIcon /> Ask on WhatsApp</a>}
         {p.swap && !p.sold && <a class="link swap" href={waLink(swapMessage(p))} target="_blank" rel="noopener">Swap your old device for this <span aria-hidden="true">›</span></a>}
 
         <ul class="assure">
+          {isPhone && <li><b>Comes with</b><span>{PHONE_EXTRAS[0].toUpperCase() + PHONE_EXTRAS.slice(1)}, at no extra cost.</span></li>}
           <li><b>Tested by us</b><span>Screen, battery, cameras, ports and buttons.</span></li>
           <li><b>Pick up free in Ikeja</b><span>{site.address}, {site.hours}.</span></li>
           <li><b>Delivered to all 36 states</b><span>Fee and timing agreed on WhatsApp.</span></li>
@@ -119,6 +137,7 @@ const photosMsg = waLink(`Hi GreenTech, please send photos or a live video of th
         <div class="spec-group">
           <h3>This unit</h3>
           <dl>
+            {p.option && <div class="row"><dt>Option</dt><dd>{p.option}</dd></div>}
             <div class="row"><dt>Condition</dt><dd>{isNew ? "Brand new, never used" : "UK used: pre-owned, imported and tested by us"}</dd></div>
             <div class="row"><dt>Swap</dt><dd>{p.swap ? "You can swap your old device towards this one" : "Not available for swap"}</dd></div>
             {!isNew && <div class="row"><dt>Battery & cosmetics</dt><dd>Ask us for this unit's battery health and any marks before you buy</dd></div>}
@@ -130,21 +149,6 @@ const photosMsg = waLink(`Hi GreenTech, please send photos or a live video of th
         <a class="link" href={photosMsg} target="_blank" rel="noopener">Ask a question on WhatsApp <span aria-hidden="true">›</span></a>
       </p>
     </section>
-
-    {pairs && (
-      <section class="block" aria-labelledby="pair-title">
-        <h2 id="pair-title" class="h2">Pairs well with. <span class="tone">Protect it from day one.</span></h2>
-        <div class="pair">
-          <span class="pair-icon" aria-hidden="true"><Logo size={36} /></span>
-          <div class="pair-text">
-            <h3>{pairs.name}</h3>
-            <p>{details[pairs.id]?.summary}</p>
-          </div>
-          <p class="pair-price"><span class="cur">₦</span>{amount(pairs.price)}</p>
-          <p class="pair-how">Tick <b>Add a pouch</b> when you check out and it's added to the same payment.</p>
-        </div>
-      </section>
-    )}
 
     <section class="block info" aria-labelledby="how-title">
       <h2 id="how-title" class="h2">How buying works. <span class="tone">Three ways to get it.</span></h2>
@@ -207,6 +211,12 @@ const photosMsg = waLink(`Hi GreenTech, please send photos or a live video of th
   h1 { font-size: var(--text-3xl); font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; }
   .summary { color: var(--muted); font-size: var(--text-lg); max-width: 40ch; }
   .price { margin-top: 0.5rem; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.8rem, 1.5rem + 1.2vw, 2.4rem); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .price-to { font-size: 0.55em; font-weight: 500; color: var(--muted); }
+  .options { display: grid; gap: 0.4rem; }
+  .options a { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 1rem; align-items: center; min-height: 2.75rem; padding: 0.45rem 0.9rem; border-radius: 0.8rem; border: 1px solid var(--line-strong); color: inherit; text-decoration: none; font-size: 0.92rem; }
+  .options a:hover { border-color: var(--green); }
+  .options a[aria-current] { border-color: var(--green); box-shadow: inset 0 0 0 1px var(--green); font-weight: 600; }
+  .option-price { font-variant-numeric: tabular-nums; }
   .price-note { margin-top: -0.4rem; font-size: 0.85rem; color: var(--muted); }
   .btn-lg { --h: 3.25rem; width: 100%; font-size: 1.0625rem; font-weight: 500; }
   .buy-now { margin-top: 0.5rem; }
@@ -243,13 +253,6 @@ const photosMsg = waLink(`Hi GreenTech, please send photos or a live video of th
   .stock-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 18%, transparent); }
   .stock-sold { color: var(--muted); }
 
-  .pair { margin-top: 1.75rem; display: grid; grid-template-columns: auto 1fr auto; gap: 0.5rem 1.5rem; align-items: center; padding: clamp(1.25rem, 3vw, 1.75rem); border-radius: 1.5rem; background: var(--surface); box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
-  .pair-icon { width: 4.5rem; height: 4.5rem; border-radius: 1rem; display: grid; place-items: center; background: var(--surface-2); }
-  .pair h3 { font-size: 1.2rem; font-weight: 600; letter-spacing: -0.015em; }
-  .pair-text p { color: var(--muted); font-size: 0.95rem; margin-top: 0.2rem; }
-  .pair-price { font-family: var(--font-display); font-weight: 600; font-size: 1.4rem; font-variant-numeric: tabular-nums; }
-  .pair-how { grid-column: 2 / -1; font-size: var(--text-sm); color: var(--muted); }
-  .pair-how b { color: var(--text); font-weight: 600; }
 
   .help { margin-top: 1.75rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
   .help article { padding: 1.5rem; border-radius: 1.4rem; background: var(--surface); box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
@@ -264,8 +267,6 @@ const photosMsg = waLink(`Hi GreenTech, please send photos or a live video of th
     .specs { grid-template-columns: 1fr; }
     .highlights, .ways { grid-template-columns: 1fr; }
     .help { grid-template-columns: 1fr 1fr; }
-    .pair { grid-template-columns: auto 1fr; }
-    .pair-price, .pair-how { grid-column: 2; }
     .related { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
   }
   @media (max-width: 480px) {
