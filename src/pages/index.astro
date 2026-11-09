@@ -39,6 +39,13 @@ const testimonials = [
   { name: "Tunde A.", where: "Lekki", text: "Swapped my old iPhone 11 for a Pixel 9. Fair valuation, no stress. Delivery to Lekki the same day." },
   { name: "Chinwe O.", where: "Yaba", text: "Got my MacBook Air M2 in 24 hours. Genuine UK Used, exactly as described. Going back for the JBL." },
   { name: "Bola K.", where: "Ikeja", text: "GreenTech is now my go-to. Honest pricing, real specs, and they actually pick up the phone." },
+  { name: "Dami", where: "Ibadan", text: "This laptop served me, thank you for that. Even though I didn't get to enjoy the AirPods as much. But this laptop, it's worth every penny." },
+  { name: "Habideen", where: "Ilorin", text: "I came across GreenTech's profile on Twitter in 2024, and he took the time to explain what I didn't understand, and also recommend the best fitting laptop for my work. I'm still using the laptop till now." },
+  { name: "Mrs Omoh", where: "Port Harcourt", text: "You know it's so hard to buy things online these days, and I was trying to avoid the “what you ordered vs what you got”. Thank you so much for not disappointing, God bless you." },
+  { name: "Ibrahim", where: "Osogbo", text: "When the laptop started misbehaving just a few weeks after I got it, I was worried, because the laptop is quite expensive. But when I reached out to GreenTech, I was asked to send it back and get a replacement, and an apology gift too." },
+  { name: "Ayodeji", where: "Lagos", text: "I got a free power bank and wireless mouse when I got my laptop from GreenTech. I was actually surprised." },
+  { name: "Lanre", where: "Lagos", text: "I bought most of the gadgets in my workspace from GreenTech. Even my wife and my siblings all got our phones and laptops from them. I don't need to go all the way to Ikeja, I just need to put a call through and it'll be delivered to my address." },
+  { name: "Aisha", where: "Ogun", text: "What I wanted was not what I eventually bought. By the time I described what I actually needed the laptop for, GreenTech made recommendations for me, and made me understand that function ranks higher than aesthetics." },
 ];
 
 const faqs = [
@@ -563,14 +570,16 @@ const faqs = [
   @media (max-width: 860px) { .swap-grid { grid-template-columns: 1fr; } }
 
   /* ---------- Testimonials ---------- */
-  .voice-grid { margin-top: 2.25rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .voice { margin: 0; padding: clamp(1.5rem, 3vw, 2rem); border-radius: 1.6rem; background: var(--surface); display: flex; flex-direction: column; justify-content: space-between; gap: 1.75rem; box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
+  /* Masonry columns: reviews vary a lot in length, so a row grid would leave gaps */
+  .voice-grid { margin-top: 2.25rem; columns: 3; column-gap: 1rem; }
+  .voice { break-inside: avoid; margin: 0 0 1rem; padding: clamp(1.5rem, 3vw, 2rem); border-radius: 1.6rem; background: var(--surface); display: flex; flex-direction: column; justify-content: space-between; gap: 1.75rem; box-shadow: 0 1px 2px rgba(var(--shadow-rgb) / 0.04), 0 6px 24px rgba(var(--shadow-rgb) / 0.06); }
   .voice blockquote { margin: 0; font-family: var(--font-display); font-size: clamp(1.15rem, 1rem + 0.5vw, 1.35rem); font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
   .voice figcaption { display: grid; font-size: 0.9rem; }
   .voice figcaption b { font-weight: 600; }
   .voice figcaption span { color: var(--muted); }
   .voices-more { margin-top: 1.5rem; color: var(--muted); font-size: var(--text-sm); }
-  @media (max-width: 860px) { .voice-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 1000px) { .voice-grid { columns: 2; } }
+  @media (max-width: 640px) { .voice-grid { columns: 1; } }
 
   /* ---------- FAQ ---------- */
   .faq-grid { display: grid; grid-template-columns: 1fr 1.45fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
